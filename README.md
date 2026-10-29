@@ -11,7 +11,7 @@ Um quiz multijogador para jogar em família ou com amigos, no estilo Buzz!. Até
 ### ▶️ JOGAR AGORA
 Abre este link no PC (ligado à TV) ou no telemóvel e escolhe **Criar jogo**. Os outros jogadores abrem o mesmo link e carregam em **Entrar num jogo**.
 
-*(Saber & Sobreviver)*
+https://bolinhared.github.io/saber-e-sobreviver/
 
 ### 🕹️ Como jogar
 
