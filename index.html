@@ -347,13 +347,17 @@ body.is-tv #feed { top: 96px; left: auto; right: 2vw; transform: none; align-ite
     <div class="glass card">
       <div class="logo">
         <div class="logo-bonecos" id="logo-bonecos"></div>
-        <h1>SABER &amp;<br>SOBREVIVER</h1>
+        <h1 data-en="KNOW &amp;<br>SURVIVE">SABER &amp;<br>SOBREVIVER</h1>
         <div class="sub">QUIZ PARTY</div>
       </div>
+      <div class="seg lang-sw" style="justify-content:center;margin:-6px 0 14px">
+        <button data-l="pt" onclick="UI.setLang('pt')">Português</button>
+        <button data-l="en" onclick="UI.setLang('en')">English</button>
+      </div>
       <div class="stack">
-        <button class="btn btn-blue" onclick="UI.goCreate()">🎮 Criar jogo</button>
-        <button class="btn btn-green" onclick="UI.goJoin()">📱 Entrar num jogo</button>
-        <button class="btn btn-ghost hidden" id="btn-resume" onclick="UI.resume()">↩️ Voltar ao jogo anterior</button>
+        <button class="btn btn-blue" onclick="UI.goCreate()" data-en="🎮 Create game">🎮 Criar jogo</button>
+        <button class="btn btn-green" onclick="UI.goJoin()" data-en="📱 Join a game">📱 Entrar num jogo</button>
+        <button class="btn btn-ghost hidden" id="btn-resume" onclick="UI.resume()" data-en="↩️ Back to my last game">↩️ Voltar ao jogo anterior</button>
       </div>
       <p class="muted small center mt" id="home-note"></p>
     </div>
@@ -362,17 +366,17 @@ body.is-tv #feed { top: 96px; left: auto; right: 2vw; transform: none; align-ite
   <!-- CRIAR: ESCOLHER MODO -->
   <section id="v-create" class="view hidden">
     <div class="glass card">
-      <h2 class="mid-title" style="font-size:26px">Como vão jogar?</h2>
+      <h2 class="mid-title" style="font-size:26px" data-en="How will you play?">Como vão jogar?</h2>
       <div class="stack mt">
         <button class="mode-card" onclick="UI.createTV()">
           <div class="ic">📺</div>
-          <div><b>Modo TV</b><span>Este ecrã (PC ou TV) é o ecrã principal. Cada jogador usa o telemóvel como comando.</span></div>
+          <div data-en="<b>TV Mode</b><span>This screen (PC or TV) is the main screen. Each player uses their phone as a controller.</span>"><b>Modo TV</b><span>Este ecrã (PC ou TV) é o ecrã principal. Cada jogador usa o telemóvel como comando.</span></div>
         </button>
         <button class="mode-card" onclick="UI.createMesa()">
           <div class="ic">🍽️</div>
-          <div><b>Modo Mesa</b><span>Só telemóveis. Este telemóvel cria a sala e também joga. Todos veem tudo no seu ecrã.</span></div>
+          <div data-en="<b>Table Mode</b><span>Phones only. This phone creates the room and also plays. Everyone sees everything on their own screen.</span>"><b>Modo Mesa</b><span>Só telemóveis. Este telemóvel cria a sala e também joga. Todos veem tudo no seu ecrã.</span></div>
         </button>
-        <button class="btn btn-ghost btn-sm" style="align-self:center" onclick="UI.show('v-home')">← Voltar</button>
+        <button class="btn btn-ghost btn-sm" style="align-self:center" onclick="UI.show('v-home')" data-en="← Back">← Voltar</button>
       </div>
     </div>
   </section>
@@ -380,12 +384,12 @@ body.is-tv #feed { top: 96px; left: auto; right: 2vw; transform: none; align-ite
   <!-- ENTRAR -->
   <section id="v-join" class="view hidden">
     <div class="glass card">
-      <h2 class="mid-title" style="font-size:26px">Entrar na sala</h2>
-      <p class="muted center small mt">Escreve o código de 4 letras que aparece no ecrã do anfitrião.</p>
+      <h2 class="mid-title" style="font-size:26px" data-en="Join the room">Entrar na sala</h2>
+      <p class="muted center small mt" data-en="Type the 4-letter code shown on the host's screen.">Escreve o código de 4 letras que aparece no ecrã do anfitrião.</p>
       <div class="stack mt">
         <input id="join-code" class="inp code" maxlength="4" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" placeholder="ABCD">
-        <button class="btn btn-green" id="btn-connect" onclick="UI.connect()">Ligar</button>
-        <button class="btn btn-ghost btn-sm" style="align-self:center" onclick="UI.show('v-home')">← Voltar</button>
+        <button class="btn btn-green" id="btn-connect" onclick="UI.connect()" data-en="Connect">Ligar</button>
+        <button class="btn btn-ghost btn-sm" style="align-self:center" onclick="UI.show('v-home')" data-en="← Back">← Voltar</button>
       </div>
     </div>
   </section>
@@ -394,12 +398,12 @@ body.is-tv #feed { top: 96px; left: auto; right: 2vw; transform: none; align-ite
   <section id="v-avatar" class="view hidden">
     <div class="glass card av-wrap">
       <div class="av-preview" id="av-preview" onclick="UI.avTrick()"></div>
-      <input id="av-name" class="inp" maxlength="12" placeholder="O teu nome" autocomplete="off">
+      <input id="av-name" class="inp" maxlength="12" placeholder="O teu nome" data-en-ph="Your name" autocomplete="off">
       <div class="lbl">Animal</div>
       <div class="grid4" id="av-animals"></div>
-      <div class="lbl">Acessório</div>
+      <div class="lbl" data-en="Accessory">Acessório</div>
       <div class="grid5" id="av-accs"></div>
-      <button class="btn btn-blue mt" id="btn-ready" onclick="UI.avReady()">Pronto!</button>
+      <button class="btn btn-blue mt" id="btn-ready" onclick="UI.avReady()" data-en="Ready!">Pronto!</button>
     </div>
   </section>
 
@@ -410,10 +414,10 @@ body.is-tv #feed { top: 96px; left: auto; right: 2vw; transform: none; align-ite
         <div class="l" id="tv-l"></div>
         <div class="c" id="tv-c"></div>
         <div class="r">
-          <button class="icon-btn hidden" id="tv-skip" title="Avançar" onclick="UI.hostAct('skip')">⏭</button>
-          <button class="icon-btn" id="tv-mus" title="Música de fundo" onclick="UI.toggleMusic()">🎵</button>
-          <button class="icon-btn" id="tv-snd" title="Efeitos sonoros" onclick="UI.toggleSound()">🔊</button>
-          <button class="icon-btn" title="Ecrã inteiro" onclick="UI.fullscreen()">⛶</button>
+          <button class="icon-btn hidden" id="tv-skip" title="Avançar" data-en-title="Skip" onclick="UI.hostAct('skip')">⏭</button>
+          <button class="icon-btn" id="tv-mus" title="Música de fundo" data-en-title="Background music" onclick="UI.toggleMusic()">🎵</button>
+          <button class="icon-btn" id="tv-snd" title="Efeitos sonoros" data-en-title="Sound effects" onclick="UI.toggleSound()">🔊</button>
+          <button class="icon-btn" title="Ecrã inteiro" data-en-title="Full screen" onclick="UI.fullscreen()">⛶</button>
           <div class="timer" id="tv-t"></div>
         </div>
       </div>
@@ -446,17 +450,55 @@ body.is-tv #feed { top: 96px; left: auto; right: 2vw; transform: none; align-ite
 
 <div id="ovl-ink" class="ovl hidden">
   <canvas id="ink-cv"></canvas>
-  <div class="hint"><h2>💥 BOMBA DE TINTA!</h2><p id="ink-msg">Toca no ecrã para limpar!</p></div>
+  <div class="hint"><h2 data-en="💥 INK BOMB!">💥 BOMBA DE TINTA!</h2><p id="ink-msg">Toca no ecrã para limpar!</p></div>
 </div>
 <div id="ovl-pie" class="ovl hidden">
   <canvas id="pie-cv"></canvas>
-  <div class="hint"><h2>🥧 TARTE NA CARA!</h2><p id="pie-msg">Passa o dedo para limpar!</p></div>
+  <div class="hint"><h2 data-en="🥧 PIE IN THE FACE!">🥧 TARTE NA CARA!</h2><p id="pie-msg">Passa o dedo para limpar!</p></div>
 </div>
 <div id="feed"></div>
 <div id="toast" class="hidden"></div>
 <div id="netbar" class="hidden"></div>
 
 <script>
+/* =========================================================
+   IDIOMA / LANGUAGE (pt | en)
+   L('texto em português', 'text in English')
+   ========================================================= */
+let LANG = (() => {
+  const q = new URLSearchParams(location.search).get('lang');
+  if (q === 'en' || q === 'pt') return q;
+  try { const s = localStorage.getItem('ss_lang'); if (s === 'en' || s === 'pt') return s; } catch (e) { }
+  return (navigator.language || 'pt').toLowerCase().startsWith('pt') ? 'pt' : 'en';
+})();
+const L = (pt, en) => (LANG === 'en' ? en : pt);
+
+// textos fixos do HTML: o elemento guarda o português e o atributo data-en tem o inglês
+function applyStaticLang() {
+  document.documentElement.lang = LANG === 'en' ? 'en' : 'pt-PT';
+  document.querySelectorAll('[data-en]').forEach(el => {
+    if (el.dataset.pt == null) el.dataset.pt = el.innerHTML;
+    el.innerHTML = LANG === 'en' ? el.dataset.en : el.dataset.pt;
+  });
+  document.querySelectorAll('[data-en-ph]').forEach(el => {
+    if (el.dataset.ptPh == null) el.dataset.ptPh = el.placeholder;
+    el.placeholder = LANG === 'en' ? el.dataset.enPh : el.dataset.ptPh;
+  });
+  document.querySelectorAll('[data-en-title]').forEach(el => {
+    if (el.dataset.ptTitle == null) el.dataset.ptTitle = el.title;
+    el.title = LANG === 'en' ? el.dataset.enTitle : el.dataset.ptTitle;
+  });
+  document.querySelectorAll('.lang-sw button').forEach(b => b.classList.toggle('on', b.dataset.l === LANG));
+  document.title = L('Saber & Sobreviver', 'Know & Survive');
+}
+function setLang(l, save) {
+  if (l !== 'pt' && l !== 'en') return;
+  LANG = l;
+  if (save) { try { localStorage.setItem('ss_lang', l); } catch (e) { } }
+  applyStaticLang();
+}
+
+
 /* =========================================================
    PERGUNTAS — MODO GERAL (escolha múltipla)
    Formato: ["Pergunta", "CERTA", "errada", "errada", "errada"]
@@ -1646,6 +1688,1189 @@ QDB.sub12.vf = {
 
 
 /* =========================================================
+   QUESTIONS — ENGLISH, GENERAL MODE (multiple choice)
+   Format: ["Question", "RIGHT", "wrong", "wrong", "wrong"]
+   ========================================================= */
+const QDB_EN = { geral: {}, sub12: {} };
+
+QDB_EN.geral.mc = {
+  "History": [
+    ["In which year did Christopher Columbus reach the Americas?", "1492", "1498", "1500", "1488"],
+    ["In which year did World War I begin?", "1914", "1918", "1939", "1905"],
+    ["In which year did World War II end?", "1945", "1944", "1939", "1950"],
+    ["Who was the first person to walk on the Moon?", "Neil Armstrong", "Buzz Aldrin", "Yuri Gagarin", "Michael Collins"],
+    ["In which year did humans first land on the Moon?", "1969", "1965", "1972", "1959"],
+    ["Who was the first human to travel into space?", "Yuri Gagarin", "Neil Armstrong", "Alan Shepard", "John Glenn"],
+    ["In which year did the Berlin Wall fall?", "1989", "1991", "1985", "1979"],
+    ["Which explorer led the first expedition to sail around the world?", "Ferdinand Magellan", "Vasco da Gama", "James Cook", "Francis Drake"],
+    ["Which explorer first reached India by sea from Europe, in 1498?", "Vasco da Gama", "Christopher Columbus", "Marco Polo", "Bartolomeu Dias"],
+    ["What was the capital of the Inca Empire?", "Cusco", "Lima", "Quito", "La Paz"],
+    ["What was the capital of the Aztec Empire?", "Tenochtitlan", "Cusco", "Chichen Itza", "Quito"],
+    ["Which French emperor was defeated at Waterloo?", "Napoleon Bonaparte", "Louis XIV", "Charlemagne", "Louis XVI"],
+    ["In which city was US President John F. Kennedy assassinated?", "Dallas", "Washington", "New York", "Chicago"],
+    ["Which British monarch reigned for more than 70 years?", "Elizabeth II", "Victoria", "Elizabeth I", "George III"],
+    ["In which year did the French Revolution begin?", "1789", "1776", "1815", "1799"],
+    ["Which civilisation built the pyramids of Giza?", "Ancient Egyptians", "Romans", "Greeks", "Maya"],
+    ["Who was the first President of the United States?", "George Washington", "Abraham Lincoln", "Thomas Jefferson", "John Adams"],
+    ["Which ship sank in 1912 after hitting an iceberg?", "Titanic", "Lusitania", "Britannic", "Queen Mary"],
+    ["In which country did the Industrial Revolution begin?", "Great Britain", "France", "Germany", "United States"],
+    ["Which people built Machu Picchu?", "The Incas", "The Maya", "The Aztecs", "The Olmecs"],
+    ["Which South African leader spent 27 years in prison?", "Nelson Mandela", "Desmond Tutu", "Steve Biko", "Jacob Zuma"],
+    ["Which city was buried by the eruption of Mount Vesuvius in 79 AD?", "Pompeii", "Rome", "Athens", "Carthage"],
+    ["What was the name of Columbus's largest ship in 1492?", "Santa María", "Pinta", "Niña", "Victoria"],
+    ["Which nurse became known as 'the Lady with the Lamp'?", "Florence Nightingale", "Marie Curie", "Mother Teresa", "Clara Barton"],
+    ["What name was given to the rivalry between the USA and the USSR after 1945?", "The Cold War", "The Hundred Years' War", "The Vietnam War", "The Great War"],
+    ["In which year did the United States declare independence?", "1776", "1789", "1812", "1801"],
+    ["Who was the first Roman emperor?", "Augustus", "Julius Caesar", "Nero", "Caligula"],
+    ["Which Greek city-state was famous for its warriors?", "Sparta", "Thebes", "Corinth", "Olympia"],
+    ["Which Indian leader championed non-violent resistance?", "Mahatma Gandhi", "Jawaharlal Nehru", "Indira Gandhi", "Rabindranath Tagore"],
+    ["Which country launched Sputnik, the first artificial satellite?", "Soviet Union", "United States", "China", "United Kingdom"],
+    ["What was the trade route linking China and Europe called?", "The Silk Road", "The Gold Road", "The Salt Road", "The Amber Road"],
+    ["Which Norse seafarers raided Europe between the 8th and 11th centuries?", "Vikings", "Huns", "Goths", "Celts"],
+    ["Which pharaoh's almost intact tomb was found in 1922?", "Tutankhamun", "Ramesses II", "Khufu", "Akhenaten"],
+    ["Who was the first person to win two Nobel Prizes?", "Marie Curie", "Albert Einstein", "Linus Pauling", "Niels Bohr"],
+    ["In which year was Nelson Mandela elected President of South Africa?", "1994", "1990", "1989", "2000"],
+    ["Which country was the first to give all women the right to vote?", "New Zealand", "United Kingdom", "United States", "France"],
+    ["Which Carthaginian general crossed the Alps with elephants?", "Hannibal", "Julius Caesar", "Alexander the Great", "Attila"],
+    ["Alexander the Great was king of which kingdom?", "Macedon", "Sparta", "Persia", "Egypt"],
+    ["Which wall did the Romans build across northern England?", "Hadrian's Wall", "Trajan's Wall", "Augustus's Wall", "Nero's Wall"],
+    ["Which French heroine was burned at the stake in 1431?", "Joan of Arc", "Marie Antoinette", "Catherine de' Medici", "Eleanor of Aquitaine"],
+    ["Which country gave the Statue of Liberty to the USA?", "France", "United Kingdom", "Spain", "Italy"],
+    ["Which empire had Constantinople as its capital in the Middle Ages?", "Byzantine Empire", "Mongol Empire", "Persian Empire", "Carolingian Empire"],
+    ["Who was the main author of the US Declaration of Independence?", "Thomas Jefferson", "George Washington", "Benjamin Franklin", "Abraham Lincoln"],
+    ["Which Mongol leader founded the largest land empire in history?", "Genghis Khan", "Kublai Khan", "Attila", "Tamerlane"],
+    ["Who was the US President during the American Civil War?", "Abraham Lincoln", "George Washington", "Ulysses S. Grant", "Andrew Jackson"],
+    ["Which wall was built to protect China from northern invaders?", "The Great Wall", "Hadrian's Wall", "The Berlin Wall", "The Wailing Wall"]
+  ],
+  "Geography": [
+    ["What is the capital of Australia?", "Canberra", "Sydney", "Melbourne", "Perth"],
+    ["What is the largest country in the world by area?", "Russia", "Canada", "China", "United States"],
+    ["What is the longest river in Europe?", "Volga", "Danube", "Rhine", "Thames"],
+    ["What is the largest ocean in the world?", "Pacific", "Atlantic", "Indian", "Arctic"],
+    ["What is the largest hot desert in the world?", "Sahara", "Gobi", "Kalahari", "Atacama"],
+    ["What is the highest mountain in the world?", "Mount Everest", "K2", "Kilimanjaro", "Mont Blanc"],
+    ["What is the capital of Canada?", "Ottawa", "Toronto", "Montreal", "Vancouver"],
+    ["What is the capital of Brazil?", "Brasília", "Rio de Janeiro", "São Paulo", "Salvador"],
+    ["What is the capital of Morocco?", "Rabat", "Casablanca", "Marrakesh", "Fez"],
+    ["What is the capital of Turkey?", "Ankara", "Istanbul", "Izmir", "Antalya"],
+    ["What is the capital of Switzerland?", "Bern", "Zurich", "Geneva", "Basel"],
+    ["What is the capital of New Zealand?", "Wellington", "Auckland", "Christchurch", "Hamilton"],
+    ["Which country is shaped like a boot?", "Italy", "Greece", "Chile", "Croatia"],
+    ["Which river flows through Cairo?", "Nile", "Euphrates", "Tigris", "Congo"],
+    ["In which country is Machu Picchu?", "Peru", "Bolivia", "Chile", "Mexico"],
+    ["What is the smallest country in the world?", "Vatican City", "Monaco", "San Marino", "Malta"],
+    ["What is the highest mountain in Africa?", "Kilimanjaro", "Mount Kenya", "Atlas Mountains", "Rwenzori"],
+    ["Which strait separates Europe from Africa?", "Strait of Gibraltar", "Bosphorus", "Strait of Magellan", "Dardanelles"],
+    ["In which country is Mount Fuji?", "Japan", "China", "South Korea", "Nepal"],
+    ["What is the capital of Iceland?", "Reykjavík", "Oslo", "Helsinki", "Copenhagen"],
+    ["What is the capital of Argentina?", "Buenos Aires", "Santiago", "Montevideo", "Lima"],
+    ["Nairobi is the capital of which country?", "Kenya", "Ethiopia", "Tanzania", "Uganda"],
+    ["What is the largest lake in Africa?", "Lake Victoria", "Lake Tanganyika", "Lake Malawi", "Lake Chad"],
+    ["Which mountain range separates Spain from France?", "Pyrenees", "Alps", "Apennines", "Carpathians"],
+    ["Which city does the River Thames flow through?", "London", "Paris", "Dublin", "Edinburgh"],
+    ["Which of these countries has NO coastline?", "Switzerland", "Italy", "Croatia", "Belgium"],
+    ["Which imaginary line divides the Earth into northern and southern hemispheres?", "Equator", "Tropic of Cancer", "Prime Meridian", "Arctic Circle"],
+    ["What is the capital of Norway?", "Oslo", "Stockholm", "Bergen", "Copenhagen"],
+    ["Which river carries the most water in the world?", "Amazon", "Nile", "Mississippi", "Yangtze"],
+    ["What is the capital of the Netherlands?", "Amsterdam", "The Hague", "Rotterdam", "Utrecht"],
+    ["Which sea does Venice lie on?", "Adriatic Sea", "Tyrrhenian Sea", "Aegean Sea", "Baltic Sea"],
+    ["The Iguazu Falls lie on the border between Brazil and which country?", "Argentina", "Paraguay", "Uruguay", "Bolivia"],
+    ["What is the capital of South Korea?", "Seoul", "Pyongyang", "Busan", "Incheon"],
+    ["What is the largest island in the world?", "Greenland", "Borneo", "Madagascar", "Iceland"],
+    ["In which ocean are the Maldives?", "Indian Ocean", "Pacific Ocean", "Atlantic Ocean", "Arctic Ocean"],
+    ["What is the capital of Poland?", "Warsaw", "Kraków", "Prague", "Budapest"],
+    ["What is the capital of Hungary?", "Budapest", "Bucharest", "Vienna", "Prague"],
+    ["In which country is Mount Kilimanjaro?", "Tanzania", "Kenya", "Uganda", "Ethiopia"],
+    ["Which desert stretches across Mongolia and China?", "Gobi", "Sahara", "Atacama", "Namib"],
+    ["In which country is the ancient city of Petra?", "Jordan", "Egypt", "Israel", "Lebanon"],
+    ["What is the capital of Egypt?", "Cairo", "Alexandria", "Luxor", "Giza"],
+    ["Which city lies on two continents, Europe and Asia?", "Istanbul", "Athens", "Moscow", "Cairo"],
+    ["What is the capital of Portugal?", "Lisbon", "Porto", "Madrid", "Coimbra"],
+    ["What is the longest river in South America?", "Amazon", "Paraná", "Orinoco", "Magdalena"],
+    ["Which country has the most people who speak Portuguese?", "Brazil", "Portugal", "Angola", "Mozambique"]
+  ],
+  "Science": [
+    ["Which planet is closest to the Sun?", "Mercury", "Venus", "Mars", "Earth"],
+    ["What is the largest planet in the Solar System?", "Jupiter", "Saturn", "Neptune", "Earth"],
+    ["Which planet is known as the 'Red Planet'?", "Mars", "Venus", "Jupiter", "Mercury"],
+    ["What is the chemical formula for water?", "H₂O", "CO₂", "O₂", "NaCl"],
+    ["What is the chemical symbol for gold?", "Au", "Ag", "Go", "Gd"],
+    ["What is the chemical symbol for iron?", "Fe", "Fr", "Ir", "F"],
+    ["Which gas do plants absorb for photosynthesis?", "Carbon dioxide", "Oxygen", "Nitrogen", "Helium"],
+    ["How many bones does an adult human have?", "206", "186", "256", "300"],
+    ["What is the largest organ of the human body?", "Skin", "Liver", "Intestine", "Brain"],
+    ["What is the approximate speed of light?", "300,000 km/s", "30,000 km/s", "3,000 km/s", "3 million km/s"],
+    ["Who developed the theory of relativity?", "Albert Einstein", "Isaac Newton", "Galileo Galilei", "Stephen Hawking"],
+    ["Who discovered penicillin?", "Alexander Fleming", "Louis Pasteur", "Marie Curie", "Edward Jenner"],
+    ["Which particle of the atom has a negative charge?", "Electron", "Proton", "Neutron", "Photon"],
+    ["At what temperature does water boil at sea level?", "100 °C", "90 °C", "120 °C", "80 °C"],
+    ["How many planets are in the Solar System?", "8", "9", "7", "10"],
+    ["Which gas is most abundant in Earth's atmosphere?", "Nitrogen", "Oxygen", "Carbon dioxide", "Argon"],
+    ["In which unit is force measured?", "Newton", "Joule", "Watt", "Pascal"],
+    ["In which unit is electrical power measured?", "Watt", "Volt", "Ampere", "Ohm"],
+    ["Which vitamin does the body make when exposed to sunlight?", "Vitamin D", "Vitamin C", "Vitamin A", "Vitamin B12"],
+    ["How many chromosomes does a normal human cell have?", "46", "23", "44", "48"],
+    ["Which metal is liquid at room temperature?", "Mercury", "Lead", "Tin", "Aluminium"],
+    ["What is the largest moon of Jupiter?", "Ganymede", "Europa", "Io", "Titan"],
+    ["Who created the periodic table of elements?", "Dmitri Mendeleev", "Antoine Lavoisier", "John Dalton", "Niels Bohr"],
+    ["Which blood type is the universal donor?", "O negative", "AB positive", "A negative", "B positive"],
+    ["Which science studies fossils?", "Palaeontology", "Archaeology", "Geology", "Anthropology"],
+    ["Which instrument records earthquakes?", "Seismograph", "Barometer", "Thermometer", "Anemometer"],
+    ["Which instrument measures air pressure?", "Barometer", "Hygrometer", "Anemometer", "Rain gauge"],
+    ["How long does sunlight take to reach Earth?", "About 8 minutes", "8 seconds", "1 hour", "1 day"],
+    ["In which part of the cell is most of the DNA found?", "Nucleus", "Membrane", "Cytoplasm", "Cell wall"],
+    ["Which chemical element are diamonds made of?", "Carbon", "Silicon", "Calcium", "Iron"],
+    ["What is the longest bone in the human body?", "Femur", "Tibia", "Humerus", "Fibula"],
+    ["Which scientist is linked to an apple and the law of gravity?", "Isaac Newton", "Albert Einstein", "Galileo Galilei", "Johannes Kepler"],
+    ["Who patented the telephone in 1876?", "Alexander Graham Bell", "Thomas Edison", "Nikola Tesla", "Guglielmo Marconi"],
+    ["A substance with a pH of 7 is…", "Neutral", "Acidic", "Alkaline", "Radioactive"],
+    ["Which is the hottest planet in the Solar System?", "Venus", "Mercury", "Mars", "Jupiter"],
+    ["Which planet was reclassified as a 'dwarf planet' in 2006?", "Pluto", "Ceres", "Mercury", "Neptune"],
+    ["What is the square root of 144?", "12", "14", "11", "16"],
+    ["What is 7 × 8?", "56", "54", "64", "48"],
+    ["What is the approximate value of π (pi)?", "3.14", "2.71", "1.61", "3.41"],
+    ["What do the inner angles of a triangle add up to?", "180°", "90°", "360°", "270°"],
+    ["Which organ produces insulin?", "Pancreas", "Liver", "Kidneys", "Stomach"],
+    ["Which organ filters the blood and produces urine?", "Kidneys", "Liver", "Spleen", "Lungs"],
+    ["What does an anemometer measure?", "Wind speed", "Temperature", "Humidity", "Pressure"],
+    ["What is the chemical symbol for sodium?", "Na", "So", "Sd", "S"],
+    ["Which planet has a giant storm called the Great Red Spot?", "Jupiter", "Mars", "Saturn", "Venus"]
+  ],
+  "Sport": [
+    ["How many players does a football (soccer) team have on the pitch?", "11", "10", "9", "12"],
+    ["In which country were the first modern Olympic Games held, in 1896?", "Greece", "France", "United Kingdom", "United States"],
+    ["How many rings are in the Olympic symbol?", "5", "6", "4", "7"],
+    ["How often is the FIFA World Cup held?", "Every 4 years", "Every 2 years", "Every 3 years", "Every 5 years"],
+    ["Which country has won the most men's football World Cups?", "Brazil", "Germany", "Italy", "Argentina"],
+    ["In which sport is a 'puck' used?", "Ice hockey", "Baseball", "Golf", "Cricket"],
+    ["How many points is a free throw worth in basketball?", "1", "2", "3", "0.5"],
+    ["How long is a marathon?", "42.195 km", "40 km", "21.1 km", "50 km"],
+    ["In which sport did Michael Phelps become famous?", "Swimming", "Athletics", "Gymnastics", "Cycling"],
+    ["Which country is Usain Bolt from?", "Jamaica", "United States", "Kenya", "Trinidad and Tobago"],
+    ["Which tennis tournament is played on grass in London?", "Wimbledon", "Roland Garros", "US Open", "Australian Open"],
+    ["On what surface is Roland Garros (French Open) played?", "Clay", "Grass", "Hard court", "Carpet"],
+    ["How many players per team are on court in basketball?", "5", "6", "7", "4"],
+    ["How many players per team are on court in volleyball?", "6", "5", "7", "11"],
+    ["How many players per team are on the field in rugby union?", "15", "11", "9", "12"],
+    ["In Formula 1, which flag signals the end of the race?", "Chequered flag", "Red flag", "Green flag", "Yellow flag"],
+    ["Which Formula 1 team is Italian and races in red?", "Ferrari", "McLaren", "Mercedes", "Red Bull"],
+    ["How many holes are on a standard golf course?", "18", "9", "12", "21"],
+    ["In which sport do you score a 'strike' by knocking down all the pins?", "Bowling", "Golf", "Tennis", "Cricket"],
+    ["In which country did judo originate?", "Japan", "China", "South Korea", "Thailand"],
+    ["Which sport is played with a shuttlecock?", "Badminton", "Tennis", "Squash", "Padel"],
+    ["Where were the 2016 Summer Olympics held?", "Rio de Janeiro", "London", "Tokyo", "Beijing"],
+    ["Where were the 2024 Summer Olympics held?", "Paris", "Los Angeles", "Tokyo", "Madrid"],
+    ["How long is a football match, without stoppage time?", "90 minutes", "80 minutes", "100 minutes", "60 minutes"],
+    ["How many quarters are there in an NBA game?", "4", "2", "3", "6"],
+    ["Which Japanese wrestling sport features very heavy wrestlers?", "Sumo", "Karate", "Judo", "Kendo"],
+    ["Who has won the most Ballon d'Or awards?", "Lionel Messi", "Cristiano Ronaldo", "Michel Platini", "Johan Cruyff"],
+    ["Which country hosted the 2022 FIFA World Cup?", "Qatar", "Russia", "Brazil", "United Arab Emirates"],
+    ["Which country won the 2022 FIFA World Cup?", "Argentina", "France", "Croatia", "Morocco"],
+    ["In tennis, what score comes after 15 and 30?", "40", "45", "35", "50"],
+    ["In which sport is there a position called 'libero'?", "Volleyball", "Basketball", "Handball", "Rugby"],
+    ["Which country was Pelé from?", "Brazil", "Argentina", "Portugal", "Uruguay"],
+    ["Which sport is the Tour de France?", "Cycling", "Athletics", "Motor racing", "Horse riding"],
+    ["In which sport do players use the terms 'birdie' and 'eagle'?", "Golf", "Tennis", "Badminton", "Cricket"],
+    ["Which is the most popular sport in the world?", "Football (soccer)", "Basketball", "Tennis", "Cricket"],
+    ["Which country is famous for inventing cricket?", "England", "India", "Australia", "South Africa"],
+    ["In which sport would you perform a 'slam dunk'?", "Basketball", "Volleyball", "Tennis", "Handball"],
+    ["Which tennis player has won the most Grand Slam singles titles among men?", "Novak Djokovic", "Rafael Nadal", "Roger Federer", "Pete Sampras"],
+    ["Which country hosts the Super Bowl?", "United States", "Canada", "United Kingdom", "Mexico"],
+    ["In which sport is the Stanley Cup awarded?", "Ice hockey", "Baseball", "American football", "Basketball"],
+    ["Which martial art's name means 'empty hand'?", "Karate", "Judo", "Taekwondo", "Kung fu"],
+    ["How many players per team are on court in handball?", "7", "6", "5", "11"],
+    ["Which country has won the most Rugby World Cups (men)?", "South Africa", "England", "Australia", "France"],
+    ["Which country does Cristiano Ronaldo play for?", "Portugal", "Spain", "Brazil", "Italy"],
+    ["In which city is the famous Maracanã stadium?", "Rio de Janeiro", "São Paulo", "Buenos Aires", "Lisbon"]
+  ],
+  "Arts & Literature": [
+    ["Who painted the Mona Lisa?", "Leonardo da Vinci", "Michelangelo", "Raphael", "Botticelli"],
+    ["Who wrote 'Don Quixote'?", "Miguel de Cervantes", "Lope de Vega", "William Shakespeare", "Dante Alighieri"],
+    ["Who wrote 'Romeo and Juliet'?", "William Shakespeare", "Christopher Marlowe", "Charles Dickens", "Molière"],
+    ["Which painter cut off part of his own ear?", "Vincent van Gogh", "Pablo Picasso", "Claude Monet", "Salvador Dalí"],
+    ["Who painted 'Guernica'?", "Pablo Picasso", "Salvador Dalí", "Joan Miró", "Francisco Goya"],
+    ["Who painted the ceiling of the Sistine Chapel?", "Michelangelo", "Leonardo da Vinci", "Raphael", "Donatello"],
+    ["Who painted 'The Starry Night'?", "Vincent van Gogh", "Claude Monet", "Paul Cézanne", "Paul Gauguin"],
+    ["Who wrote the 'Harry Potter' series?", "J. K. Rowling", "J. R. R. Tolkien", "C. S. Lewis", "Roald Dahl"],
+    ["Who wrote 'The Lord of the Rings'?", "J. R. R. Tolkien", "J. K. Rowling", "C. S. Lewis", "George R. R. Martin"],
+    ["Who wrote 'The Little Prince'?", "Antoine de Saint-Exupéry", "Jules Verne", "Victor Hugo", "Marcel Proust"],
+    ["Who wrote 'Twenty Thousand Leagues Under the Sea'?", "Jules Verne", "H. G. Wells", "Alexandre Dumas", "Victor Hugo"],
+    ["Who wrote 'Les Misérables'?", "Victor Hugo", "Alexandre Dumas", "Émile Zola", "Honoré de Balzac"],
+    ["Who wrote 'The Three Musketeers'?", "Alexandre Dumas", "Victor Hugo", "Jules Verne", "Molière"],
+    ["In which Paris museum is the Mona Lisa?", "The Louvre", "Musée d'Orsay", "Centre Pompidou", "Musée Rodin"],
+    ["In which city is the Prado Museum?", "Madrid", "Barcelona", "Lisbon", "Rome"],
+    ["Who composed 'The Four Seasons'?", "Antonio Vivaldi", "Wolfgang Mozart", "Johann Sebastian Bach", "Ludwig van Beethoven"],
+    ["Which composer went deaf but kept composing?", "Beethoven", "Mozart", "Chopin", "Haydn"],
+    ["Who composed the opera 'The Magic Flute'?", "Mozart", "Beethoven", "Verdi", "Wagner"],
+    ["In which city was Mozart born?", "Salzburg", "Vienna", "Berlin", "Prague"],
+    ["Who sculpted the giant marble statue of 'David' in Florence?", "Michelangelo", "Bernini", "Rodin", "Canova"],
+    ["Who sculpted 'The Thinker'?", "Auguste Rodin", "Michelangelo", "Antonio Canova", "Bernini"],
+    ["Which art movement did Salvador Dalí belong to?", "Surrealism", "Cubism", "Impressionism", "Baroque"],
+    ["Claude Monet was a founder of which movement?", "Impressionism", "Cubism", "Expressionism", "Futurism"],
+    ["Who painted 'The Scream'?", "Edvard Munch", "Vincent van Gogh", "Gustav Klimt", "Wassily Kandinsky"],
+    ["Who painted the golden painting 'The Kiss'?", "Gustav Klimt", "Edvard Munch", "Egon Schiele", "Henri Matisse"],
+    ["Which Mexican painter is famous for her self-portraits?", "Frida Kahlo", "Tarsila do Amaral", "Georgia O'Keeffe", "Paula Rego"],
+    ["Who wrote 'The Metamorphosis'?", "Franz Kafka", "Friedrich Nietzsche", "Goethe", "Thomas Mann"],
+    ["Who wrote the novel '1984'?", "George Orwell", "Aldous Huxley", "Ray Bradbury", "H. G. Wells"],
+    ["What is the name of Don Quixote's horse?", "Rocinante", "Babieca", "Bucephalus", "Pegasus"],
+    ["Who created the detective Sherlock Holmes?", "Arthur Conan Doyle", "Agatha Christie", "Edgar Allan Poe", "Charles Dickens"],
+    ["Who created the detective Hercule Poirot?", "Agatha Christie", "Arthur Conan Doyle", "Georges Simenon", "Dorothy L. Sayers"],
+    ["Which of these works is attributed to Homer?", "The Iliad", "The Aeneid", "The Divine Comedy", "Metamorphoses"],
+    ["Who wrote 'The Divine Comedy'?", "Dante Alighieri", "Petrarch", "Boccaccio", "Virgil"],
+    ["Who wrote 'Pride and Prejudice'?", "Jane Austen", "Charlotte Brontë", "Mary Shelley", "Virginia Woolf"],
+    ["Who wrote 'Frankenstein'?", "Mary Shelley", "Bram Stoker", "Jane Austen", "Edgar Allan Poe"],
+    ["Who wrote 'Dracula'?", "Bram Stoker", "Mary Shelley", "Oscar Wilde", "Robert Louis Stevenson"],
+    ["Who wrote 'A Christmas Carol'?", "Charles Dickens", "Oscar Wilde", "Lewis Carroll", "Mark Twain"],
+    ["Who wrote 'Alice's Adventures in Wonderland'?", "Lewis Carroll", "Roald Dahl", "J. M. Barrie", "Beatrix Potter"],
+    ["Who wrote 'The Adventures of Tom Sawyer'?", "Mark Twain", "Ernest Hemingway", "Jack London", "John Steinbeck"],
+    ["Which Colombian writer wrote 'One Hundred Years of Solitude'?", "Gabriel García Márquez", "Jorge Luis Borges", "Pablo Neruda", "Isabel Allende"],
+    ["Which Portuguese writer won the Nobel Prize in Literature in 1998?", "José Saramago", "Fernando Pessoa", "Eça de Queirós", "Luís de Camões"],
+    ["Which Dutch painter created 'Girl with a Pearl Earring'?", "Johannes Vermeer", "Rembrandt", "Vincent van Gogh", "Frans Hals"],
+    ["Which Japanese artist made 'The Great Wave off Kanagawa'?", "Hokusai", "Hiroshige", "Utamaro", "Sesshū"],
+    ["Who wrote the play 'Hamlet'?", "William Shakespeare", "Oscar Wilde", "George Bernard Shaw", "Christopher Marlowe"],
+    ["Which Russian author wrote 'War and Peace'?", "Leo Tolstoy", "Fyodor Dostoevsky", "Anton Chekhov", "Alexander Pushkin"]
+  ],
+  "World Culture": [
+    ["What is the currency of Japan?", "Yen", "Yuan", "Won", "Rupee"],
+    ["What is the currency of the United Kingdom?", "Pound sterling", "Euro", "Dollar", "Franc"],
+    ["What is the currency used in most of the European Union?", "Euro", "Pound", "Franc", "Mark"],
+    ["What is the currency of India?", "Rupee", "Yen", "Rand", "Dinar"],
+    ["What is the most spoken native language in the world?", "Mandarin Chinese", "English", "Spanish", "Hindi"],
+    ["What is the official language of Brazil?", "Portuguese", "Spanish", "Brazilian", "English"],
+    ["Which language is spoken in Mexico?", "Spanish", "Portuguese", "Mexican", "English"],
+    ["In which country is the festival of Diwali, the festival of lights, widely celebrated?", "India", "Japan", "Mexico", "Ireland"],
+    ["In which country is the 'Day of the Dead' (Día de los Muertos) a famous tradition?", "Mexico", "Spain", "Peru", "Italy"],
+    ["In which city is the famous Carnival with samba schools held?", "Rio de Janeiro", "Venice", "New Orleans", "Havana"],
+    ["Which city is famous for its carnival masks and canals?", "Venice", "Amsterdam", "Bruges", "Rio de Janeiro"],
+    ["Which country is famous for the Oktoberfest beer festival?", "Germany", "Belgium", "Austria", "Czech Republic"],
+    ["What do people in Spain famously throw at each other during La Tomatina?", "Tomatoes", "Oranges", "Flour", "Water balloons"],
+    ["In which country is the Taj Mahal?", "India", "Pakistan", "Iran", "Bangladesh"],
+    ["In which city is the Colosseum?", "Rome", "Athens", "Istanbul", "Naples"],
+    ["In which city is the Eiffel Tower?", "Paris", "Lyon", "Brussels", "London"],
+    ["In which city is the Sagrada Família basilica?", "Barcelona", "Madrid", "Seville", "Valencia"],
+    ["In which city is the statue of Christ the Redeemer?", "Rio de Janeiro", "Lisbon", "Buenos Aires", "Mexico City"],
+    ["In which country is Angkor Wat, the largest religious monument in the world?", "Cambodia", "Thailand", "Vietnam", "Laos"],
+    ["Which country is home to the giant stone heads called moai, on Easter Island?", "Chile", "Peru", "New Zealand", "Mexico"],
+    ["What is the traditional Japanese garment wrapped and tied with a sash?", "Kimono", "Sari", "Poncho", "Kilt"],
+    ["Which traditional garment is worn by women in India?", "Sari", "Kimono", "Kilt", "Dirndl"],
+    ["Which country is famous for the kilt and bagpipes?", "Scotland", "Ireland", "Wales", "Norway"],
+    ["What is the name of the Japanese art of folding paper?", "Origami", "Ikebana", "Bonsai", "Haiku"],
+    ["What is a 'haiku'?", "A short Japanese poem", "A Japanese dish", "A martial art", "A paper lantern"],
+    ["Which instrument is typical of Andean music in Peru and Bolivia?", "Pan flute", "Bagpipes", "Sitar", "Banjo"],
+    ["The sitar is a traditional instrument from which country?", "India", "China", "Turkey", "Egypt"],
+    ["Which dance was born in Buenos Aires and Montevideo?", "Tango", "Salsa", "Flamenco", "Samba"],
+    ["Flamenco is a traditional art form from which country?", "Spain", "Mexico", "Italy", "Argentina"],
+    ["Fado is a traditional music style from which country?", "Portugal", "Spain", "Brazil", "Cape Verde"],
+    ["Which city is known as 'The Big Apple'?", "New York", "Los Angeles", "Chicago", "London"],
+    ["Which city is called 'The City of Light'?", "Paris", "Las Vegas", "Rome", "Tokyo"],
+    ["What is the name of the famous clock tower bell in London?", "Big Ben", "Little John", "Old Tom", "Great Paul"],
+    ["In which country would you find the ancient city of Petra and the desert of Wadi Rum?", "Jordan", "Egypt", "Morocco", "Oman"],
+    ["How many stars are on the flag of the United States?", "50", "48", "52", "13"],
+    ["What colour is the maple leaf on Canada's flag?", "Red", "Green", "Orange", "White"],
+    ["Which country's flag shows a red circle on a white background?", "Japan", "South Korea", "China", "Bangladesh"],
+    ["Which celebration marks the start of the lunar year in China?", "Chinese New Year", "Diwali", "Hanukkah", "Ramadan"],
+    ["How many animals are there in the Chinese zodiac?", "12", "10", "8", "24"],
+    ["In which country do people traditionally greet each other with a bow?", "Japan", "Brazil", "Italy", "Australia"],
+    ["Which country gave the world the Olympic Games in ancient times?", "Greece", "Italy", "Egypt", "Turkey"],
+    ["Which organisation has its headquarters in New York and 193 member states?", "United Nations", "NATO", "European Union", "World Bank"],
+    ["Which country has the most native speakers of Spanish?", "Mexico", "Spain", "Argentina", "Colombia"],
+    ["Which of these is NOT an official language of Switzerland?", "Dutch", "German", "French", "Italian"],
+    ["Which country is famous for windmills, tulips and wooden clogs?", "Netherlands", "Denmark", "Belgium", "Switzerland"]
+  ],
+  "Nature": [
+    ["What is the largest animal in the world?", "Blue whale", "African elephant", "Whale shark", "Giraffe"],
+    ["What is the fastest land animal?", "Cheetah", "Lion", "Gazelle", "Ostrich"],
+    ["Which is the only mammal capable of true flight?", "Bat", "Flying squirrel", "Colugo", "Sugar glider"],
+    ["How many legs does a spider have?", "8", "6", "10", "12"],
+    ["How many legs does an insect have?", "6", "8", "4", "10"],
+    ["Which animal changes colour to camouflage itself?", "Chameleon", "Iguana", "Gecko", "Tortoise"],
+    ["What is the largest bird in the world?", "Ostrich", "Emu", "Condor", "Albatross"],
+    ["What is the tallest animal in the world?", "Giraffe", "Elephant", "Camel", "Ostrich"],
+    ["What does the giant panda mainly eat?", "Bamboo", "Eucalyptus", "Fish", "Berries"],
+    ["What does the koala mainly eat?", "Eucalyptus leaves", "Bamboo", "Insects", "Berries"],
+    ["What is a group of wolves called?", "A pack", "A herd", "A school", "A swarm"],
+    ["What is a group of fish called?", "A school", "A flock", "A pack", "A herd"],
+    ["A dolphin is a…", "Mammal", "Fish", "Reptile", "Amphibian"],
+    ["A penguin is a…", "Bird", "Mammal", "Fish", "Reptile"],
+    ["How do whales breathe?", "With lungs", "With gills", "Through their skin", "Through their fins"],
+    ["Which tree gives us cork?", "Cork oak", "Pine", "Maple", "Birch"],
+    ["Which carnivorous plant snaps its leaves shut on insects?", "Venus flytrap", "Cactus", "Orchid", "Sunflower"],
+    ["What is the process by which plants make food from light?", "Photosynthesis", "Respiration", "Pollination", "Germination"],
+    ["What does a tadpole turn into?", "A frog", "A fish", "A lizard", "A snake"],
+    ["Which of these animals hibernates in winter?", "Brown bear", "Lion", "Zebra", "Dolphin"],
+    ["Which animal carries its babies in a pouch?", "Kangaroo", "Panda", "Lemur", "Sloth"],
+    ["Which mammal lays eggs?", "Platypus", "Kangaroo", "Bat", "Pangolin"],
+    ["What is the largest cat in the world?", "Tiger", "Lion", "Leopard", "Jaguar"],
+    ["Which very slow animal spends its life hanging in trees?", "Sloth", "Koala", "Lemur", "Gibbon"],
+    ["What is the largest reptile in the world?", "Saltwater crocodile", "Anaconda", "Komodo dragon", "Giant tortoise"],
+    ["What is the longest snake in the world?", "Reticulated python", "Anaconda", "King cobra", "Black mamba"],
+    ["How many hearts does an octopus have?", "3", "1", "2", "8"],
+    ["What colour is an octopus's blood?", "Blue", "Red", "Green", "Yellow"],
+    ["Which animal makes pearls?", "Oyster", "Squid", "Crab", "Starfish"],
+    ["Which flightless bird lives in New Zealand?", "Kiwi", "Emu", "Ostrich", "Cassowary"],
+    ["What is the largest fish in the world?", "Whale shark", "Great white shark", "Bluefin tuna", "Ocean sunfish"],
+    ["What is the largest rainforest in the world?", "The Amazon", "Congo rainforest", "Borneo", "Daintree"],
+    ["How long is an elephant's pregnancy?", "About 22 months", "9 months", "12 months", "3 years"],
+    ["Which kingdom do mushrooms belong to?", "Fungi", "Plants", "Animals", "Bacteria"],
+    ["Which insect goes through caterpillar and chrysalis stages?", "Butterfly", "Ant", "Grasshopper", "Cockroach"],
+    ["Which animal is famous for building dams in rivers?", "Beaver", "Otter", "Rat", "Badger"],
+    ["Which bird can fly backwards?", "Hummingbird", "Swallow", "Eagle", "Sparrow"],
+    ["What do herbivores eat?", "Plants", "Meat", "Insects", "Fish"],
+    ["Which tree produces olives?", "Olive tree", "Oak", "Palm", "Almond tree"],
+    ["Which sea creature has five arms and can regrow them?", "Starfish", "Octopus", "Jellyfish", "Sea urchin"],
+    ["How many wings does a bee have?", "4", "2", "6", "8"],
+    ["Which is the largest living land animal?", "African elephant", "White rhino", "Hippopotamus", "Giraffe"],
+    ["Where do polar bears live?", "The Arctic", "Antarctica", "Siberian forests", "The Alps"],
+    ["Which big cat lives in packs called 'prides'?", "Lion", "Tiger", "Cheetah", "Leopard"],
+    ["What is the world's tallest type of tree?", "Coast redwood", "Oak", "Baobab", "Eucalyptus"]
+  ],
+  "Film & Music": [
+    ["Which British band sang 'Yesterday'?", "The Beatles", "The Rolling Stones", "Queen", "The Who"],
+    ["Who is known as the 'King of Pop'?", "Michael Jackson", "Elvis Presley", "Prince", "Freddie Mercury"],
+    ["Who is known as the 'King of Rock and Roll'?", "Elvis Presley", "Michael Jackson", "Chuck Berry", "Little Richard"],
+    ["Freddie Mercury was the lead singer of which band?", "Queen", "The Beatles", "U2", "Pink Floyd"],
+    ["Bono is the lead singer of which band?", "U2", "Coldplay", "Oasis", "Radiohead"],
+    ["Which 1997 film about a ship won 11 Oscars?", "Titanic", "Poseidon", "Pearl Harbor", "Master and Commander"],
+    ["Who directed 'Jurassic Park'?", "Steven Spielberg", "George Lucas", "James Cameron", "Ridley Scott"],
+    ["Who directed 'Avatar'?", "James Cameron", "Steven Spielberg", "Peter Jackson", "Christopher Nolan"],
+    ["In which film saga does Luke Skywalker appear?", "Star Wars", "Star Trek", "Dune", "The Matrix"],
+    ["Which film festival awards the 'Palme d'Or'?", "Cannes", "Venice", "Berlin", "Sundance"],
+    ["Who sang 'Thriller'?", "Michael Jackson", "Prince", "Lionel Richie", "Stevie Wonder"],
+    ["Which band recorded 'Bohemian Rhapsody'?", "Queen", "The Beatles", "Led Zeppelin", "Pink Floyd"],
+    ["Who wrote and sang 'Imagine'?", "John Lennon", "Paul McCartney", "Bob Dylan", "Elton John"],
+    ["Who sings 'Shape of You'?", "Ed Sheeran", "Justin Bieber", "Bruno Mars", "Sam Smith"],
+    ["Who sings 'Bad Romance'?", "Lady Gaga", "Beyoncé", "Rihanna", "Katy Perry"],
+    ["Which British singer released 'Hello' in 2015?", "Adele", "Amy Winehouse", "Dua Lipa", "Sia"],
+    ["Which band recorded 'Smells Like Teen Spirit'?", "Nirvana", "Pearl Jam", "Metallica", "Foo Fighters"],
+    ["How many strings does a classical guitar have?", "6", "4", "5", "12"],
+    ["How many keys does a standard piano have?", "88", "76", "64", "100"],
+    ["In which Disney film does Queen Elsa appear?", "Frozen", "Tangled", "Brave", "Moana"],
+    ["What is James Bond's code number?", "007", "001", "009", "700"],
+    ["Who played Jack in the film 'Titanic'?", "Leonardo DiCaprio", "Brad Pitt", "Tom Cruise", "Matt Damon"],
+    ["Who played Forrest Gump?", "Tom Hanks", "Robin Williams", "Kevin Costner", "Bill Murray"],
+    ["In which saga do characters say 'May the Force be with you'?", "Star Wars", "Star Trek", "The Matrix", "The Lord of the Rings"],
+    ["Who played Captain Jack Sparrow?", "Johnny Depp", "Orlando Bloom", "Brad Pitt", "Keanu Reeves"],
+    ["Which South Korean film won the Oscar for Best Picture?", "Parasite", "Oldboy", "Train to Busan", "Minari"],
+    ["Which studio made 'Toy Story'?", "Pixar", "DreamWorks", "Studio Ghibli", "Blue Sky"],
+    ["Which Japanese studio made 'Spirited Away'?", "Studio Ghibli", "Pixar", "Toei", "Sunrise"],
+    ["Who composed the music for 'Star Wars'?", "John Williams", "Hans Zimmer", "Ennio Morricone", "Howard Shore"],
+    ["Which singer wrote the songs for 'The Lion King' (1994)?", "Elton John", "Phil Collins", "Sting", "Bryan Adams"],
+    ["How many members were in The Beatles?", "4", "5", "3", "6"],
+    ["Which country is ABBA from?", "Sweden", "Norway", "Denmark", "Finland"],
+    ["Who sings 'Shake It Off'?", "Taylor Swift", "Katy Perry", "Ariana Grande", "Miley Cyrus"],
+    ["Who sings 'Despacito' with Daddy Yankee?", "Luis Fonsi", "Enrique Iglesias", "Ricky Martin", "J Balvin"],
+    ["In which film do astronauts say 'Houston, we have a problem'?", "Apollo 13", "Gravity", "Armageddon", "Interstellar"],
+    ["Which character says 'To infinity and beyond!'?", "Buzz Lightyear", "Woody", "WALL-E", "Superman"],
+    ["Which film saga features Frodo and Gandalf?", "The Lord of the Rings", "Harry Potter", "The Chronicles of Narnia", "Star Wars"],
+    ["In which city is the Academy Awards ceremony held?", "Los Angeles", "New York", "Cannes", "Las Vegas"],
+    ["Which instrument did Jimi Hendrix play?", "Electric guitar", "Drums", "Piano", "Saxophone"],
+    ["Which country is the singer Shakira from?", "Colombia", "Mexico", "Spain", "Argentina"],
+    ["Which K-pop group sang 'Dynamite' and 'Butter'?", "BTS", "BLACKPINK", "EXO", "TWICE"],
+    ["Which Jamaican musician is the most famous reggae singer?", "Bob Marley", "Peter Tosh", "Jimmy Cliff", "Sean Paul"],
+    ["Which Indian film industry is based in Mumbai?", "Bollywood", "Tollywood", "Nollywood", "Hollywood"],
+    ["Which Nigerian film industry is one of the largest in the world?", "Nollywood", "Bollywood", "Hollywood", "Kollywood"],
+    ["Who directed the 'Lord of the Rings' film trilogy?", "Peter Jackson", "Steven Spielberg", "James Cameron", "Ridley Scott"]
+  ],
+  "Food & Drink": [
+    ["What is the main ingredient of guacamole?", "Avocado", "Tomato", "Cucumber", "Peas"],
+    ["Which country does paella come from?", "Spain", "Italy", "Mexico", "Portugal"],
+    ["Which country does sushi come from?", "Japan", "China", "South Korea", "Thailand"],
+    ["Which country is famous for pizza and pasta?", "Italy", "France", "Greece", "Spain"],
+    ["Which country is the croissant most associated with?", "France", "Germany", "Belgium", "Italy"],
+    ["Which country is famous for tacos and burritos?", "Mexico", "Spain", "Argentina", "Peru"],
+    ["Which country is famous for kimchi?", "South Korea", "Japan", "China", "Vietnam"],
+    ["Which country is famous for pad thai?", "Thailand", "Vietnam", "India", "Malaysia"],
+    ["Which country is famous for the dish 'fish and chips'?", "United Kingdom", "Ireland", "Norway", "Australia"],
+    ["Which country is famous for the pastry 'pastel de nata'?", "Portugal", "Spain", "Brazil", "France"],
+    ["Which Indian dish is a spiced rice dish often cooked with meat?", "Biryani", "Naan", "Samosa", "Dal"],
+    ["What is the main ingredient of hummus?", "Chickpeas", "Beans", "Lentils", "Peas"],
+    ["Which green paste is served with sushi?", "Wasabi", "Ginger", "Pesto", "Guacamole"],
+    ["What is the main ingredient of pesto?", "Basil", "Parsley", "Coriander", "Spinach"],
+    ["Which Japanese drink is made from rice?", "Sake", "Tequila", "Vodka", "Rum"],
+    ["Which plant is tequila made from?", "Agave", "Sugar cane", "Potato", "Barley"],
+    ["Which plant is rum made from?", "Sugar cane", "Agave", "Grapes", "Wheat"],
+    ["On which continent did cocoa originate?", "The Americas", "Africa", "Asia", "Europe"],
+    ["What is the most expensive spice in the world?", "Saffron", "Vanilla", "Cinnamon", "Cardamom"],
+    ["Which country does the kiwi fruit originally come from?", "China", "New Zealand", "Australia", "Brazil"],
+    ["Which sauce is made with egg, oil and a little vinegar or lemon?", "Mayonnaise", "Béchamel", "Pesto", "Ketchup"],
+    ["Which of these cheeses is Italian?", "Mozzarella", "Camembert", "Gouda", "Cheddar"],
+    ["Which country does Gouda cheese come from?", "Netherlands", "Switzerland", "France", "Denmark"],
+    ["Which nut is used in the most famous chocolate spread?", "Hazelnut", "Almond", "Walnut", "Cashew"],
+    ["What colour are the beans in Brazilian feijoada?", "Black", "White", "Red", "Green"],
+    ["Which tropical fruit has a crown of leaves?", "Pineapple", "Mango", "Papaya", "Banana"],
+    ["Which of these is botanically a fruit?", "Tomato", "Carrot", "Potato", "Lettuce"],
+    ["Which Spanish soup is served cold?", "Gazpacho", "Minestrone", "Borscht", "Miso soup"],
+    ["Which coffee drink is espresso topped with steamed milk foam?", "Cappuccino", "Black tea", "Hot chocolate", "Lemonade"],
+    ["Which cereal grain is used to make popcorn?", "Corn (maize)", "Rice", "Wheat", "Oats"],
+    ["Which fruit is olive oil made from?", "Olives", "Sunflower seeds", "Peanuts", "Coconuts"],
+    ["Which Russian and Ukrainian soup is made with beetroot?", "Borscht", "Goulash", "Gazpacho", "Ramen"],
+    ["Which Hungarian dish is a meat stew flavoured with paprika?", "Goulash", "Paella", "Moussaka", "Risotto"],
+    ["Which Greek dish has layers of aubergine, meat and béchamel?", "Moussaka", "Lasagne", "Gyros", "Tzatziki"],
+    ["Which Japanese noodle soup is very popular worldwide?", "Ramen", "Pho", "Laksa", "Udon salad"],
+    ["Which Vietnamese noodle soup is usually made with beef broth?", "Pho", "Ramen", "Laksa", "Tom yum"],
+    ["Which Middle Eastern snack is made of fried balls of chickpeas?", "Falafel", "Kebab", "Baklava", "Couscous"],
+    ["Which Italian rice dish is cooked slowly with broth?", "Risotto", "Paella", "Biryani", "Jambalaya"],
+    ["Which drink is made from fermented grapes?", "Wine", "Beer", "Cider", "Sake"],
+    ["Which drink is made from fermented apples?", "Cider", "Wine", "Beer", "Mead"],
+    ["What is the main ingredient of traditional Japanese miso?", "Soybeans", "Rice", "Fish", "Seaweed"],
+    ["Which country is famous for maple syrup?", "Canada", "Sweden", "Russia", "Austria"],
+    ["Which country is famous for Belgian waffles and chocolate?", "Belgium", "Netherlands", "Switzerland", "Austria"],
+    ["Which Argentine and Brazilian drink is sipped from a gourd with a metal straw?", "Mate", "Chai", "Kombucha", "Horchata"],
+    ["What type of food is brie?", "Cheese", "Bread", "Sausage", "Wine"]
+  ]
+};
+
+
+/* =========================================================
+   ENGLISH, GENERAL MODE — emoji riddles, clues, true/false
+   ========================================================= */
+Object.assign(EMO_PROMPT, {
+  "Movies": "Which movie is this?",
+  "Idioms": "Which English saying is this?",
+  "Countries": "Which country is this?",
+  "Cartoons & Movies": "Which movie is this?",
+  "Jobs": "Which job is this?",
+  "Fairy Tales": "Which story is this?"
+});
+Object.assign(PIS_PROMPT, {
+  "Who am I?": "Who am I?",
+  "What place is this?": "What place is this?",
+  "What object is this?": "What object is this?",
+  "What animal am I?": "What animal am I?",
+  "Characters": "Which character am I?",
+  "What is it?": "What is it?"
+});
+
+QDB_EN.geral.emo = {
+  "Movies": [
+    ["🚢🧊💔", "Titanic", "Poseidon", "Moby Dick", "Pirates of the Caribbean"],
+    ["🦖🏝️🧬", "Jurassic Park", "King Kong", "Godzilla", "Ice Age"],
+    ["👻🚫📞", "Ghostbusters", "The Exorcist", "Casper", "Poltergeist"],
+    ["🧙‍♂️💍🌋", "The Lord of the Rings", "Harry Potter", "The Chronicles of Narnia", "Merlin"],
+    ["🦈🏖️😱", "Jaws", "Finding Nemo", "Piranha", "Waterworld"],
+    ["👽📞🏠", "E.T. the Extra-Terrestrial", "Alien", "Close Encounters", "Independence Day"],
+    ["🦇🃏🌃", "The Dark Knight", "Spider-Man", "Superman", "Captain America"],
+    ["🦍🏙️✈️", "King Kong", "Godzilla", "Planet of the Apes", "Tarzan"],
+    ["🏃‍♂️🍫📦", "Forrest Gump", "Rocky", "Cast Away", "The Terminal"],
+    ["🥊🇺🇸🏃‍♂️🥩", "Rocky", "The Karate Kid", "Million Dollar Baby", "Raging Bull"],
+    ["🏝️🏐✈️", "Cast Away", "The Beach", "The Blue Lagoon", "Lost"],
+    ["💊🕶️💻", "The Matrix", "Inception", "Tron", "Avatar"],
+    ["🌌⚔️👨‍👦", "Star Wars", "Star Trek", "Interstellar", "Avatar"],
+    ["🧛‍♂️🏰🦇", "Dracula", "Frankenstein", "The Wolf Man", "The Mummy"],
+    ["🧟‍♂️⚡🔬", "Frankenstein", "Dracula", "Zombieland", "The Mummy"],
+    ["🕰️🚗⚡", "Back to the Future", "Fast & Furious", "Cars", "The Terminator"],
+    ["🤖🔫😎", "The Terminator", "RoboCop", "Transformers", "The Matrix"],
+    ["🔨⚡👑", "Thor", "Hulk", "Captain America", "Iron Man"],
+    ["🐀👨‍🍳🇫🇷", "Ratatouille", "Stuart Little", "Chef", "Kitchen Magic"],
+    ["🏠🎈👴🐶", "Up", "Monster House", "Mary Poppins", "Inside Out"],
+    ["🍫🏭🎫", "Charlie and the Chocolate Factory", "Matilda", "Chocolat", "Mary Poppins"],
+    ["☂️👜🎶🧹", "Mary Poppins", "Matilda", "Home Alone", "The Sound of Music"],
+    ["🏠🎄👦🚪😱", "Home Alone", "The Grinch", "Elf", "The Polar Express"],
+    ["👰💍🏃‍♀️", "Runaway Bride", "My Big Fat Greek Wedding", "Mamma Mia!", "Pretty Woman"],
+    ["🦁👑🌅", "The Lion King", "Madagascar", "The Jungle Book", "Tarzan"],
+    ["🐼🥋", "Kung Fu Panda", "The Karate Kid", "Mulan", "Shaolin Soccer"],
+    ["🌹👸👹", "Beauty and the Beast", "Shrek", "Snow White", "Tangled"],
+    ["🧞‍♂️🪔🐒", "Aladdin", "The Jungle Book", "Hercules", "Sinbad"]
+  ],
+  "Idioms": [
+    ["🐱👜🔓", "Let the cat out of the bag", "Curiosity killed the cat", "Raining cats and dogs", "Cat got your tongue"],
+    ["🌧️🐱🐶", "Raining cats and dogs", "Let the cat out of the bag", "Every dog has its day", "It's a dog's life"],
+    ["🐦🐦🪨", "Kill two birds with one stone", "The early bird catches the worm", "A bird in the hand", "Birds of a feather"],
+    ["🐦🌅🪱", "The early bird catches the worm", "Kill two birds with one stone", "Birds of a feather flock together", "Night owl"],
+    ["🥚🥚🧺", "Don't put all your eggs in one basket", "Walking on eggshells", "Chicken and egg", "Don't count your chickens"],
+    ["🐘🛋️", "The elephant in the room", "An elephant never forgets", "White elephant", "Bull in a china shop"],
+    ["🐂🏺💥", "A bull in a china shop", "Take the bull by the horns", "The elephant in the room", "Like a red rag to a bull"],
+    ["🍰🍴😋", "Have your cake and eat it", "A piece of cake", "The icing on the cake", "Sell like hot cakes"],
+    ["🍰👌", "A piece of cake", "Have your cake and eat it", "Sell like hot cakes", "Cherry on top"],
+    ["🔥🔥🥞", "Sell like hot cakes", "Out of the frying pan into the fire", "A piece of cake", "Spill the beans"],
+    ["🥫💦🗣️", "Spill the beans", "Full of beans", "Cool beans", "Not worth a bean"],
+    ["🌙🔵", "Once in a blue moon", "Over the moon", "Promise the moon", "Moonlighting"],
+    ["🌙😀", "Over the moon", "Once in a blue moon", "Shoot for the moon", "Honeymoon"],
+    ["🧊🔨", "Break the ice", "Cold feet", "Tip of the iceberg", "On thin ice"],
+    ["🦶❄️", "Cold feet", "Break the ice", "Get off on the wrong foot", "Put your foot down"],
+    ["⏰💰", "Time is money", "Money doesn't grow on trees", "Better late than never", "Time flies"],
+    ["⏰🕊️", "Time flies", "Time is money", "Kill time", "Better late than never"],
+    ["💰🌳❌", "Money doesn't grow on trees", "Time is money", "Money talks", "Penny for your thoughts"],
+    ["🌧️☔🗓️", "Save it for a rainy day", "Right as rain", "It never rains but it pours", "Under the weather"],
+    ["🤒🌥️", "Under the weather", "Save it for a rainy day", "Storm in a teacup", "Brainstorm"],
+    ["🍎👁️", "The apple of my eye", "An apple a day keeps the doctor away", "Bad apple", "Big Apple"],
+    ["🍎📅👨‍⚕️❌", "An apple a day keeps the doctor away", "The apple of my eye", "Upset the apple cart", "Bad apple"],
+    ["🐴🗣️👄", "Straight from the horse's mouth", "Hold your horses", "Don't look a gift horse in the mouth", "Dark horse"],
+    ["✋🐴🐴", "Hold your horses", "Straight from the horse's mouth", "Change horses midstream", "Horse around"],
+    ["🌊🧊🏔️", "The tip of the iceberg", "Break the ice", "On thin ice", "Cold feet"]
+  ],
+  "Countries": [
+    ["🗼🥐🧀🍷", "France", "Belgium", "Switzerland", "Italy"],
+    ["🍕🍝🛵🏛️", "Italy", "Greece", "Spain", "France"],
+    ["🍣🗻🌸", "Japan", "China", "South Korea", "Thailand"],
+    ["🦘🐨🏄", "Australia", "New Zealand", "South Africa", "Brazil"],
+    ["🌮🌵🎺", "Mexico", "Spain", "Argentina", "Colombia"],
+    ["🍁🏒🐻", "Canada", "Russia", "Sweden", "United States"],
+    ["🗽🍔🦅", "United States", "Canada", "United Kingdom", "Australia"],
+    ["🐼🏯🥟", "China", "Japan", "Vietnam", "South Korea"],
+    ["🐘🍛🕌", "India", "Thailand", "Egypt", "Pakistan"],
+    ["💂‍♂️☕🎡", "United Kingdom", "Ireland", "Australia", "Canada"],
+    ["⚽🏖️🦜🥁", "Brazil", "Spain", "Cuba", "Mexico"],
+    ["🌷🚲🧀", "Netherlands", "Denmark", "Belgium", "Switzerland"],
+    ["🍫⌚🏔️", "Switzerland", "Austria", "Belgium", "Norway"],
+    ["🐫🏜️🔺", "Egypt", "Morocco", "Saudi Arabia", "Mexico"],
+    ["🍺🥨🏰", "Germany", "Austria", "Belgium", "Czech Republic"],
+    ["🥘💃🐂", "Spain", "Mexico", "Portugal", "Italy"],
+    ["🥩🧉💃⚽", "Argentina", "Mexico", "Brazil", "Chile"],
+    ["🥝🐑🏉", "New Zealand", "Australia", "Ireland", "Wales"],
+    ["🍀🍺🎻", "Ireland", "Scotland", "England", "Iceland"],
+    ["🏛️⛵🏺", "Greece", "Italy", "Turkey", "Cyprus"],
+    ["🐓🐟🎸⛵", "Portugal", "Spain", "Brazil", "Greece"],
+    ["🧊🌋🐋", "Iceland", "Norway", "Greenland", "Japan"],
+    ["🦁🦓🌍🏔️", "Kenya", "Australia", "Argentina", "Norway"]
+  ]
+};
+
+const CLUES_ANIMALS_EN = [
+  [["I live in Africa.", "My neck is very long.", "I eat leaves from tall trees."], "Giraffe", "Zebra", "Camel", "Ostrich"],
+  [["I'm the largest land animal.", "I have huge ears.", "I have a trunk."], "Elephant", "Rhino", "Hippo", "Mammoth"],
+  [["I live in very cold places.", "I'm a bird but I can't fly.", "I always wear a 'tuxedo'."], "Penguin", "Seagull", "Ostrich", "Seal"],
+  [["I live in the sea.", "I have eight arms.", "I squirt ink to escape."], "Octopus", "Squid", "Jellyfish", "Crab"],
+  [["I'm a mammal.", "I sleep upside down.", "I fly at night."], "Bat", "Owl", "Squirrel", "Mouse"],
+  [["I'm very slow.", "I live in South American trees.", "I sleep many hours a day."], "Sloth", "Koala", "Lemur", "Tortoise"],
+  [["I live in Australia.", "I have a pouch on my belly.", "I hop everywhere."], "Kangaroo", "Koala", "Hare", "Platypus"],
+  [["My tongue is very long.", "My eyes move separately.", "I change colour."], "Chameleon", "Gecko", "Frog", "Iguana"],
+  [["I have a sting.", "I live in a hive.", "I make honey."], "Bee", "Wasp", "Fly", "Ant"],
+  [["I have black spots.", "I'm a big cat.", "I'm the fastest land animal."], "Cheetah", "Leopard", "Jaguar", "Lynx"],
+  [["Some of us live for over 100 years.", "I'm very slow on land.", "I carry my home on my back."], "Tortoise", "Snail", "Lobster", "Crocodile"],
+  [["I live on the savannah.", "The males have a mane.", "I roar very loudly."], "Lion", "Tiger", "Wolf", "Bear"],
+  [["I'm related to the horse.", "I live in herds in Africa.", "I have black and white stripes."], "Zebra", "Donkey", "Okapi", "Giraffe"],
+  [["I'm a night bird.", "I can turn my head a long way round.", "I say 'hoot hoot'."], "Owl", "Bat", "Crow", "Pigeon"]
+];
+
+QDB_EN.geral.pis = {
+  "Who am I?": [
+    [["I was born in Madeira in 1985.", "I played for Manchester United and Real Madrid.", "People call me CR7."], "Cristiano Ronaldo", "Lionel Messi", "Neymar", "Kylian Mbappé"],
+    [["I was born in Brazil in 1940.", "I won three World Cups.", "I'm known as 'The King of Football'."], "Pelé", "Diego Maradona", "Ronaldo Nazário", "Zico"],
+    [["I was born near Florence in 1452.", "I was a painter, inventor and scientist.", "I painted the Mona Lisa."], "Leonardo da Vinci", "Michelangelo", "Galileo Galilei", "Raphael"],
+    [["I was born in Germany in 1879.", "I won the Nobel Prize in Physics in 1921.", "My most famous equation is E=mc²."], "Albert Einstein", "Isaac Newton", "Max Planck", "Stephen Hawking"],
+    [["I was born in Poland.", "I discovered polonium and radium.", "I was the first woman to win a Nobel Prize."], "Marie Curie", "Rosalind Franklin", "Ada Lovelace", "Florence Nightingale"],
+    [["I was born in Stratford-upon-Avon.", "I wrote many plays and sonnets.", "I wrote 'Romeo and Juliet'."], "William Shakespeare", "Charles Dickens", "Geoffrey Chaucer", "John Milton"],
+    [["I was born in Liverpool in 1940.", "I was in the most famous band of the 1960s.", "I wrote the song 'Imagine'."], "John Lennon", "Paul McCartney", "Ringo Starr", "Mick Jagger"],
+    [["I was born in a log cabin in Kentucky in 1809.", "I was President during the American Civil War.", "I fought to end slavery in the USA."], "Abraham Lincoln", "George Washington", "Thomas Jefferson", "Theodore Roosevelt"],
+    [["I was born in Corsica.", "I became Emperor of France.", "I was defeated at Waterloo."], "Napoleon Bonaparte", "Louis XIV", "Charlemagne", "Julius Caesar"],
+    [["I was a pilot and astronaut.", "I flew on Apollo 11.", "I was the first person to walk on the Moon."], "Neil Armstrong", "Buzz Aldrin", "Yuri Gagarin", "Michael Collins"],
+    [["I was born in Salzburg in 1756.", "I started composing at age 5.", "I composed 'The Magic Flute'."], "Mozart", "Beethoven", "Bach", "Vivaldi"],
+    [["I was born in Málaga.", "I helped create Cubism.", "I painted 'Guernica'."], "Pablo Picasso", "Salvador Dalí", "Joan Miró", "Francisco Goya"],
+    [["I was born in the Netherlands in 1853.", "I sold very few paintings in my lifetime.", "I painted 'The Starry Night'."], "Vincent van Gogh", "Rembrandt", "Claude Monet", "Paul Gauguin"],
+    [["I was born in Argentina in 1987.", "I played for Barcelona for many years.", "I won the World Cup in 2022."], "Lionel Messi", "Diego Maradona", "Neymar", "Ángel Di María"],
+    [["I was born in South Africa in 1918.", "I spent 27 years in prison.", "I became my country's first Black president."], "Nelson Mandela", "Desmond Tutu", "Kofi Annan", "Martin Luther King Jr."],
+    [["I was born in Jamaica in 1986.", "I won 8 Olympic gold medals.", "I'm the fastest man in history over 100 metres."], "Usain Bolt", "Carl Lewis", "Jesse Owens", "Mo Farah"],
+    [["I was born in Tupelo, Mississippi, in 1935.", "I recorded 'Hound Dog' and 'Jailhouse Rock'.", "I'm called 'The King of Rock and Roll'."], "Elvis Presley", "Chuck Berry", "Johnny Cash", "Buddy Holly"],
+    [["Arthur Conan Doyle created me.", "I live at 221B Baker Street.", "My best friend is Dr Watson."], "Sherlock Holmes", "Hercule Poirot", "Miss Marple", "Inspector Clouseau"]
+  ],
+  "What place is this?": [
+    [["I was built for a World's Fair.", "I'm made of iron.", "I'm the symbol of Paris."], "Eiffel Tower", "Arc de Triomphe", "Big Ben", "Colosseum"],
+    [["I'm almost 2,000 years old.", "Gladiators fought here.", "I'm an amphitheatre in Rome."], "Colosseum", "Pantheon", "Parthenon", "Trevi Fountain"],
+    [["I was built over many centuries.", "I'm very, very long.", "I'm in China."], "Great Wall of China", "Forbidden City", "Hadrian's Wall", "Temple of Heaven"],
+    [["I'm in Agra, India.", "I'm made of white marble.", "An emperor built me in memory of his wife."], "Taj Mahal", "Golden Temple", "Angkor Wat", "Blue Mosque"],
+    [["I'm in New York.", "I was a gift from France.", "I hold up a torch."], "Statue of Liberty", "Empire State Building", "Eiffel Tower", "Christ the Redeemer"],
+    [["I'm in Rio de Janeiro.", "I stand on top of Corcovado mountain.", "My arms are wide open."], "Christ the Redeemer", "Sugarloaf Mountain", "Statue of Liberty", "Cristo Rei"],
+    [["I'm in Peru.", "The Incas built me.", "I'm a city high in the mountains."], "Machu Picchu", "Chichen Itza", "Teotihuacan", "Petra"],
+    [["I'm in Egypt.", "I'm the largest of the three at Giza.", "I was built for the pharaoh Khufu."], "Great Pyramid of Giza", "Great Sphinx", "Karnak Temple", "Abu Simbel"],
+    [["I'm in London.", "I'm actually the name of the great bell.", "I'm in the clock tower of Parliament."], "Big Ben", "Tower Bridge", "London Eye", "Buckingham Palace"],
+    [["I'm in Barcelona.", "Construction began in 1882.", "I was designed by Gaudí."], "Sagrada Família", "Casa Batlló", "Park Güell", "Seville Cathedral"],
+    [["I'm in Athens.", "I stand on the Acropolis.", "I was a temple to the goddess Athena."], "Parthenon", "Colosseum", "Pantheon", "Temple of Zeus"],
+    [["I'm in Moscow.", "I have colourful onion domes.", "I'm on Red Square."], "St Basil's Cathedral", "The Kremlin", "The Hermitage", "St Peter's Basilica"],
+    [["I'm in Sydney.", "My roof looks like sails.", "Concerts and operas happen inside me."], "Sydney Opera House", "Harbour Bridge", "Bondi Beach", "Uluru"],
+    [["I'm in Cambodia.", "I'm surrounded by a huge moat.", "I'm the largest religious monument in the world."], "Angkor Wat", "Borobudur", "Taj Mahal", "Petra"],
+    [["I'm in Jordan.", "I'm carved into pink rock.", "I'm known as the 'Rose City'."], "Petra", "Machu Picchu", "Pyramids of Giza", "Angkor Wat"]
+  ],
+  "What object is this?": [
+    [["I can hang on a wall or sit on a wrist.", "I have hands or numbers.", "I tell you the time."], "Clock", "Compass", "Calendar", "Thermometer"],
+    [["Sailors used me.", "I help you find your way.", "My needle always points north."], "Compass", "Astrolabe", "Clock", "Map"],
+    [["I can be grand or upright.", "I'm a musical instrument.", "I have 88 black and white keys."], "Piano", "Accordion", "Harp", "Violin"],
+    [["I have lenses.", "Scientists use me in labs.", "I show tiny, tiny things."], "Microscope", "Telescope", "Binoculars", "Periscope"],
+    [["I have lenses.", "Astronomers use me.", "I show distant stars and planets."], "Telescope", "Microscope", "Periscope", "Magnifying glass"],
+    [["Gutenberg made me famous in Europe.", "I changed books forever.", "I print letters on paper."], "Printing press", "Typewriter", "Photocopier", "Quill pen"],
+    [["I have a screen.", "I fit in your pocket.", "You use me to call and text."], "Mobile phone", "Radio", "Calculator", "Watch"],
+    [["I don't need fuel.", "I have pedals and a chain.", "I ride on two wheels."], "Bicycle", "Scooter", "Motorbike", "Skateboard"],
+    [["I have many pages.", "You find me in libraries.", "I have words and meanings in alphabetical order."], "Dictionary", "Atlas", "Novel", "Newspaper"],
+    [["I'm round and I spin.", "I represent the Earth.", "I have the continents drawn on me."], "Globe", "Football", "Astrolabe", "World map"],
+    [["I run on batteries.", "I light up the dark.", "I fit in your hand."], "Torch", "Lamp", "Candle", "Lighter"],
+    [["I have strings.", "You play me with a bow.", "I sit under your chin."], "Violin", "Guitar", "Harp", "Cello"]
+  ],
+  "What animal am I?": CLUES_ANIMALS_EN
+};
+
+QDB_EN.geral.vf = {
+  "Science": [
+    ["The Sun is a star.", true],
+    ["The Moon makes its own light.", false],
+    ["Sound can travel through a vacuum.", false],
+    ["Water is made of hydrogen and oxygen.", true],
+    ["Venus is the closest planet to the Sun.", false],
+    ["Diamonds are made of carbon.", true],
+    ["Light travels faster than sound.", true],
+    ["Saturn is the only planet with rings.", false],
+    ["The human heart has four chambers.", true],
+    ["Mars has two moons.", true],
+    ["Earth is the largest planet in the Solar System.", false],
+    ["A lightning bolt is hotter than the surface of the Sun.", true],
+    ["Pluto is classified as a dwarf planet.", true],
+    ["Human blood is blue inside the veins.", false],
+    ["A year on Mercury lasts 88 Earth days.", true],
+    ["Gold is attracted to magnets.", false],
+    ["The femur is the longest bone in the body.", true],
+    ["Seawater freezes at exactly 0 °C.", false]
+  ],
+  "Geography": [
+    ["The Amazon River flows into the Atlantic Ocean.", true],
+    ["Mount Everest is in the Andes.", false],
+    ["Canada shares a border with Mexico.", false],
+    ["The Nile flows through Egypt.", true],
+    ["Japan is made up of islands.", true],
+    ["Sydney is the capital of Australia.", false],
+    ["The Sahara Desert is in Africa.", true],
+    ["Brazil is the largest country in South America.", true],
+    ["Iceland is in Asia.", false],
+    ["Istanbul lies on two continents.", true],
+    ["Greenland is part of the Kingdom of Denmark.", true],
+    ["It's very easy to float in the Dead Sea.", true],
+    ["The capital of Switzerland is Zurich.", false],
+    ["The Pacific is the largest ocean in the world.", true],
+    ["Vatican City is the smallest country in the world.", true],
+    ["Russia is the largest country in the world.", true],
+    ["The Danube flows through London.", false]
+  ],
+  "History": [
+    ["Vasco da Gama reached India by sea in 1498.", true],
+    ["World War I began in 1939.", false],
+    ["The Colosseum was built by the Romans.", true],
+    ["Christopher Columbus reached the Americas in 1492.", true],
+    ["Napoleon was Emperor of France.", true],
+    ["The Berlin Wall fell in 1989.", true],
+    ["The Vikings came from Scandinavia.", true],
+    ["The Titanic sank on its first voyage.", true],
+    ["The pyramids of Giza were built by the Romans.", false],
+    ["Julius Caesar was the first Roman emperor.", false],
+    ["The French Revolution began in 1789.", true],
+    ["The first person in space was Neil Armstrong.", false],
+    ["The first modern Olympic Games were held in Athens.", true],
+    ["The Eiffel Tower was built for the 1889 World's Fair.", true],
+    ["The Incas lived in South America.", true],
+    ["The Western Roman Empire fell in the year 476.", true]
+  ],
+  "World": [
+    ["The yen is the currency of Japan.", true],
+    ["Portuguese is the official language of Brazil.", true],
+    ["Spanish is the official language of Mexico.", true],
+    ["The Taj Mahal is in Pakistan.", false],
+    ["The kimono is a traditional garment from China.", false],
+    ["Oktoberfest is a famous festival in Germany.", true],
+    ["Tango was born in Argentina and Uruguay.", true],
+    ["The Statue of Liberty was a gift from the United Kingdom.", false],
+    ["The flag of Japan has a red circle on a white background.", true],
+    ["Flamenco comes from Italy.", false],
+    ["The United Nations has its headquarters in New York.", true],
+    ["Big Ben is the name of a bell.", true],
+    ["Bollywood is the film industry based in Mumbai.", true],
+    ["The moai statues are on Easter Island.", true],
+    ["Mandarin Chinese is the most spoken native language in the world.", true],
+    ["The euro is the currency of Switzerland.", false]
+  ],
+  "Animals": [
+    ["Bats are blind.", false],
+    ["Whales are fish.", false],
+    ["An octopus has three hearts.", true],
+    ["Spiders are insects.", false],
+    ["Penguins live at the North Pole.", false],
+    ["Under their white fur, polar bears have black skin.", true],
+    ["Dolphins breathe air.", true],
+    ["Goldfish only have a 3-second memory.", false],
+    ["Camels store water in their humps.", false],
+    ["Ostriches bury their heads in the sand when scared.", false],
+    ["In seahorses, the male carries the babies.", true],
+    ["Sharks are mammals.", false],
+    ["The cheetah is the fastest land animal.", true],
+    ["A cow's stomach has four compartments.", true],
+    ["Hummingbirds can fly backwards.", true],
+    ["Snakes have eyelids.", false]
+  ],
+  "Trivia": [
+    ["A chessboard has 64 squares.", true],
+    ["A standard die has 8 faces.", false],
+    ["A tomato is a fruit.", true],
+    ["A peanut is a true nut.", false],
+    ["Banana plants are trees.", false],
+    ["A standard piano has 88 keys.", true],
+    ["The Mona Lisa is in the Louvre Museum.", true],
+    ["A marathon is about 42 km long.", true],
+    ["Basketball was invented in Brazil.", false],
+    ["Properly stored honey can last for many years.", true],
+    ["The Beatles came from Liverpool.", true],
+    ["The English alphabet has 24 letters.", false],
+    ["The Great Wall of China can be seen with the naked eye from the Moon.", false],
+    ["White chocolate contains cocoa powder.", false],
+    ["The Statue of Liberty is green because its copper oxidised.", true],
+    ["The Summer Olympics are held every 4 years.", true]
+  ]
+};
+
+
+/* =========================================================
+   ENGLISH, KIDS MODE (up to 12)
+   ========================================================= */
+QDB_EN.sub12.mc = {
+  "School": [
+    ["What is 5 × 5?", "25", "15", "20", "30"],
+    ["What is 7 + 8?", "15", "14", "16", "13"],
+    ["What is 9 × 3?", "27", "24", "21", "30"],
+    ["What is 100 − 37?", "63", "73", "67", "53"],
+    ["What is half of 50?", "25", "20", "30", "15"],
+    ["What is double 12?", "24", "22", "14", "36"],
+    ["How many minutes are in an hour?", "60", "100", "30", "50"],
+    ["How many hours are in a day?", "24", "12", "20", "30"],
+    ["How many months are in a year?", "12", "10", "11", "13"],
+    ["How many days does February have in a normal (non-leap) year?", "28", "29", "30", "31"],
+    ["Which month comes after March?", "April", "May", "February", "June"],
+    ["What do you call a shape with 5 sides?", "Pentagon", "Hexagon", "Octagon", "Square"],
+    ["How many letters are in the English alphabet?", "26", "24", "28", "22"],
+    ["How many vowels are in the alphabet (a, e, i, o, u)?", "5", "4", "6", "7"],
+    ["What is the plural of 'mouse'?", "Mice", "Mouses", "Meese", "Mousen"],
+    ["What is the plural of 'child'?", "Children", "Childs", "Childes", "Childrens"],
+    ["What is the past tense of 'go'?", "Went", "Goed", "Gone", "Goes"],
+    ["Which word means the same as 'happy'?", "Glad", "Sad", "Angry", "Tired"],
+    ["What is the opposite of 'tall'?", "Short", "Big", "Wide", "Long"],
+    ["Which of these words is a verb?", "Run", "Table", "Blue", "Quick"],
+    ["Which punctuation mark goes at the end of a question?", "Question mark", "Exclamation mark", "Full stop", "Comma"],
+    ["What is 6 × 7?", "42", "36", "48", "49"],
+    ["What is 81 ÷ 9?", "9", "8", "7", "11"],
+    ["How many centimetres are in a metre?", "100", "10", "1000", "50"],
+    ["How many grams are in a kilogram?", "1000", "100", "10", "500"],
+    ["Which number comes after 99?", "100", "98", "101", "110"],
+    ["How many tens are in 50?", "5", "50", "10", "15"],
+    ["Which number is 'X' in Roman numerals?", "10", "5", "50", "100"],
+    ["Which of these numbers is the biggest?", "0.5", "0.25", "0.1", "0.05"],
+    ["How many seconds are in a minute?", "60", "100", "30", "10"],
+    ["What is 3 × 4?", "12", "7", "34", "16"],
+    ["How many sides does a hexagon have?", "6", "5", "8", "7"],
+    ["Which word is spelled correctly?", "Because", "Becuase", "Becose", "Beacause"],
+    ["What is 15 + 15?", "30", "25", "35", "20"],
+    ["What is 1000 − 1?", "999", "990", "900", "1001"],
+    ["How many days are in a week?", "7", "5", "6", "10"]
+  ],
+  "Animals": [
+    ["Which animal lays eggs but is a mammal?", "Platypus", "Chicken", "Whale", "Penguin"],
+    ["What is the biggest animal in the world?", "Blue whale", "Elephant", "Giraffe", "Shark"],
+    ["How many legs does a spider have?", "8", "6", "10", "4"],
+    ["Which animal eats mostly bamboo?", "Panda", "Lion", "Kangaroo", "Gorilla"],
+    ["Which animal has a trunk?", "Elephant", "Rhino", "Hippo", "Giraffe"],
+    ["What is a baby cow called?", "Calf", "Foal", "Lamb", "Piglet"],
+    ["What is a baby horse called?", "Foal", "Puppy", "Chick", "Piglet"],
+    ["What is a baby sheep called?", "Lamb", "Calf", "Kid", "Foal"],
+    ["What is a baby chicken called?", "Chick", "Duckling", "Piglet", "Lamb"],
+    ["Which animal has the longest neck?", "Giraffe", "Horse", "Ostrich", "Camel"],
+    ["Which slow animal has a shell?", "Tortoise", "Rabbit", "Mouse", "Squirrel"],
+    ["Which of these animals is an insect?", "Ladybird", "Spider", "Worm", "Snail"],
+    ["Which of these animals is a reptile?", "Crocodile", "Frog", "Dolphin", "Penguin"],
+    ["Which of these animals is an amphibian?", "Frog", "Lizard", "Snake", "Tortoise"],
+    ["Which animal spins webs?", "Spider", "Ant", "Bee", "Ladybird"],
+    ["What do bees collect from flowers to make honey?", "Nectar", "Leaves", "Soil", "Seawater"],
+    ["Which animal has black and white stripes?", "Zebra", "Tiger", "Leopard", "Giraffe"],
+    ["Which animal stores food in its cheeks?", "Hamster", "Rabbit", "Cat", "Dog"],
+    ["Which Australian animal hops and has a pouch?", "Kangaroo", "Koala", "Hare", "Frog"],
+    ["What is the fastest animal on land?", "Cheetah", "Horse", "Lion", "Rabbit"],
+    ["Which big bird can't fly but runs very fast?", "Ostrich", "Eagle", "Pigeon", "Duck"],
+    ["Dolphins are…", "Mammals", "Fish", "Reptiles", "Amphibians"],
+    ["Which sea animal has eight arms?", "Octopus", "Squid", "Starfish", "Jellyfish"],
+    ["Which animal carries its 'house' on its back?", "Snail", "Worm", "Ant", "Slug"],
+    ["Which animal howls at night?", "Wolf", "Lion", "Bear", "Horse"],
+    ["Which bird hunts at night and can turn its head a long way?", "Owl", "Pigeon", "Chicken", "Parrot"],
+    ["Which bird can copy people's voices?", "Parrot", "Sparrow", "Pigeon", "Seagull"],
+    ["What is a bee's home called?", "Hive", "Nest", "Burrow", "Anthill"],
+    ["What is a wild rabbit's home called?", "Burrow", "Hive", "Nest", "Stable"],
+    ["Near which pole do polar bears live?", "North Pole", "South Pole", "Equator", "Desert"],
+    ["Where do most penguins live?", "Southern Hemisphere", "North Pole", "Sahara Desert", "Amazon Rainforest"],
+    ["How many wings does a butterfly have?", "4", "2", "6", "8"],
+    ["Which animal sleeps hanging upside down?", "Bat", "Bird", "Cat", "Squirrel"],
+    ["What does a caterpillar eat?", "Leaves", "Meat", "Fish", "Stones"],
+    ["What is the biggest cat in the world?", "Tiger", "House cat", "Lynx", "Puma"],
+    ["Which animal can change colour?", "Chameleon", "Dog", "Cow", "Duck"]
+  ],
+  "Cartoons & Movies": [
+    ["Who lives in a pineapple under the sea?", "SpongeBob", "Patrick", "Squidward", "Sandy"],
+    ["What is the name of the snowman in 'Frozen'?", "Olaf", "Sven", "Kristoff", "Hans"],
+    ["What kind of animal is Simba?", "Lion", "Tiger", "Panther", "Cat"],
+    ["What colour are the Minions?", "Yellow", "Blue", "Green", "Red"],
+    ["What is the name of Elsa's sister?", "Anna", "Moana", "Rapunzel", "Merida"],
+    ["Which clownfish got lost in the ocean?", "Nemo", "Dory", "Bruce", "Gill"],
+    ["Which blue fish keeps forgetting everything?", "Dory", "Nemo", "Marlin", "Gill"],
+    ["What is the cowboy's name in 'Toy Story'?", "Woody", "Buzz", "Rex", "Slinky"],
+    ["Which 'Toy Story' character says 'To infinity and beyond!'?", "Buzz Lightyear", "Woody", "Rex", "Jessie"],
+    ["What is the name of Disney's most famous mouse?", "Mickey", "Jerry", "Speedy", "Stuart"],
+    ["What is the name of the cat who chases Jerry?", "Tom", "Garfield", "Sylvester", "Felix"],
+    ["What colour is Shrek?", "Green", "Blue", "Orange", "Purple"],
+    ["Who is Shrek's best friend?", "Donkey", "Puss in Boots", "Pinocchio", "Lord Farquaad"],
+    ["Which princess has very long magic hair?", "Rapunzel", "Cinderella", "Belle", "Ariel"],
+    ["What animal is Peppa?", "Pig", "Sheep", "Rabbit", "Cat"],
+    ["What is the name of Peppa's little brother?", "George", "Peter", "Tom", "Richard"],
+    ["What is Spider-Man's real name?", "Peter Parker", "Bruce Wayne", "Clark Kent", "Tony Stark"],
+    ["In which city does Batman live?", "Gotham", "Metropolis", "New York", "Springfield"],
+    ["Which planet does Superman come from?", "Krypton", "Mars", "Asgard", "Saturn"],
+    ["Which superhero has a magic hammer?", "Thor", "Hulk", "Captain America", "Iron Man"],
+    ["What colour does the Hulk turn?", "Green", "Blue", "Red", "Purple"],
+    ["What is the name of the girl who goes to Wonderland?", "Alice", "Dorothy", "Wendy", "Matilda"],
+    ["Which wooden puppet's nose grows when he lies?", "Pinocchio", "Woody", "Chucky", "Geppetto"],
+    ["Which fairy goes with Peter Pan?", "Tinker Bell", "Fairy Godmother", "Flora", "Fauna"],
+    ["What does Cinderella lose at midnight?", "A glass slipper", "Her crown", "A necklace", "A glove"],
+    ["How many dwarfs live with Snow White?", "7", "5", "6", "9"],
+    ["What is the name of the red race car in 'Cars'?", "Lightning McQueen", "Mater", "Sally", "Doc Hudson"],
+    ["In 'Inside Out', which emotion is blue?", "Sadness", "Joy", "Fear", "Anger"],
+    ["What kind of animal is Baloo in 'The Jungle Book'?", "Bear", "Panther", "Tiger", "Monkey"],
+    ["And what kind of animal is Shere Khan?", "Tiger", "Lion", "Wolf", "Snake"],
+    ["What is the name of Ash's yellow Pokémon?", "Pikachu", "Charmander", "Bulbasaur", "Squirtle"],
+    ["What is Harry Potter's school of magic called?", "Hogwarts", "Beauxbatons", "Durmstrang", "Narnia"],
+    ["Stitch, Lilo's friend, is an…", "Alien", "Dog", "Koala", "Bear"],
+    ["What is the lion's name in 'Madagascar'?", "Alex", "Marty", "Melman", "Gloria"],
+    ["Which rat wants to be a chef in Paris?", "Remy", "Mickey", "Jerry", "Stuart"],
+    ["In 'The Incredibles', what power does Violet have?", "Turning invisible", "Flying", "Super speed", "Stretching"]
+  ],
+  "Human Body": [
+    ["How many teeth does an adult usually have?", "32", "20", "28", "40"],
+    ["How many baby teeth does a child have?", "20", "32", "10", "24"],
+    ["Which organs do we use to breathe?", "Lungs", "Kidneys", "Stomach", "Liver"],
+    ["Which organ pumps blood?", "Heart", "Lung", "Brain", "Stomach"],
+    ["Which bone protects the brain?", "Skull", "Ribs", "Femur", "Spine"],
+    ["How many senses do we have?", "5", "3", "4", "7"],
+    ["Which sense do we use to smell?", "Smell", "Taste", "Touch", "Hearing"],
+    ["Which sense tells us how food tastes?", "Taste", "Smell", "Sight", "Hearing"],
+    ["What is the biggest bone in the body?", "Femur", "Skull", "Rib", "Finger bone"],
+    ["Which part of the eye has colour?", "Iris", "Pupil", "Eyelash", "Eyebrow"],
+    ["Which organs do the ribs protect?", "Heart and lungs", "Stomach and kidneys", "Brain", "Knees"],
+    ["In which organ is food mixed with juices to be digested?", "Stomach", "Lung", "Heart", "Bladder"],
+    ["How many lungs do we have?", "2", "1", "3", "4"],
+    ["What is the largest organ of the body?", "Skin", "Heart", "Brain", "Stomach"],
+    ["Which foods give us lots of energy?", "Bread and pasta", "Water", "Salt", "Ice"],
+    ["Which vitamin is found in oranges?", "Vitamin C", "Vitamin D", "Vitamin K", "Vitamin B12"],
+    ["Milk helps build strong bones because it has…", "Calcium", "Sugar", "Salt", "Iron"],
+    ["How many hours should a child sleep each night?", "9 to 12 hours", "4 hours", "15 hours", "6 hours"],
+    ["At least how many times a day should we brush our teeth?", "2", "1", "5", "Only on Sundays"],
+    ["Which joint is in the middle of your leg?", "Knee", "Elbow", "Shoulder", "Wrist"],
+    ["Which joint is in the middle of your arm?", "Elbow", "Knee", "Ankle", "Hip"],
+    ["What are muscles for?", "Moving", "Seeing", "Hearing", "Smelling"],
+    ["Which liquid do we make in our mouths?", "Saliva", "Sweat", "Tears", "Blood"],
+    ["What is different for every person in the world?", "Fingerprints", "Number of fingers", "Colour of blood", "Number of eyes"],
+    ["When we run, our heart beats…", "Faster", "Slower", "Not at all", "The same"],
+    ["Which is the thickest finger on your hand?", "Thumb", "Index finger", "Little finger", "Ring finger"],
+    ["Which is the smallest finger on your hand?", "Little finger", "Thumb", "Index finger", "Middle finger"],
+    ["What is your belly button a mark of?", "The umbilical cord", "A vaccine", "A scratch", "A bone"],
+    ["What comes out of your eyes when you cry?", "Tears", "Sweat", "Saliva", "Blood"],
+    ["Which organ do we think with?", "Brain", "Heart", "Stomach", "Liver"],
+    ["What flows inside our veins?", "Blood", "Water", "Air", "Milk"],
+    ["How many bones does an adult body have?", "206", "50", "100", "1000"],
+    ["Which of these foods has the most fibre?", "Apple", "Gummy sweets", "Crisps", "Fizzy drink"],
+    ["What should we do before eating?", "Wash our hands", "Run", "Sleep", "Watch TV"],
+    ["What carries oxygen in our blood?", "Red blood cells", "White blood cells", "Nails", "Hair"],
+    ["Which part of the body do we use to hear?", "Ears", "Nose", "Knees", "Tongue"]
+  ],
+  "Planet Earth": [
+    ["What is the biggest ocean?", "Pacific", "Atlantic", "Indian", "Arctic"],
+    ["Which star gives us light and heat?", "The Sun", "The Moon", "The North Star", "Mars"],
+    ["Which natural satellite goes around the Earth?", "The Moon", "The Sun", "Mars", "Venus"],
+    ["Which is the red planet?", "Mars", "Jupiter", "Venus", "Saturn"],
+    ["What is the biggest planet in the Solar System?", "Jupiter", "Earth", "Mars", "Venus"],
+    ["At what temperature does water boil?", "100 °C", "50 °C", "10 °C", "200 °C"],
+    ["At what temperature does water freeze?", "0 °C", "10 °C", "100 °C", "50 °C"],
+    ["On which continent is France?", "Europe", "Africa", "America", "Asia"],
+    ["What is the capital of England?", "London", "Manchester", "Liverpool", "Dublin"],
+    ["What is the capital of Spain?", "Madrid", "Barcelona", "Seville", "Valencia"],
+    ["What is the capital of France?", "Paris", "Lyon", "Marseille", "Nice"],
+    ["What is the capital of Italy?", "Rome", "Milan", "Venice", "Naples"],
+    ["What is the capital of the United States?", "Washington, D.C.", "New York", "Los Angeles", "Chicago"],
+    ["In which country is the Eiffel Tower?", "France", "Italy", "Spain", "Germany"],
+    ["What is the biggest country in the world?", "Russia", "China", "Brazil", "India"],
+    ["In which country are the pyramids of Giza?", "Egypt", "Mexico", "Peru", "Greece"],
+    ["On which continent do kangaroos live in the wild?", "Australia (Oceania)", "Africa", "Asia", "Europe"],
+    ["What comes out of an erupting volcano?", "Lava", "Snow", "Fresh water", "Beach sand"],
+    ["How many seasons are in a year?", "4", "2", "3", "6"],
+    ["In which season do leaves fall from the trees?", "Autumn", "Spring", "Summer", "Winter"],
+    ["Which season is usually the hottest?", "Summer", "Winter", "Autumn", "Spring"],
+    ["What is the biggest hot desert in the world?", "Sahara", "Gobi", "Atacama", "Kalahari"],
+    ["Which animal lives in Antarctica?", "Penguin", "Polar bear", "Camel", "Lion"],
+    ["How long does the Earth take to go around the Sun?", "1 year", "1 day", "1 month", "1 week"],
+    ["How long does the Earth take to spin around once?", "1 day", "1 year", "1 hour", "1 month"],
+    ["How many colours are in a rainbow?", "7", "5", "3", "10"],
+    ["What does a thermometer measure?", "Temperature", "Weight", "Height", "Speed"],
+    ["Which gas do we need to breathe?", "Oxygen", "Helium", "Smoke", "Steam"],
+    ["What does a plant need to grow?", "Water and sunlight", "Only salt", "Juice", "Total darkness"],
+    ["What do we call land surrounded by water?", "An island", "A mountain", "A river", "A desert"],
+    ["What is the highest mountain in the world?", "Mount Everest", "Ben Nevis", "Mont Blanc", "Kilimanjaro"],
+    ["How many planets are in the Solar System?", "8", "9", "7", "12"],
+    ["What is the longest river in Africa?", "The Nile", "The Thames", "The Amazon", "The Danube"],
+    ["Which of these can be recycled?", "Glass bottles", "Food leftovers", "Used tissues", "Broken crayons"],
+    ["What is the name of the rainforest in South America?", "The Amazon", "The Sahara", "The Alps", "The Outback"],
+    ["What planet do we live on?", "Earth", "Mars", "Venus", "The Moon"]
+  ],
+  "Sports & Games": [
+    ["How many players does a football (soccer) team have on the pitch?", "11", "10", "9", "12"],
+    ["Which sport uses a racket and a yellow ball?", "Tennis", "Football", "Golf", "Volleyball"],
+    ["In which sport do you score baskets?", "Basketball", "Handball", "Football", "Rugby"],
+    ["How many rings are on the Olympic flag?", "5", "4", "6", "3"],
+    ["Which colour card sends a football player off?", "Red", "Yellow", "Green", "Blue"],
+    ["Which sport uses skates and a stick on ice?", "Ice hockey", "Football", "Golf", "Tennis"],
+    ["How many squares are on a chessboard?", "64", "32", "100", "81"],
+    ["Which chess piece moves in an 'L' shape?", "Knight", "Rook", "Bishop", "Queen"],
+    ["Which is the most important chess piece?", "King", "Pawn", "Rook", "Knight"],
+    ["How many faces does a normal die have?", "6", "4", "8", "12"],
+    ["How many cards are in a normal deck without jokers?", "52", "40", "54", "48"],
+    ["In noughts and crosses (tic-tac-toe), how many in a row do you need?", "3", "4", "5", "2"],
+    ["In which sport are there strokes like front crawl and butterfly?", "Swimming", "Gymnastics", "Athletics", "Cycling"],
+    ["Which sport is played with an oval ball?", "Rugby", "Football", "Volleyball", "Handball"],
+    ["How many players per team are on court in volleyball?", "6", "5", "11", "4"],
+    ["What medal do you win for 1st place at the Olympics?", "Gold", "Silver", "Bronze", "Diamond"],
+    ["What medal do you win for 2nd place?", "Silver", "Gold", "Bronze", "Copper"],
+    ["How long is a football match, without extra time?", "90 minutes", "60 minutes", "120 minutes", "45 minutes"],
+    ["Which sport do you do going down snowy mountains on two skis?", "Skiing", "Surfing", "Skateboarding", "Skating"],
+    ["Which sport do you do on waves with a board?", "Surfing", "Skiing", "Rowing", "Cycling"],
+    ["In which game do you say 'checkmate'?", "Chess", "Draughts", "Dominoes", "Monopoly"],
+    ["In which board game do you buy streets and houses?", "Monopoly", "Chess", "Draughts", "Ludo"],
+    ["Which sport uses a bow and arrows?", "Archery", "Fencing", "Golf", "Badminton"],
+    ["Which sport uses a shuttlecock?", "Badminton", "Tennis", "Volleyball", "Squash"],
+    ["How many players per team are on court in basketball?", "5", "6", "7", "11"],
+    ["What is another name for table tennis?", "Ping-pong", "Badminton", "Squash", "Padel"],
+    ["How many players per team are on court in handball?", "7", "5", "6", "11"],
+    ["Which sport does Rafael Nadal play?", "Tennis", "Football", "Golf", "Cycling"],
+    ["In which sport do you score a 'goal' by kicking a ball?", "Football", "Tennis", "Swimming", "Gymnastics"],
+    ["In football, who can catch the ball with their hands in their own area?", "Goalkeeper", "Defender", "Striker", "Referee"],
+    ["In hide-and-seek, what does the person who counts do?", "Looks for the others", "Hides", "Sleeps", "Sings"],
+    ["What colour is the most common tennis ball?", "Yellow", "Red", "Black", "Blue"],
+    ["Which sport uses a club and a small ball on grass with holes?", "Golf", "Hockey", "Tennis", "Snooker"],
+    ["Which building-block toy comes from Denmark?", "LEGO", "Playmobil", "Barbie", "Monopoly"],
+    ["How often are the Summer Olympics held?", "Every 4 years", "Every year", "Every 2 years", "Every 10 years"],
+    ["In which sport do you ride a horse over jumps?", "Show jumping", "Rowing", "Fencing", "Diving"]
+  ],
+  "Food": [
+    ["Which yellow fruit do monkeys love?", "Banana", "Apple", "Grape", "Pear"],
+    ["What is cheese made from?", "Milk", "Flour", "Eggs", "Sugar"],
+    ["What is the main ingredient in bread?", "Flour", "Sugar", "Rice", "Milk"],
+    ["Which animal lays most of the eggs we eat?", "Chicken", "Duck", "Ostrich", "Quail"],
+    ["Which red fruit has its seeds on the outside?", "Strawberry", "Cherry", "Apple", "Tomato"],
+    ["Which orange vegetable do rabbits love?", "Carrot", "Potato", "Cabbage", "Onion"],
+    ["Which fruit is green outside, red inside with black seeds?", "Watermelon", "Melon", "Kiwi", "Avocado"],
+    ["Which country does pizza come from?", "Italy", "France", "Spain", "Brazil"],
+    ["Which country does sushi come from?", "Japan", "China", "India", "Mexico"],
+    ["Which bean is chocolate made from?", "Cocoa", "Coffee", "Vanilla", "Peanut"],
+    ["Which country are tacos from?", "Mexico", "Italy", "Japan", "Egypt"],
+    ["What do people often eat on birthdays with candles on top?", "Cake", "Soup", "Salad", "Pizza"],
+    ["Who makes honey?", "Bees", "Ants", "Butterflies", "Flies"],
+    ["Where does rice grow?", "In flooded fields", "On trees", "In the sea", "In plastic pots"],
+    ["Where does a potato grow?", "Under the ground", "On trees", "In water", "In bunches"],
+    ["Which fruit grows in bunches and is used for juice and raisins?", "Grapes", "Oranges", "Pears", "Plums"],
+    ["Which of these is a vegetable?", "Broccoli", "Apple", "Pear", "Banana"],
+    ["Which of these is a fruit?", "Kiwi", "Cabbage", "Lettuce", "Carrot"],
+    ["Which plant is popcorn made from?", "Corn (maize)", "Rice", "Wheat", "Beans"],
+    ["What goes inside a hot dog?", "A sausage", "A fish", "A boiled egg", "A banana"],
+    ["Which fruit has a crown of leaves?", "Pineapple", "Orange", "Apple", "Grape"],
+    ["What is butter made from?", "Cream from milk", "Olives", "Eggs", "Wheat"],
+    ["What is olive oil made from?", "Olives", "Oranges", "Grapes", "Apples"],
+    ["Which nut looks like a little brain?", "Walnut", "Almond", "Hazelnut", "Chestnut"],
+    ["Which hot drink is made with milk and cocoa?", "Hot chocolate", "Tea", "Coffee", "Soup"],
+    ["What is the first meal of the day called?", "Breakfast", "Lunch", "Dinner", "Supper"],
+    ["Which of these foods has the most sugar?", "Gummy sweets", "Broccoli", "Lettuce", "Cucumber"],
+    ["What colour is a kiwi inside?", "Green", "Red", "Blue", "White"],
+    ["Which frozen treat is often made with milk?", "Ice cream", "Cheese", "Bread", "Pudding"],
+    ["Which vegetable makes you cry when you cut it?", "Onion", "Carrot", "Lettuce", "Cucumber"],
+    ["Which yellow sour fruit is used for lemonade?", "Lemon", "Banana", "Pineapple", "Mango"],
+    ["Which food made from milk do we eat with a spoon, sometimes with fruit?", "Yoghurt", "Bread", "Rice", "Soup"],
+    ["Which long, thin Italian pasta looks like strings?", "Spaghetti", "Lasagne", "Ravioli", "Macaroni"],
+    ["Which fruit keeps the doctor away, as the saying goes?", "Apple", "Banana", "Pear", "Grape"],
+    ["What are French fries made from?", "Potatoes", "Carrots", "Apples", "Bread"],
+    ["Which orange fruit is also the name of a colour?", "Orange", "Lemon", "Peach", "Mango"]
+  ]
+};
+
+QDB_EN.sub12.emo = {
+  "Cartoons & Movies": [
+    ["🦁👑🌅", "The Lion King", "Madagascar", "The Jungle Book", "Tarzan"],
+    ["❄️👸⛄", "Frozen", "Snow White", "Ice Age", "Cinderella"],
+    ["🐠🔍🌊", "Finding Nemo", "The Little Mermaid", "Moana", "Jaws"],
+    ["🤠🧸🚀", "Toy Story", "Cars", "WALL-E", "The Incredibles"],
+    ["🚗⚡🏁", "Cars", "Fast & Furious", "Turbo", "Herbie"],
+    ["👹🟢🏰", "Shrek", "Monsters, Inc.", "Hulk", "Despicable Me"],
+    ["🏠🎈👴🐶", "Up", "Monster House", "Inside Out", "Toy Story"],
+    ["🐼🥋", "Kung Fu Panda", "The Karate Kid", "Mulan", "Madagascar"],
+    ["🐉👦🔥", "How to Train Your Dragon", "Mulan", "Shrek", "Raya and the Last Dragon"],
+    ["🐀👨‍🍳🇫🇷", "Ratatouille", "Stuart Little", "Kitchen Magic", "The Aristocats"],
+    ["🧞‍♂️🪔🐒", "Aladdin", "The Jungle Book", "Hercules", "Sinbad"],
+    ["🌹👸👹", "Beauty and the Beast", "Shrek", "Snow White", "Tangled"],
+    ["🤖🌱🚀", "WALL-E", "Robots", "Big Hero 6", "The Iron Giant"],
+    ["⚡👓🧙", "Harry Potter", "The Lord of the Rings", "Percy Jackson", "Merlin"],
+    ["🕷️🧑🏙️", "Spider-Man", "Ant-Man", "Batman", "Venom"],
+    ["😊😢😡😱🤢", "Inside Out", "Monsters, Inc.", "The Smurfs", "The Emoji Movie"],
+    ["🏝️🌊👧🐔", "Moana", "Lilo & Stitch", "The Little Mermaid", "Finding Nemo"],
+    ["🦓🦒🦛🦁🏙️", "Madagascar", "The Lion King", "Zootopia", "Ice Age"],
+    ["👾💙🏝️👧", "Lilo & Stitch", "Moana", "Monsters, Inc.", "Toy Story"],
+    ["🐰🦊🚓🏙️", "Zootopia", "Robin Hood", "Madagascar", "Peter Rabbit"]
+  ],
+  "Jobs": [
+    ["🔥🚒💧", "Firefighter", "Police officer", "Doctor", "Postal worker"],
+    ["🩺💊🏥", "Doctor", "Teacher", "Chef", "Pilot"],
+    ["🥖🥐🔥", "Baker", "Chef", "Farmer", "Fisher"],
+    ["🐶💉🐱", "Vet", "Dentist", "Hairdresser", "Firefighter"],
+    ["🦷😁🦷", "Dentist", "Vet", "Doctor", "Hairdresser"],
+    ["📚✏️🏫", "Teacher", "Postal worker", "Police officer", "Mechanic"],
+    ["🔧🚗🛞", "Mechanic", "Pilot", "Postal worker", "Farmer"],
+    ["🎣🐟🚤", "Fisher", "Sailor", "Chef", "Lifeguard"],
+    ["🍳🍝🔪", "Chef", "Baker", "Farmer", "Fisher"],
+    ["🚀🌕👨‍🚀", "Astronaut", "Pilot", "Scientist", "Mechanic"],
+    ["✉️📦🚲", "Postal worker", "Baker", "Mechanic", "Teacher"],
+    ["🚜🌾🐄", "Farmer", "Vet", "Mechanic", "Baker"],
+    ["✂️💇‍♀️💈", "Hairdresser", "Tailor", "Dentist", "Painter"],
+    ["✈️☁️🧳", "Pilot", "Astronaut", "Postal worker", "Taxi driver"],
+    ["🚓🚨👮", "Police officer", "Firefighter", "Postal worker", "Judge"],
+    ["🎨🖌️🖼️", "Painter", "Photographer", "Writer", "Hairdresser"],
+    ["⚽🥅🏆", "Footballer", "Tennis player", "Swimmer", "Referee"],
+    ["🏗️🧱👷", "Builder", "Mechanic", "Farmer", "Painter"],
+    ["🏖️🆘🏊", "Lifeguard", "Fisher", "Sailor", "Surfer"],
+    ["🔬🧪🥼", "Scientist", "Chef", "Painter", "Postal worker"]
+  ],
+  "Fairy Tales": [
+    ["🐺👧🧺🔴", "Little Red Riding Hood", "The Three Little Pigs", "Snow White", "Hansel and Gretel"],
+    ["🐷🐷🐷🐺🏠", "The Three Little Pigs", "Little Red Riding Hood", "Goldilocks", "The Wolf and the Seven Kids"],
+    ["🍬🏠👧👦🧙‍♀️", "Hansel and Gretel", "Snow White", "Sleeping Beauty", "Little Red Riding Hood"],
+    ["🐻🐻🐻👧🥣", "Goldilocks and the Three Bears", "The Three Little Pigs", "The Jungle Book", "Hansel and Gretel"],
+    ["🧜‍♀️🐠🔱", "The Little Mermaid", "Moana", "Finding Nemo", "Peter Pan"],
+    ["👦🌱☁️🏰", "Jack and the Beanstalk", "Peter Pan", "Pinocchio", "Puss in Boots"],
+    ["🐸👑💋", "The Frog Prince", "Beauty and the Beast", "Shrek", "The Little Mermaid"],
+    ["🦢🐣😢", "The Ugly Duckling", "The Little Red Hen", "Swan Lake", "Little Red Riding Hood"],
+    ["🧒🌳👃🤥", "Pinocchio", "Peter Pan", "Jack and the Beanstalk", "Toy Story"],
+    ["🐢🐇🏁", "The Tortoise and the Hare", "The Ant and the Grasshopper", "The Lion and the Mouse", "The Three Little Pigs"],
+    ["🦗🐜❄️", "The Ant and the Grasshopper", "The Tortoise and the Hare", "The Ugly Duckling", "The Lion and the Mouse"],
+    ["🐭🦁🕸️", "The Lion and the Mouse", "The Lion King", "The Ant and the Grasshopper", "Puss in Boots"],
+    ["👸🛏️🟢", "The Princess and the Pea", "Sleeping Beauty", "Cinderella", "Rapunzel"],
+    ["🧚✨🏴‍☠️🐊", "Peter Pan", "Pinocchio", "The Little Mermaid", "Alice in Wonderland"],
+    ["🐈👢🎩", "Puss in Boots", "The Aristocats", "Alice in Wonderland", "The Ugly Duckling"],
+    ["👸💤🌹🧙‍♀️", "Sleeping Beauty", "Snow White", "Cinderella", "Beauty and the Beast"],
+    ["🪞🍎👸", "Snow White", "Cinderella", "Sleeping Beauty", "Rapunzel"],
+    ["👸👠🎃🕛", "Cinderella", "Sleeping Beauty", "Rapunzel", "Snow White"],
+    ["🐇⏰🎩🃏", "Alice in Wonderland", "Peter Pan", "The Wizard of Oz", "Pinocchio"],
+    ["👧👠🦁🤖🌪️", "The Wizard of Oz", "Alice in Wonderland", "Peter Pan", "Hansel and Gretel"]
+  ]
+};
+
+QDB_EN.sub12.pis = {
+  "Characters": [
+    [["I'm yellow and I live under the sea.", "I work making burgers.", "My best friend is Patrick the starfish."], "SpongeBob", "Nemo", "Squidward", "Pikachu"],
+    [["I'm a snowman.", "I love warm hugs.", "I'm friends with Anna and Elsa."], "Olaf", "Sven", "Frosty", "Kristoff"],
+    [["I live in a swamp.", "I'm an ogre.", "I'm green and I married Fiona."], "Shrek", "Hulk", "Donkey", "Gru"],
+    [["I'm a very famous mouse.", "I have round ears and red shorts.", "My girlfriend is Minnie."], "Mickey", "Jerry", "Stuart", "Remy"],
+    [["I'm a clownfish.", "One of my fins is smaller.", "My dad searched the whole ocean for me."], "Nemo", "Dory", "Ariel", "Bruce"],
+    [["I'm a race car.", "I'm red and my number is 95.", "My best friend is Mater."], "Lightning McQueen", "Herbie", "Doc Hudson", "Sally"],
+    [["I'm a toy.", "My owner was called Andy.", "I'm a cowboy and my friend is Buzz."], "Woody", "Rex", "Jessie", "Slinky"],
+    [["I'm a princess.", "I lived in a tower for many years.", "I have very long, magic hair."], "Rapunzel", "Cinderella", "Belle", "Ariel"],
+    [["A woodcarver called Geppetto made me.", "I'm made of wood.", "My nose grows when I lie."], "Pinocchio", "Woody", "Peter Pan", "Geppetto"],
+    [["I wear round glasses.", "I have a lightning-shaped scar.", "I study at Hogwarts."], "Harry Potter", "Ron Weasley", "Merlin", "Gandalf"],
+    [["I wear a cape and a mask.", "I live in Gotham.", "I'm the bat-man."], "Batman", "Superman", "Spider-Man", "Zorro"],
+    [["I'm a Pokémon.", "I give electric shocks.", "I'm yellow and I travel with Ash."], "Pikachu", "Charmander", "Squirtle", "Eevee"],
+    [["My father was Mufasa.", "My friend Timon taught me 'Hakuna Matata'.", "I'm the lion who became king."], "Simba", "Nala", "Scar", "Alex"],
+    [["I'm a princess with powers.", "My sister is Anna.", "I make ice and snow with my hands."], "Elsa", "Rapunzel", "Moana", "Merida"]
+  ],
+  "What animal am I?": CLUES_ANIMALS_EN,
+  "What is it?": [
+    [["It's small and soft.", "It's always near the pencil.", "It makes mistakes disappear."], "Rubber (eraser)", "Sharpener", "Ruler", "Glue"],
+    [["It has four wheels.", "It carries lots of people at once.", "It's yellow and takes children to school."], "School bus", "Train", "Bicycle", "Plane"],
+    [["It's round.", "It bounces a lot.", "You kick it to play football."], "Ball", "Spinning top", "Marble", "Yo-yo"],
+    [["It has two wheels.", "It has pedals.", "You need balance to ride it."], "Bicycle", "Car", "Roller skates", "Scooter"],
+    [["It's cold.", "It can be chocolate or strawberry.", "You eat it in a cone or a cup."], "Ice cream", "Pudding", "Yoghurt", "Cake"],
+    [["It's made of paper.", "It flies in the wind.", "You hold it by a string."], "Kite", "Balloon", "Paper plane", "Soap bubble"],
+    [["It has numbers.", "It has hands.", "It tells us what time it is."], "Clock", "Calculator", "Ruler", "Calendar"],
+    [["It has keys.", "It has a screen.", "You use it to type and play on a computer."], "Keyboard", "Piano", "Phone", "Mouse"],
+    [["It has feathers on one end.", "It's used in badminton.", "It's also called a birdie."], "Shuttlecock", "Tennis ball", "Racket", "Feather"],
+    [["It shines in the sky.", "You see it at night.", "Sometimes it's round, sometimes it looks like a banana."], "The Moon", "The Sun", "A shooting star", "A cloud"],
+    [["It has water.", "It's salty.", "It has waves and fish."], "The sea", "A river", "A lake", "A swimming pool"],
+    [["It has seven colours.", "It appears with sun and rain.", "It makes an arch in the sky."], "Rainbow", "Cloud", "Lightning", "Aurora"]
+  ]
+};
+
+QDB_EN.sub12.vf = {
+  "Nature": [
+    ["The Sun is a star.", true],
+    ["Chickens give milk.", false],
+    ["Spiders have 8 legs.", true],
+    ["Penguins can fly.", false],
+    ["The elephant is the biggest land animal.", true],
+    ["The blue whale is the biggest animal in the world.", true],
+    ["Cows eat grass.", true],
+    ["Cats are reptiles.", false],
+    ["Honey is made by ants.", false],
+    ["A tadpole turns into a frog.", true],
+    ["A butterfly starts life as a caterpillar.", true],
+    ["Bats sleep upside down.", true],
+    ["Tortoises have shells.", true],
+    ["Giraffes have short necks.", false],
+    ["Male lions have manes.", true],
+    ["Chameleons can change colour.", true],
+    ["A kiwi is both a fruit and a bird.", true],
+    ["Plants need light to grow.", true]
+  ],
+  "World": [
+    ["The Pacific is the biggest ocean.", true],
+    ["Snow is hot.", false],
+    ["London is the capital of England.", true],
+    ["Paris is in Italy.", false],
+    ["Water boils at 100 degrees Celsius.", true],
+    ["The Earth goes around the Sun.", true],
+    ["The Sun goes around the Earth.", false],
+    ["A year has 12 months.", true],
+    ["February always has 31 days.", false],
+    ["Ice is frozen water.", true],
+    ["Winter is the hottest season.", false],
+    ["Leaves fall from trees in autumn.", true],
+    ["The North Pole is very hot.", false],
+    ["The Sahara is a desert.", true],
+    ["The pyramids of Giza are in Egypt.", true],
+    ["Kangaroos live in Australia.", true],
+    ["Glass bottles can be recycled.", true],
+    ["The Moon is made of cheese.", false]
+  ],
+  "Cartoons & Games": [
+    ["Shrek is blue.", false],
+    ["Elsa has ice powers.", true],
+    ["Pikachu is a fire Pokémon.", false],
+    ["Mickey is a mouse.", true],
+    ["Nemo is a shark.", false],
+    ["Simba is a tiger.", false],
+    ["Pinocchio is made of wood.", true],
+    ["Batman lives in Gotham.", true],
+    ["Superman comes from the planet Krypton.", true],
+    ["Peppa is a pig.", true],
+    ["In football, the goalkeeper can catch the ball in their own area.", true],
+    ["Basketball is played with your feet.", false],
+    ["The Summer Olympics happen every 4 years.", true],
+    ["A normal die has 6 faces.", true],
+    ["In chess, the knight moves in an 'L' shape.", true],
+    ["Buzz Lightyear is a cowboy.", false],
+    ["A normal deck of cards has 52 cards.", true]
+  ],
+  "Body & Numbers": [
+    ["2 + 2 = 5.", false],
+    ["10 × 10 = 100.", true],
+    ["A triangle has 4 sides.", false],
+    ["The heart pumps blood.", true],
+    ["People have 3 eyes.", false],
+    ["Baby teeth fall out.", true],
+    ["Bones are soft like jelly.", false],
+    ["We have 10 fingers on our hands.", true],
+    ["Blood is green.", false],
+    ["Eating fruit is good for you.", true],
+    ["We should brush our teeth after meals.", true],
+    ["An hour has 60 minutes.", true],
+    ["Half of 10 is 4.", false],
+    ["A square has 4 equal sides.", true],
+    ["We breathe with our stomach.", false],
+    ["5 × 0 = 0.", true],
+    ["A week has 8 days.", false]
+  ]
+};
+
+
+/* =========================================================
    BONECOS PIXEL ART (estilo tamagotchi)
    Cada animal é uma grelha 16 x N desenhada em código.
    K contorno · M cor principal · D sombra · L focinho claro
@@ -1968,7 +3193,7 @@ function netHost(code, cb) {
   peer.on('open', () => { ready = true; cb.ready(); });
   peer.on('error', err => {
     if (err.type === 'unavailable-id') cb.error('taken');
-    else if (!ready) cb.error(err.type, 'Não foi possível criar a sala (' + err.type + '). Verifica a internet.');
+    else if (!ready) cb.error(err.type, L('Não foi possível criar a sala (', 'Could not create the room (') + err.type + L('). Verifica a internet.', '). Check your internet.'));
     else console.warn('peer error', err.type);
   });
   peer.on('disconnected', () => { setTimeout(() => { try { if (!peer.destroyed) peer.reconnect(); } catch (e) { } }, 1500); });
@@ -2009,7 +3234,7 @@ function netJoin(code, cb) {
       else if (m.k === 'bye') { L.open = false; cb.close(); }
     };
     bc.postMessage({ to: code, from: me, k: 'hello' });
-    setTimeout(() => { if (!ok) { bc.close(); cb.fail('Sala não encontrada. Confirma o código.'); } }, 2500);
+    setTimeout(() => { if (!ok) { bc.close(); cb.fail(L('Sala não encontrada. Confirma o código.', 'Room not found. Check the code.')); } }, 2500);
     return L;
   }
   const L = new Link();
@@ -2032,11 +3257,11 @@ function netJoin(code, cb) {
     }, 3000);
   });
   peer.on('error', err => {
-    if (err.type === 'peer-unavailable') fail('Sala não encontrada. Confirma o código.');
-    else if (!ok) fail('Erro de ligação (' + err.type + '). Verifica a internet.');
+    if (err.type === 'peer-unavailable') fail(L('Sala não encontrada. Confirma o código.', 'Room not found. Check the code.'));
+    else if (!ok) fail(L('Erro de ligação (', 'Connection error (') + err.type + L('). Verifica a internet.', '). Check your internet.'));
     else if (['network', 'disconnected', 'server-error', 'socket-error', 'socket-closed'].includes(err.type)) { /* a ligação direta pode continuar */ }
   });
-  setTimeout(() => fail('A ligação demorou demasiado. Tenta outra vez.'), 15000);
+  setTimeout(() => fail(L('A ligação demorou demasiado. Tenta outra vez.', 'The connection took too long. Try again.')), 15000);
   return L;
 }
 
@@ -2054,6 +3279,17 @@ const STYLE_DEF = {
   aposta:   { nome: 'Tudo ou Nada',       ic: '🎰', pool: 'mc',  dur: 12, desc: 'Antes de cada pergunta apostas pontos. Acertas: ganhas a aposta. Erras (ou não respondes): perdes!' },
   vf:       { nome: 'Verdadeiro ou Falso', ic: '✅', pool: 'vf', dur: 6,  desc: 'Afirmações relâmpago! Tens 6 segundos para cada uma. Errar tira 100 pontos.' }
 };
+const STYLE_EN = {
+  rapido:   ['Quick Fire', 'Everyone who gets it right scores, in order of arrival: 1st gets 1000, 2nd 800, 3rd 650…'],
+  certeiro: ['Sharpshooter', 'Only the FIRST correct answer wins 1000 points. Careful: a wrong answer costs 250!'],
+  letras:   ['Hidden Letters', 'The answers appear with letters missing. Letters keep appearing… but points keep dropping. Will you risk it?'],
+  emojis:   ['Emoji Riddle', 'Crack the riddle written in emojis. The faster you are, the more points you get!'],
+  pistas:   ['Clues', 'Clues appear one by one. Answer with 1 clue for 1000, with 2 for 700, with 3 for 400.'],
+  aposta:   ['All or Nothing', 'Bet points before each question. Right: you win the bet. Wrong (or no answer): you lose it!'],
+  vf:       ['True or False', 'Lightning statements! 6 seconds for each one. A wrong answer costs 100 points.']
+};
+const styleName = id => (typeof LANG !== 'undefined' && LANG === 'en' && STYLE_EN[id] ? STYLE_EN[id][0] : STYLE_DEF[id].nome);
+const styleDesc = id => (typeof LANG !== 'undefined' && LANG === 'en' && STYLE_EN[id] ? STYLE_EN[id][1] : STYLE_DEF[id].desc);
 const RANK_PTS = [1000, 800, 650, 500, 400, 300];
 const BET_OPTS = [100, 250, 500, 1000];
 const FINAL_MIN = 45, FINAL_MAX = 70;
@@ -2074,12 +3310,14 @@ function itemId(kind, it) { return kind + ':' + hashStr(JSON.stringify(it[0]) + 
 
 const POOL_CACHE = {};
 function getPool(aud, kind) {
-  const key = aud + '/' + kind;
+  const lang = ENG.S && ENG.S.lang === 'en' ? 'en' : 'pt';
+  const DBX = lang === 'en' ? QDB_EN : QDB;
+  const key = lang + '/' + aud + '/' + kind;
   if (POOL_CACHE[key]) return POOL_CACHE[key];
   const srcs = aud === 'familia' ? ['geral', 'sub12'] : [aud];
   const out = {};
   for (const s of srcs) {
-    const p = (QDB[s] && QDB[s][kind]) || {};
+    const p = (DBX[s] && DBX[s][kind]) || {};
     for (const c in p) {
       if (!out[c]) out[c] = [];
       for (const it of p[c]) {
@@ -2097,9 +3335,9 @@ function resetUsed(list) { list.forEach(x => delete USED[x.id]); saveUsed(); }
 /* ---------- estado ---------- */
 const ENG = { S: null, H: null, links: {}, tokens: {}, localPid: null, tm: null, nextPid: 1, onState: null, feedId: 0, seen: {}, hb: null };
 
-function engCreate(code, mode) {
+function engCreate(code, mode, lang) {
   ENG.S = {
-    v: 0, code, mode, phase: 'LOBBY', aud: 'geral', len: 5, nRounds: 5, round: 0,
+    v: 0, code, mode, lang: lang === 'en' ? 'en' : 'pt', phase: 'LOBBY', aud: 'geral', len: 5, nRounds: 5, round: 0,
     styles: [], style: null, players: {}, order: [], t: 0, tMax: 0,
     vote: null, cat: null, q: null, qi: 0, nq: 0, feed: [], rank: null, winner: null, fin: null, catHist: []
   };
@@ -2117,7 +3355,7 @@ function engHeartbeat() {
     const t = ENG.seen[p.id];
     if (t && now - t > 12000) {
       p.on = false;
-      if (S.phase !== 'LOBBY') feed('📵 ' + p.name + ' perdeu a ligação', 'off', p.id);
+      if (S.phase !== 'LOBBY') feed('off', p.id);
       engPush(); engCheckAll();
     }
   }
@@ -2131,9 +3369,10 @@ function engPush() {
   if (ENG.onState) ENG.onState(JSON.parse(JSON.stringify(S)));
 }
 
-function feed(txt, kind, a, b) {
+// os avisos vão sem texto: cada aparelho escreve-os na língua do jogo
+function feed(kind, a, b, n) {
   const S = ENG.S;
-  S.feed.push({ id: ++ENG.feedId, txt, kind: kind || 'info', a: a || null, b: b || null });
+  S.feed.push({ id: ++ENG.feedId, kind, a: a || null, b: b || null, n: n == null ? null : n });
   if (S.feed.length > 6) S.feed.shift();
 }
 
@@ -2141,7 +3380,7 @@ function plist() { return ENG.S.order.map(id => ENG.S.players[id]).filter(Boolea
 function activeList() { return plist().filter(p => p.on && (!ENG.S.fin || p.alive)); }
 
 function newPlayer(pid, d) {
-  const name = String(d.name || '').replace(/\s+/g, ' ').trim().slice(0, 12) || 'Jogador';
+  const name = String(d.name || '').replace(/\s+/g, ' ').trim().slice(0, 12) || (ENG.S && ENG.S.lang === 'en' ? 'Player' : 'Jogador');
   return {
     id: pid, name,
     anim: ANIMALS[d.anim] ? d.anim : 'urso',
@@ -2169,7 +3408,7 @@ function engOnConn(L) {
       const p = ENG.S.players[pid];
       if (p) {
         p.on = false;
-        if (ENG.S.phase !== 'LOBBY') feed('📵 ' + p.name + ' perdeu a ligação', 'off', pid);
+        if (ENG.S.phase !== 'LOBBY') feed('off', pid);
         engPush(); engCheckAll();
       }
     }
@@ -2185,12 +3424,12 @@ function engJoin(L, d) {
     if (old && old !== L) { try { old.close(); } catch (e) { } }
     p.on = true; ENG.links[pid] = L; L.pid = pid; ENG.seen[pid] = Date.now();
     L.send({ t: 'W', pid, token: d.token, code: S.code, mode: S.mode });
-    if (S.phase !== 'LOBBY') feed('🔌 ' + p.name + ' voltou!', 'on', pid);
+    if (S.phase !== 'LOBBY') feed('on', pid);
     engPush();
     return;
   }
-  if (S.phase !== 'LOBBY') { L.send({ t: 'E', msg: 'O jogo já começou. Espera pelo próximo!' }); return; }
-  if (S.order.length >= 6) { L.send({ t: 'E', msg: 'A sala está cheia (máximo 6 jogadores).' }); return; }
+  if (S.phase !== 'LOBBY') { L.send({ t: 'E', code: 'started' }); return; }
+  if (S.order.length >= 6) { L.send({ t: 'E', code: 'full' }); return; }
   pid = 'p' + (ENG.nextPid++);
   const token = d.token || rid(12);
   ENG.tokens[token] = pid;
@@ -2229,8 +3468,8 @@ function engMsg(pid, m) {
         if (m.w === 'roubo') {
           const amt = Math.min(250, v.score);
           v.score -= amt; p.score += amt;
-          if (amt > 0) feed('💰 ' + p.name + ' roubou ' + amt + ' pontos a ' + v.name + '!', 'roubo', pid, v.id);
-          else feed('😅 ' + p.name + ' tentou roubar ' + v.name + ', mas não havia pontos para levar!', 'roubo0', pid, v.id);
+          if (amt > 0) feed('roubo', pid, v.id, amt);
+          else feed('roubo0', pid, v.id);
         } else if (m.w === 'ink' || m.w === 'pie') {
           H.hits.push({ to: v.id, w: m.w, from: p.name, fromId: pid, qi: Math.floor(Math.random() * Math.max(1, S.nq)) });
         }
@@ -2276,6 +3515,7 @@ function engAction(a, d) {
   if (a === 'opts' && S.phase === 'LOBBY') {
     if (['geral', 'familia', 'sub12'].includes(d.aud)) S.aud = d.aud;
     if ([3, 5, 7].includes(d.len)) S.len = d.len;
+    if (d.lang === 'pt' || d.lang === 'en') S.lang = d.lang;
     engPush();
   } else if (a === 'start' && S.phase === 'LOBBY') engStart();
   else if (a === 'skip') engHurry(0);
@@ -2287,7 +3527,7 @@ function engKick(pid, self) {
   const S = ENG.S;
   if (S.phase !== 'LOBBY' || !S.players[pid] || pid === ENG.localPid) return;
   const L = ENG.links[pid];
-  if (L) { if (!self) L.send({ t: 'E', msg: 'Foste removido da sala.', kick: 1 }); setTimeout(() => { try { L.close(); } catch (e) { } }, 300); }
+  if (L) { if (!self) L.send({ t: 'E', code: 'kick', kick: 1 }); setTimeout(() => { try { L.close(); } catch (e) { } }, 300); }
   delete ENG.links[pid];
   delete S.players[pid];
   S.order = S.order.filter(x => x !== pid);
@@ -2409,7 +3649,7 @@ function engStartQ() {
     const v = S.players[h.to];
     if (!v.hit) {
       v.hit = { w: h.w, from: h.from, k: S.q.k };
-      feed((h.w === 'ink' ? '💥 ' + h.from + ' atirou uma bomba de tinta a ' : '🥧 ' + h.from + ' atirou uma tarte a ') + v.name + '!', h.w, h.fromId, v.id);
+      feed(h.w, h.fromId, v.id);
     }
   }
   S.q.live = true;
@@ -2425,7 +3665,7 @@ function engBuildQ(entry, style) {
   const kind = STYLE_DEF[style] ? STYLE_DEF[style].pool : 'mc';
   const q = { k: S.qi + '-' + rid(4), n: S.qi + 1, of: S.nq, kind, cat: entry.cat, live: false };
   if (kind === 'vf') {
-    q.text = it[0]; q.ans = ['Verdadeiro', 'Falso'];
+    q.text = it[0]; q.ans = S.lang === 'en' ? ['True', 'False'] : ['Verdadeiro', 'Falso'];
     H.correct = it[1] ? 0 : 1;
   } else {
     const opts = shuffle([0, 1, 2, 3]);
@@ -2595,7 +3835,7 @@ function engFinalElims() {
   for (const p of dead) {
     p.alive = false; p.time = 0;
     S.fin.elim.push(p.id);
-    feed('💀 ' + p.name + ' ficou sem tempo!', 'elim', p.id);
+    feed('elim', p.id);
   }
   return dead.length > 0;
 }
@@ -2627,7 +3867,7 @@ function engFinalOver() {
   S.rank = rank; S.winner = rank[0];
   S.q = null;
   const w = S.players[S.winner];
-  if (w) feed(S.fin.solo ? '🏁 Sobreviveste a ' + S.fin.n + ' perguntas!' : '🏆 ' + w.name + ' é o grande sobrevivente!', 'win', w.id);
+  if (w) feed(S.fin.solo ? 'solo' : 'win', w.id, null, S.fin.n);
   engPhase('END', 0, null);
   return true;
 }
@@ -2639,17 +3879,37 @@ function engFinalOver() {
 const $ = id => document.getElementById(id);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const SHAPES = ['▲', '◆', '●', '■'];
-const AUD_LBL = { geral: ['Geral', 'adultos'], familia: ['Família', 'misto, 12+'], sub12: ['Crianças', 'até 12 anos'] };
-const LEN_LBL = { 3: ['Rápido', '5×3 perguntas'], 5: ['Médio', '5×5 perguntas'], 7: ['Longo', '5×7 perguntas'] };
-const WEAPONS = {
-  ink: { ic: '💣', nome: 'Bomba de tinta', desc: 'Enche-lhe o ecrã de tinta preta. Tem de tocar para limpar.' },
-  pie: { ic: '🥧', nome: 'Tarte na cara', desc: 'Tapa-lhe o ecrã com creme. Tem de passar o dedo para limpar.' },
-  roubo: { ic: '💰', nome: 'Ladrão de pontos', desc: 'Rouba-lhe 250 pontos já!' }
-};
-const PHASE_TITLE = {
-  LOBBY: 'À espera de jogadores', INTRO: 'Nova ronda', VOTE: 'Votação do tema', THEME: 'Tema escolhido', ATTACK: 'Sabotagem!',
-  BET: 'Façam as vossas apostas', READY: 'Prepara-te…', RANK: 'Classificação', FINTRO: 'A Grande Final', FQ: 'Sobrevivência', FREV: 'Sobrevivência', END: 'Fim de jogo'
-};
+const AUD_LBL = () => ({ geral: [L('Geral', 'General'), L('adultos', 'adults')], familia: [L('Família', 'Family'), L('misto, 12+', 'mixed, 12+')], sub12: [L('Crianças', 'Kids'), L('até 12 anos', 'up to 12')] });
+const LEN_LBL = () => ({ 3: [L('Rápido', 'Quick'), L('5×3 perguntas', '5×3 questions')], 5: [L('Médio', 'Medium'), L('5×5 perguntas', '5×5 questions')], 7: [L('Longo', 'Long'), L('5×7 perguntas', '5×7 questions')] });
+const LANG_LBL = { pt: ['Português', 'PT'], en: ['English', 'EN'] };
+const WEAPONS = () => ({
+  ink: { ic: '💣', nome: L('Bomba de tinta', 'Ink bomb'), desc: L('Enche-lhe o ecrã de tinta preta. Tem de tocar para limpar.', 'Covers their screen in black ink. They must tap to clean it.') },
+  pie: { ic: '🥧', nome: L('Tarte na cara', 'Pie in the face'), desc: L('Tapa-lhe o ecrã com creme. Tem de passar o dedo para limpar.', 'Covers their screen in cream. They must swipe to wipe it off.') },
+  roubo: { ic: '💰', nome: L('Ladrão de pontos', 'Point thief'), desc: L('Rouba-lhe 250 pontos já!', 'Steal 250 points right now!') }
+});
+const PHASE_TITLE = () => ({
+  LOBBY: L('À espera de jogadores', 'Waiting for players'), INTRO: L('Nova ronda', 'New round'), VOTE: L('Votação do tema', 'Topic vote'), THEME: L('Tema escolhido', 'Chosen topic'), ATTACK: L('Sabotagem!', 'Sabotage!'),
+  BET: L('Façam as vossas apostas', 'Place your bets'), READY: L('Prepara-te…', 'Get ready…'), RANK: L('Classificação', 'Standings'), FINTRO: L('A Grande Final', 'The Grand Final'), FQ: L('Sobrevivência', 'Survival'), FREV: L('Sobrevivência', 'Survival'), END: L('Fim de jogo', 'Game over')
+});
+const ANIMAL_EN = { gato: 'Cat', pinguim: 'Penguin', coelho: 'Rabbit', raposa: 'Fox', urso: 'Bear', macaco: 'Monkey', sapo: 'Frog', passaro: 'Bird' };
+const ACC_EN = { nada: 'None', oculos: 'Sunglasses', palha: 'Straw hat', laco: 'Bow', pirata: 'Pirate hat', coroa: 'Crown', capacete: 'Hard hat', monoculo: 'Monocle', cachecol: 'Scarf' };
+const ERR_TXT = () => ({ started: L('O jogo já começou. Espera pelo próximo!', 'The game has already started. Wait for the next one!'), full: L('A sala está cheia (máximo 6 jogadores).', 'The room is full (6 players max).'), kick: L('Foste removido da sala.', 'You were removed from the room.') });
+function feedText(it, S) {
+  const nm = id => (id && S.players[id] ? S.players[id].name : '?');
+  const a = nm(it.a), b = nm(it.b), n = it.n;
+  switch (it.kind) {
+    case 'off': return L('📵 ' + a + ' perdeu a ligação', '📵 ' + a + ' lost connection');
+    case 'on': return L('🔌 ' + a + ' voltou!', '🔌 ' + a + ' is back!');
+    case 'roubo': return L('💰 ' + a + ' roubou ' + n + ' pontos a ' + b + '!', '💰 ' + a + ' stole ' + n + ' points from ' + b + '!');
+    case 'roubo0': return L('😅 ' + a + ' tentou roubar ' + b + ', mas não havia pontos para levar!', '😅 ' + a + ' tried to rob ' + b + ', but there were no points to take!');
+    case 'ink': return L('💥 ' + a + ' atirou uma bomba de tinta a ' + b + '!', '💥 ' + a + ' threw an ink bomb at ' + b + '!');
+    case 'pie': return L('🥧 ' + a + ' atirou uma tarte a ' + b + '!', '🥧 ' + a + ' threw a pie at ' + b + '!');
+    case 'elim': return L('💀 ' + a + ' ficou sem tempo!', '💀 ' + a + ' ran out of time!');
+    case 'win': return L('🏆 ' + a + ' é o grande sobrevivente!', '🏆 ' + a + ' is the last survivor!');
+    case 'solo': return L('🏁 Sobreviveste a ' + n + ' perguntas!', '🏁 You survived ' + n + ' questions!');
+  }
+  return '';
+}
 
 const G = {
   role: null, host: false, me: null, link: null, S: null, code: null, token: null, mode: null,
@@ -2689,6 +3949,7 @@ function joinUrl(code) {
   let u = location.origin + location.pathname + '?sala=' + code;
   if (NET_LOCAL && URLP.has('local')) u += '&local=1';
   if (URLP.has('speed')) u += '&speed=' + URLP.get('speed');
+  u += '&lang=' + ((G.S && G.S.lang) || LANG);
   return u + PEER_PARAMS;
 }
 function makeQR(el, url) {
@@ -2698,7 +3959,7 @@ function makeQR(el, url) {
   catch (e) { el.classList.add('hidden'); }
 }
 function ranked(S) { return S.order.map(id => S.players[id]).filter(Boolean).sort((a, b) => b.score - a.score); }
-function ordinal(n) { return n + '.º'; }
+function ordinal(n) { if (LANG !== 'en') return n + '.º'; const s = ['th', 'st', 'nd', 'rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); }
 
 /* ---------- som ---------- */
 const SFX = {
@@ -2790,7 +4051,7 @@ const MUSIC = {
   }
 };
 function musicBtns() {
-  ['tv-mus', 'ph-mus'].forEach(id => { const b = $(id); if (b) { b.textContent = MUSIC.on ? '🎵' : '🔕'; b.classList.toggle('off', !MUSIC.on); b.title = MUSIC.on ? 'Desligar a música' : 'Ligar a música'; } });
+  ['tv-mus', 'ph-mus'].forEach(id => { const b = $(id); if (b) { b.textContent = MUSIC.on ? '🎵' : '🔕'; b.classList.toggle('off', !MUSIC.on); b.title = MUSIC.on ? L('Desligar a música', 'Turn music off') : L('Ligar a música', 'Turn music on'); } });
 }
 function vib(p) { try { if (navigator.vibrate) navigator.vibrate(p); } catch (e) { } }
 
@@ -2830,11 +4091,12 @@ function initHome() {
     const ac = mountActor(d, 2, a, ['laco', 'coroa', 'nada', 'oculos', 'cachecol'][i]);
     setTimeout(function trick() { if (ac.dead) return; ac.play(TRICKS[Math.floor(Math.random() * TRICKS.length)]); setTimeout(trick, 3000 + Math.random() * 5000); }, 800 + i * 900);
   });
+  applyStaticLang();
   try { const av = JSON.parse(localStorage.getItem('ss_av') || 'null'); if (av) G.av = Object.assign(G.av, av); } catch (e) { }
   const sess = getSess();
   const sala = (URLP.get('sala') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 4);
   if (sess && (!sala || sala === sess.code)) $('btn-resume').classList.remove('hidden');
-  if (NET_LOCAL) $('home-note').textContent = URLP.has('local') ? 'Modo de teste local (várias abas no mesmo browser).' : 'Sem ligação ao servidor de jogo. Verifica a internet e recarrega a página.';
+  if (NET_LOCAL) $('home-note').textContent = URLP.has('local') ? L('Modo de teste local (várias abas no mesmo browser).', 'Local test mode (several tabs in the same browser).') : L('Sem ligação ao servidor de jogo. Verifica a internet e recarrega a página.', 'No connection to the game server. Check your internet and reload the page.');
   if (sala) {
     $('join-code').value = sala;
     if (sess && sess.code === sala) UI.resume();
@@ -2851,6 +4113,7 @@ function getSess() {
 function saveSess() { try { SESS_STORE.setItem('ss_sess', JSON.stringify({ code: G.code, token: G.token, ts: Date.now() })); } catch (e) { } }
 function clearSess() { try { SESS_STORE.removeItem('ss_sess'); } catch (e) { } }
 
+UI.setLang = l => { setLang(l, true); if (NET_LOCAL) $('home-note').textContent = URLP.has('local') ? L('Modo de teste local (várias abas no mesmo browser).', 'Local test mode (several tabs in the same browser).') : L('Sem ligação ao servidor de jogo. Verifica a internet e recarrega a página.', 'No connection to the game server. Check your internet and reload the page.'); };
 UI.goCreate = () => { SFX.unlock(); showView('v-create'); };
 UI.goJoin = () => { SFX.unlock(); showView('v-join'); setTimeout(() => $('join-code').focus(), 50); };
 
@@ -2860,11 +4123,11 @@ function startHosting(mode, done, tries) {
   tries = tries || 0;
   const code = genCode();
   G.peerHost = netHost(code, {
-    ready() { G.code = code; engCreate(code, mode); ENG.onState = onState; done(code); },
+    ready() { G.code = code; engCreate(code, mode, LANG); ENG.onState = onState; done(code); },
     conn(L) { engOnConn(L); },
     error(type, msg) {
       if (type === 'taken' && tries < 5) return startHosting(mode, done, tries + 1);
-      toast(msg || 'Não foi possível criar a sala.');
+      toast(msg || L('Não foi possível criar a sala.', 'Could not create the room.'));
       showView('v-home');
     }
   });
@@ -2873,7 +4136,7 @@ function startHosting(mode, done, tries) {
 
 UI.createTV = () => {
   SFX.unlock(); keepAwake();
-  toast('A criar a sala…', true);
+  toast(L('A criar a sala…', 'Creating the room…'), true);
   startHosting('tv', () => {
     G.role = 'tv'; G.host = true; G.mode = 'tv';
     document.body.classList.add('is-tv');
@@ -2888,16 +4151,16 @@ UI.createMesa = () => { SFX.unlock(); G.pendingMesa = true; openAvatar(); };
 UI.connect = () => {
   const code = $('join-code').value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 4);
   $('join-code').value = code;
-  if (code.length !== 4) { toast('O código tem 4 caracteres.'); return; }
+  if (code.length !== 4) { toast(L('O código tem 4 caracteres.', 'The code has 4 characters.')); return; }
   if (G.joining) return;
   G.joining = true;
-  const b = $('btn-connect'); b.disabled = true; b.textContent = 'A ligar…';
+  const b = $('btn-connect'); b.disabled = true; b.textContent = L('A ligar…', 'Connecting…');
   SFX.unlock();
   netJoin(code, {
-    open(L) { G.joining = false; G.link = L; G.code = code; b.disabled = false; b.textContent = 'Ligar'; G.pendingMesa = false; openAvatar(); },
+    open(lk) { G.joining = false; G.link = lk; G.code = code; b.disabled = false; b.textContent = L('Ligar', 'Connect'); G.pendingMesa = false; openAvatar(); },
     data: onMsg,
     close: onLost,
-    fail(msg) { G.joining = false; b.disabled = false; b.textContent = 'Ligar'; toast(msg); showView('v-join'); }
+    fail(msg) { G.joining = false; b.disabled = false; b.textContent = L('Ligar', 'Connect'); toast(msg); showView('v-join'); }
   });
 };
 
@@ -2906,12 +4169,12 @@ UI.resume = () => {
   if (!s) return;
   G.code = s.code; G.token = s.token;
   showView('v-join'); $('join-code').value = s.code;
-  const b = $('btn-connect'); b.disabled = true; b.textContent = 'A voltar ao jogo…';
+  const b = $('btn-connect'); b.disabled = true; b.textContent = L('A voltar ao jogo…', 'Rejoining the game…');
   netJoin(s.code, {
-    open(L) { G.link = L; b.disabled = false; b.textContent = 'Ligar'; L.send({ t: 'J', token: s.token, name: G.av.name, anim: G.av.anim, acc: G.av.acc }); },
+    open(lk) { G.link = lk; b.disabled = false; b.textContent = L('Ligar', 'Connect'); lk.send({ t: 'J', token: s.token, name: G.av.name, anim: G.av.anim, acc: G.av.acc }); },
     data: onMsg,
     close: onLost,
-    fail(msg) { b.disabled = false; b.textContent = 'Ligar'; toast(msg); clearSess(); $('btn-resume').classList.add('hidden'); }
+    fail(msg) { b.disabled = false; b.textContent = L('Ligar', 'Connect'); toast(msg); clearSess(); $('btn-resume').classList.add('hidden'); }
   });
 };
 
@@ -2924,7 +4187,7 @@ function openAvatar() {
   ANIMAL_IDS.forEach(id => {
     const b = document.createElement('button');
     b.className = 'pick' + (id === G.av.anim ? ' sel' : '');
-    b.title = ANIMALS[id].nome;
+    b.title = L(ANIMALS[id].nome, ANIMAL_EN[id]);
     b.appendChild(staticAv(id, 'nada', 'normal', 64, 84));
     b.onclick = () => { G.av.anim = id; ga.querySelectorAll('.pick').forEach(x => x.classList.toggle('sel', x === b)); refreshAccPicks(); avActor.set({ a: id }); avActor.play('saltar'); };
     ga.appendChild(b);
@@ -2938,8 +4201,8 @@ function refreshAccPicks() {
   ACCS.forEach(([id, nome]) => {
     const b = document.createElement('button');
     b.className = 'pick' + (id === G.av.acc ? ' sel' : '');
-    b.title = nome;
-    if (id === 'nada') b.innerHTML = '<span class="none">NADA</span>';
+    b.title = L(nome, ACC_EN[id]);
+    if (id === 'nada') b.innerHTML = '<span class="none">' + L('NADA', 'NONE') + '</span>';
     else b.appendChild(staticAv(G.av.anim, id, 'normal', 64, 84));
     b.onclick = () => { G.av.acc = id; gc.querySelectorAll('.pick').forEach(x => x.classList.toggle('sel', x === b)); avActor.set({ ac: id }); avActor.play('virar'); };
     gc.appendChild(b);
@@ -2948,13 +4211,13 @@ function refreshAccPicks() {
 UI.avTrick = () => { if (avActor) avActor.play(TRICKS[Math.floor(Math.random() * TRICKS.length)]); };
 UI.avReady = () => {
   const name = $('av-name').value.replace(/\s+/g, ' ').trim().slice(0, 12);
-  if (!name) { toast('Escreve o teu nome!'); $('av-name').focus(); return; }
+  if (!name) { toast(L('Escreve o teu nome!', 'Type your name!')); $('av-name').focus(); return; }
   G.av.name = name;
   try { localStorage.setItem('ss_av', JSON.stringify(G.av)); } catch (e) { }
   keepAwake();
   if (G.pendingMesa) {
     $('btn-ready').disabled = true;
-    toast('A criar a sala…', true);
+    toast(L('A criar a sala…', 'Creating the room…'), true);
     startHosting('mesa', () => {
       $('btn-ready').disabled = false;
       $('toast').classList.add('hidden');
@@ -2966,7 +4229,7 @@ UI.avReady = () => {
     });
     return;
   }
-  if (!G.link || !G.link.open) { toast('A ligação caiu. Tenta entrar outra vez.'); showView('v-join'); return; }
+  if (!G.link || !G.link.open) { toast(L('A ligação caiu. Tenta entrar outra vez.', 'The connection dropped. Try joining again.')); showView('v-join'); return; }
   $('btn-ready').disabled = true;
   G.link.send({ t: 'J', token: G.token, name: G.av.name, anim: G.av.anim, acc: G.av.acc });
   setTimeout(() => ($('btn-ready').disabled = false), 2000);
@@ -2984,7 +4247,7 @@ function onMsg(d) {
   } else if (d.t === 'S') {
     if (G.role === 'ph' && G.me) onState(d.s);
   } else if (d.t === 'E') {
-    toast(d.msg);
+    toast(ERR_TXT()[d.code] || d.msg || '');
     if (d.kick) { clearSess(); G.me = null; G.role = null; showView('v-home'); }
     else if (!G.me) { clearSess(); showView('v-join'); }
   }
@@ -3001,8 +4264,8 @@ UI.hostAct = (a, d) => { if (G.host) { SFX.unlock(); engAction(a, d || {}); } };
 
 function onLost() {
   if (G.host || !G.code) return;
-  if (!G.me) { toast('A ligação falhou. Tenta outra vez.'); showView('v-join'); return; }
-  $('netbar').textContent = '📡 Ligação perdida… a tentar voltar ao jogo';
+  if (!G.me) { toast(L('A ligação falhou. Tenta outra vez.', 'Connection failed. Try again.')); showView('v-join'); return; }
+  $('netbar').textContent = L('📡 Ligação perdida… a tentar voltar ao jogo', '📡 Connection lost… trying to rejoin');
   $('netbar').classList.remove('hidden');
   clearTimeout(G.reconnTimer);
   G.reconnTimer = setTimeout(reconnectNow, 1500);
@@ -3013,13 +4276,13 @@ function reconnectNow() {
   G.reconnBusy = true;
   G.reconn++;
   netJoin(G.code, {
-    open(L) { G.reconnBusy = false; G.link = L; L.send({ t: 'J', token: G.token, name: G.av.name, anim: G.av.anim, acc: G.av.acc }); },
+    open(lk) { G.reconnBusy = false; G.link = lk; lk.send({ t: 'J', token: G.token, name: G.av.name, anim: G.av.anim, acc: G.av.acc }); },
     data: onMsg,
     close: () => { G.reconnBusy = false; onLost(); },
     fail(msg) {
       G.reconnBusy = false;
       if (G.reconn < 25) { G.reconnTimer = setTimeout(reconnectNow, 3000); }
-      else { $('netbar').innerHTML = 'Não foi possível voltar ao jogo. <button class="btn btn-sm btn-ghost" onclick="location.href=location.pathname">Início</button>'; }
+      else { $('netbar').innerHTML = L('Não foi possível voltar ao jogo.', 'Could not rejoin the game.') + ' <button class="btn btn-sm btn-ghost" onclick="location.href=location.pathname">' + L('Início', 'Home') + '</button>'; }
     }
   });
 }
@@ -3030,6 +4293,8 @@ function reconnectNow() {
 function onState(S) {
   const P = G.S;
   G.S = S;
+  // o anfitrião escolhe a língua; quando muda, tudo é redesenhado
+  if (S.lang && S.lang !== LANG) { setLang(S.lang, false); G.keys = {}; musicBtns(); }
   if (G.role === 'tv') renderTV(S, P); else renderPh(S, P);
   handleFeed(S, P);
   if (G.role === 'tv' || (G.host && G.mode === 'mesa')) sounds(S, P);
@@ -3042,12 +4307,13 @@ function handleFeed(S, P) {
     if (it.id <= G.seenFeed) continue;
     G.seenFeed = it.id;
     const mine = it.a === G.me || it.b === G.me;
-    const showIt = G.role === 'tv' || G.mode === 'mesa' || mine || it.kind === 'win';
-    if (showIt) showFeed(it.txt);
+    const showIt = G.role === 'tv' || G.mode === 'mesa' || mine || it.kind === 'win' || it.kind === 'solo';
+    if (showIt) showFeed(feedText(it, S));
     if (it.kind === 'roubo') { reactPid(it.a, 'saltar'); reactPid(it.b, 'atingido'); if (it.b === G.me) vib([80, 60, 80]); }
     if (it.kind === 'roubo0') reactPid(it.a, 'abanar');
     if (it.kind === 'ink' || it.kind === 'pie') reactPid(it.b, 'atingido');
     if (it.kind === 'elim') reactPid(it.a, 'cair', true);
+    if (it.kind === 'win' || it.kind === 'solo') { /* o vencedor já dança */ }
     if (G.role === 'tv' || (G.host && G.mode === 'mesa')) {
       if (it.kind === 'roubo') SFX.play('coin');
       if (it.kind === 'ink' || it.kind === 'pie') SFX.play('splat');
@@ -3164,7 +4430,7 @@ function syncCards(el, S, kind) {
       map[pid] = c;
     }
     if (el.children[idx] !== c.root) el.insertBefore(c.root, el.children[idx] || null);
-    c.nm.textContent = p.name + (pid === G.me && kind !== 'tv' ? ' (tu)' : '');
+    c.nm.textContent = p.name + (pid === G.me && kind !== 'tv' ? L(' (tu)', ' (you)') : '');
     const fin = S.fin && ['FINTRO', 'FQ', 'FREV', 'END'].includes(S.phase);
     c.sc.textContent = fin && S.phase !== 'END' ? p.time + 's' : p.score;
     if (c.bar) {
@@ -3186,7 +4452,7 @@ function syncCards(el, S, kind) {
     // expulsar (só no lobby, no ecrã do anfitrião)
     let k = c.root.querySelector('.kick');
     if (lobby && G.host && kind === 'tv' && pid !== G.me) {
-      if (!k) { k = document.createElement('button'); k.className = 'kick'; k.textContent = '×'; k.title = 'Remover'; k.onclick = () => UI.hostAct('kick', { pid }); c.root.appendChild(k); }
+      if (!k) { k = document.createElement('button'); k.className = 'kick'; k.textContent = '×'; k.title = L('Remover', 'Remove'); k.onclick = () => UI.hostAct('kick', { pid }); c.root.appendChild(k); }
     } else if (k) k.remove();
     // pontos ganhos/perdidos
     if ((S.phase === 'REVEAL' || S.phase === 'FREV') && p.last && S.q && c.dk !== S.q.k) {
@@ -3202,11 +4468,11 @@ function syncCards(el, S, kind) {
 function qKeyOf(S) { return S.q ? S.q.k : ''; }
 function buildQ(el, S, compact) {
   const q = S.q;
-  const meta = S.phase === 'FQ' || S.phase === 'FREV' ? 'Pergunta ' + q.n + ' · ' + esc(q.cat) : 'Pergunta ' + q.n + ' de ' + q.of + ' · ' + esc(q.cat);
+  const meta = S.phase === 'FQ' || S.phase === 'FREV' ? L('Pergunta ', 'Question ') + q.n + ' · ' + esc(q.cat) : L('Pergunta ', 'Question ') + q.n + L(' de ', ' of ') + q.of + ' · ' + esc(q.cat);
   let h = `<div class="qwrap ${compact ? '' : 'fade'}"><div class="${compact ? '' : 'glass '}qbox">${compact ? '' : '<div class="tbar"><i></i></div>'}<div class="qmeta">${meta}</div>`;
   if (q.kind === 'emo') h += `<div class="qemo">${esc(q.emo)}</div>`;
   h += `<div class="qtext">${esc(q.text)}</div>`;
-  if (q.kind === 'pis') h += `<div class="clues">${[0, 1, 2].map(i => `<div class="clue wait" data-c="${i}"><i>PISTA ${i + 1}</i><span></span></div>`).join('')}</div>`;
+  if (q.kind === 'pis') h += `<div class="clues">${[0, 1, 2].map(i => `<div class="clue wait" data-c="${i}"><i>${L('PISTA', 'CLUE')} ${i + 1}</i><span></span></div>`).join('')}</div>`;
   h += '</div>';
   if (!compact) {
     const vf = q.kind === 'vf';
@@ -3250,15 +4516,15 @@ function updQ(el, S) {
    ECRÃ PRINCIPAL (TV)
    ========================================================= */
 function topLeft(S) {
-  if (S.phase === 'LOBBY') return 'Sala <b class="pix">' + esc(S.code) + '</b>';
-  if (S.fin) return '<b>🔥 Grande Final</b>';
-  if (S.style && STYLE_DEF[S.style]) return 'Ronda <b>' + S.round + '/' + S.nRounds + '</b> · ' + STYLE_DEF[S.style].ic + ' ' + STYLE_DEF[S.style].nome;
+  if (S.phase === 'LOBBY') return L('Sala', 'Room') + ' <b class="pix">' + esc(S.code) + '</b>';
+  if (S.fin) return '<b>🔥 ' + L('Grande Final', 'Grand Final') + '</b>';
+  if (S.style && STYLE_DEF[S.style]) return L('Ronda', 'Round') + ' <b>' + S.round + '/' + S.nRounds + '</b> · ' + STYLE_DEF[S.style].ic + ' ' + styleName(S.style);
   return '';
 }
 
 function renderTV(S, P) {
   $('tv-l').innerHTML = topLeft(S);
-  $('tv-c').textContent = S.phase === 'Q' || S.phase === 'REVEAL' ? (S.phase === 'REVEAL' ? 'Resposta certa…' : S.cat || '') : (PHASE_TITLE[S.phase] || '');
+  $('tv-c').textContent = S.phase === 'Q' || S.phase === 'REVEAL' ? (S.phase === 'REVEAL' ? L('Resposta certa…', 'The answer is…') : S.cat || '') : (PHASE_TITLE()[S.phase] || '');
   const tEl = $('tv-t');
   const timed = !['LOBBY', 'END'].includes(S.phase);
   tEl.textContent = timed ? S.t : '';
@@ -3274,18 +4540,19 @@ function renderTV(S, P) {
 
 const TVV = {
   LOBBY: {
-    key: S => S.code,
+    key: S => S.code + S.lang,
     build(el, S) {
       const url = joinUrl(S.code);
       el.innerHTML = `<div class="lobby fade">
         <div class="glass panel">
-          <div class="lbl">Entra com o telemóvel</div>
+          <div class="lbl">${L('Entra com o telemóvel', 'Join with your phone')}</div>
           <div class="join-row"><div class="qr" id="tv-qr"></div><div><div class="code-big">${esc(S.code)}</div><div class="url">${esc(url)}</div></div></div>
-          <p class="desc" style="font-size:clamp(14px,1.4vw,22px);margin-top:2vh">Abre o link no telemóvel (ou lê o código QR), carrega em <b>Entrar num jogo</b> e escreve o código. Até 6 jogadores.</p>
+          <p class="desc" style="font-size:clamp(14px,1.4vw,22px);margin-top:2vh">${L('Abre o link no telemóvel (ou lê o código QR), carrega em <b>Entrar num jogo</b> e escreve o código. Até 6 jogadores.', 'Open the link on your phone (or scan the QR code), tap <b>Join a game</b> and type the code. Up to 6 players.')}</p>
         </div>
         <div class="glass panel">
-          <div class="lbl">Público</div><div class="seg" id="seg-aud"></div>
-          <div class="lbl">Duração</div><div class="seg" id="seg-len"></div>
+          <div class="lbl">${L('Idioma', 'Language')}</div><div class="seg" id="seg-lang"></div>
+          <div class="lbl">${L('Público', 'Audience')}</div><div class="seg" id="seg-aud"></div>
+          <div class="lbl">${L('Duração', 'Length')}</div><div class="seg" id="seg-len"></div>
           <div style="flex:1;min-height:2vh"></div>
           <button class="btn btn-gold mt" id="btn-start" onclick="UI.start()"></button>
         </div></div>`;
@@ -3297,13 +4564,13 @@ const TVV = {
     key: S => S.round,
     build(el, S) {
       const d = STYLE_DEF[S.style];
-      el.innerHTML = `<div class="pop"><div class="mid-title muted" style="font-size:clamp(18px,2.4vw,40px)">Ronda ${S.round} de ${S.nRounds}</div><div class="style-ic">${d.ic}</div><div class="big-title">${esc(d.nome)}</div><p class="desc">${esc(d.desc)}</p><p class="desc" style="color:var(--gold)">${S.nq} ${S.style === 'vf' ? 'afirmações' : 'perguntas'}</p></div>`;
+      el.innerHTML = `<div class="pop"><div class="mid-title muted" style="font-size:clamp(18px,2.4vw,40px)">${L('Ronda', 'Round')} ${S.round} ${L('de', 'of')} ${S.nRounds}</div><div class="style-ic">${d.ic}</div><div class="big-title">${esc(styleName(S.style))}</div><p class="desc">${esc(styleDesc(S.style))}</p><p class="desc" style="color:var(--gold)">${S.nq} ${S.style === 'vf' ? L('afirmações', 'statements') : L('perguntas', 'questions')}</p></div>`;
     }
   },
   VOTE: {
     key: S => S.round,
     build(el, S) {
-      el.innerHTML = `<div class="fade"><div class="mid-title">Escolham o tema no telemóvel!</div><div class="vote-grid">${S.vote.opts.map((o, i) => `<div class="glass vote-card" data-i="${i}"><div class="fill" style="height:0"></div><h3>${esc(o)}</h3><div class="n">0</div></div>`).join('')}</div></div>`;
+      el.innerHTML = `<div class="fade"><div class="mid-title">${L('Escolham o tema no telemóvel!', 'Pick the topic on your phone!')}</div><div class="vote-grid">${S.vote.opts.map((o, i) => `<div class="glass vote-card" data-i="${i}"><div class="fill" style="height:0"></div><h3>${esc(o)}</h3><div class="n">0</div></div>`).join('')}</div></div>`;
     },
     upd(el, S) {
       const tot = Math.max(1, S.order.length);
@@ -3313,25 +4580,25 @@ const TVV = {
   THEME: {
     key: S => S.round,
     build(el, S) {
-      el.innerHTML = `<div class="pop"><div class="mid-title muted" style="font-size:clamp(18px,2.4vw,40px)">O tema é…</div><div class="big-title" style="color:var(--gold);margin-top:2vh">${esc(S.cat)}</div></div>`;
+      el.innerHTML = `<div class="pop"><div class="mid-title muted" style="font-size:clamp(18px,2.4vw,40px)">${L('O tema é…', 'The topic is…')}</div><div class="big-title" style="color:var(--gold);margin-top:2vh">${esc(S.cat)}</div></div>`;
     }
   },
   ATTACK: {
     key: S => S.round,
     build(el, S) {
-      el.innerHTML = `<div class="fade"><div class="big-title">😈 Sabotagem!</div><p class="desc">Escolhe no telemóvel uma vítima e uma arma. A tinta e a tarte vão cair numa pergunta surpresa desta ronda!</p><div class="weapons">${Object.values(WEAPONS).map(w => `<div class="glass weapon"><div class="ic">${w.ic}</div><b>${w.nome}</b><span>${w.desc}</span></div>`).join('')}</div></div>`;
+      el.innerHTML = `<div class="fade"><div class="big-title">😈 ${L('Sabotagem!', 'Sabotage!')}</div><p class="desc">${L('Escolhe no telemóvel uma vítima e uma arma. A tinta e a tarte vão cair numa pergunta surpresa desta ronda!', 'Pick a victim and a weapon on your phone. Ink and pies land on a surprise question this round!')}</p><div class="weapons">${Object.values(WEAPONS()).map(w => `<div class="glass weapon"><div class="ic">${w.ic}</div><b>${w.nome}</b><span>${w.desc}</span></div>`).join('')}</div></div>`;
     }
   },
   BET: {
     key: S => qKeyOf(S),
     build(el, S) {
-      el.innerHTML = `<div class="pop"><div class="style-ic">🎰</div><div class="mid-title">Pergunta ${S.q.n} de ${S.q.of} · tema <span style="color:var(--gold)">${esc(S.cat)}</span></div><p class="desc">Quanto apostam? Acertar ganha a aposta. Errar perde-a!</p></div>`;
+      el.innerHTML = `<div class="pop"><div class="style-ic">🎰</div><div class="mid-title">${L('Pergunta', 'Question')} ${S.q.n} ${L('de', 'of')} ${S.q.of} · ${L('tema', 'topic')} <span style="color:var(--gold)">${esc(S.cat)}</span></div><p class="desc">${L('Quanto apostam? Acertar ganha a aposta. Errar perde-a!', 'How much will you bet? Right wins the bet. Wrong loses it!')}</p></div>`;
     }
   },
   READY: {
     key: S => qKeyOf(S),
     build(el, S) {
-      el.innerHTML = `<div class="pop"><div class="style-ic">${STYLE_DEF[S.style].ic}</div><div class="big-title">Pergunta ${S.q.n}<span class="muted" style="font-size:.5em"> / ${S.q.of}</span></div></div>`;
+      el.innerHTML = `<div class="pop"><div class="style-ic">${STYLE_DEF[S.style].ic}</div><div class="big-title">${L('Pergunta', 'Question')} ${S.q.n}<span class="muted" style="font-size:.5em"> / ${S.q.of}</span></div></div>`;
     }
   },
   Q: { key: S => qKeyOf(S), build(el, S) { buildQ(el, S); }, upd(el, S) { updQ(el, S); } },
@@ -3340,7 +4607,7 @@ const TVV = {
     key: S => S.round,
     build(el, S) {
       const r = ranked(S);
-      el.innerHTML = `<div class="fade"><div class="mid-title">${S.round < S.nRounds ? 'Fim da ronda ' + S.round : 'Antes da Grande Final…'}</div><div class="rank">${r.map((p, i) => `<div class="rrow ${i === 0 ? 'first' : ''}"><span class="pos">${i + 1}.º</span>${avHTML(p)}<span class="nm">${esc(p.name)}</span><span class="rp">${p.roundPts > 0 ? '+' + p.roundPts : p.roundPts || ''}</span><span class="pts">${p.score}</span></div>`).join('')}</div></div>`;
+      el.innerHTML = `<div class="fade"><div class="mid-title">${S.round < S.nRounds ? L('Fim da ronda ', 'End of round ') + S.round : L('Antes da Grande Final…', 'Before the Grand Final…')}</div><div class="rank">${r.map((p, i) => `<div class="rrow ${i === 0 ? 'first' : ''}"><span class="pos">${ordinal(i + 1)}</span>${avHTML(p)}<span class="nm">${esc(p.name)}</span><span class="rp">${p.roundPts > 0 ? '+' + p.roundPts : p.roundPts || ''}</span><span class="pts">${p.score}</span></div>`).join('')}</div></div>`;
       hydrateAv(el);
     }
   },
@@ -3348,7 +4615,7 @@ const TVV = {
     key: () => 'f',
     build(el, S) {
       const r = ranked(S);
-      el.innerHTML = `<div class="fade"><div class="big-title">🔥 Grande Final</div><p class="desc">Os pontos viraram <b>tempo</b>. O relógio desce para todos ao mesmo tempo. Não responder tira <b>5 s</b>, errar tira <b>10 s</b>. Quem chega a zero é eliminado. O último a sobreviver ganha!</p><div class="rank">${r.map((p, i) => `<div class="rrow ${i === 0 ? 'first' : ''}"><span class="pos">${i + 1}.º</span>${avHTML(p)}<span class="nm">${esc(p.name)}</span><span class="pts">${p.score} pts →</span><span class="rp" style="color:#fff">${p.time} s</span></div>`).join('')}</div></div>`;
+      el.innerHTML = `<div class="fade"><div class="big-title">🔥 ${L('Grande Final', 'Grand Final')}</div><p class="desc">${L('Os pontos viraram <b>tempo</b>. O relógio desce para todos ao mesmo tempo. Não responder tira <b>5 s</b>, errar tira <b>10 s</b>. Quem chega a zero é eliminado. O último a sobreviver ganha!', 'Points have become <b>time</b>. Everyone\'s clock runs down at once. No answer costs <b>5 s</b>, a wrong answer <b>10 s</b>. Hit zero and you\'re out. The last survivor wins!')}</p><div class="rank">${r.map((p, i) => `<div class="rrow ${i === 0 ? 'first' : ''}"><span class="pos">${ordinal(i + 1)}</span>${avHTML(p)}<span class="nm">${esc(p.name)}</span><span class="pts">${p.score} pts →</span><span class="rp" style="color:#fff">${p.time} s</span></div>`).join('')}</div></div>`;
       hydrateAv(el);
     }
   },
@@ -3360,9 +4627,9 @@ const TVV = {
       const w = S.players[S.winner];
       const rows = (S.rank || []).map(id => S.players[id]).filter(Boolean);
       el.innerHTML = `<div class="fade podium">
-        <div class="winner"><div class="crown">👑</div><div class="act" id="win-act"></div><div class="big-title" style="font-size:clamp(28px,4.5vw,72px)">${esc(w ? w.name : '')}</div><div class="desc" style="margin-top:.5vh">${S.fin && S.fin.solo ? 'sobreviveu a ' + S.fin.n + ' perguntas' : 'é o grande sobrevivente!'}</div></div>
-        <div style="min-width:min(40vw,560px)"><div class="rank">${rows.map((p, i) => `<div class="rrow ${i === 0 ? 'first' : ''}"><span class="pos">${i + 1}.º</span>${avHTML(p)}<span class="nm">${esc(p.name)}</span><span class="pts">${p.score} pts</span></div>`).join('')}</div>
-        ${G.host ? '<div class="row mt"><button class="btn btn-gold" onclick="UI.hostAct(\'again\')">🔁 Jogar outra vez</button><button class="btn btn-ghost" onclick="UI.newGame()">Novo jogo</button></div>' : ''}</div></div>`;
+        <div class="winner"><div class="crown">👑</div><div class="act" id="win-act"></div><div class="big-title" style="font-size:clamp(28px,4.5vw,72px)">${esc(w ? w.name : '')}</div><div class="desc" style="margin-top:.5vh">${S.fin && S.fin.solo ? L('sobreviveu a ' + S.fin.n + ' perguntas', 'survived ' + S.fin.n + ' questions') : L('é o grande sobrevivente!', 'is the last survivor!')}</div></div>
+        <div style="min-width:min(40vw,560px)"><div class="rank">${rows.map((p, i) => `<div class="rrow ${i === 0 ? 'first' : ''}"><span class="pos">${ordinal(i + 1)}</span>${avHTML(p)}<span class="nm">${esc(p.name)}</span><span class="pts">${p.score} pts</span></div>`).join('')}</div>
+        ${G.host ? '<div class="row mt"><button class="btn btn-gold" onclick="UI.hostAct(\'again\')">🔁 ' + L('Jogar outra vez', 'Play again') + '</button><button class="btn btn-ghost" onclick="UI.newGame()">' + L('Novo jogo', 'New game') + '</button></div>' : ''}</div></div>`;
       hydrateAv(el);
       if (w) { const a = mountActor($('win-act'), 8, w.anim, w.acc); a.set({ expr: 'feliz' }); a.play('dancar', true); }
     }
@@ -3370,21 +4637,22 @@ const TVV = {
 };
 
 function updOpts(S) {
-  const sa = $('seg-aud'), sl = $('seg-len'), bs = $('btn-start');
+  const sa = $('seg-aud'), sl = $('seg-len'), bs = $('btn-start'), sg = $('seg-lang');
   if (!sa) return;
-  const k = S.aud + S.len + S.order.length + (G.host ? 1 : 0);
+  const k = S.aud + S.len + S.lang + S.order.length + (G.host ? 1 : 0);
   if (sa.dataset.k === k) return;
   sa.dataset.k = k;
-  sa.innerHTML = Object.entries(AUD_LBL).map(([id, [n, s]]) => `<button class="${S.aud === id ? 'on' : ''}" ${G.host ? '' : 'disabled'} onclick="UI.hostAct('opts',{aud:'${id}'})">${n}<small>${s}</small></button>`).join('');
-  sl.innerHTML = Object.entries(LEN_LBL).map(([id, [n, s]]) => `<button class="${S.len === +id ? 'on' : ''}" ${G.host ? '' : 'disabled'} onclick="UI.hostAct('opts',{len:${id}})">${n}<small>${s}</small></button>`).join('');
+  if (sg) sg.innerHTML = Object.entries(LANG_LBL).map(([id, [n]]) => `<button class="${S.lang === id ? 'on' : ''}" ${G.host ? '' : 'disabled'} onclick="UI.hostAct('opts',{lang:'${id}'})">${n}</button>`).join('');
+  sa.innerHTML = Object.entries(AUD_LBL()).map(([id, [n, s]]) => `<button class="${S.aud === id ? 'on' : ''}" ${G.host ? '' : 'disabled'} onclick="UI.hostAct('opts',{aud:'${id}'})">${n}<small>${s}</small></button>`).join('');
+  sl.innerHTML = Object.entries(LEN_LBL()).map(([id, [n, s]]) => `<button class="${S.len === +id ? 'on' : ''}" ${G.host ? '' : 'disabled'} onclick="UI.hostAct('opts',{len:${id}})">${n}<small>${s}</small></button>`).join('');
   if (bs) {
     const n = S.order.length;
     bs.disabled = !n || !G.host;
-    bs.textContent = !G.host ? 'O anfitrião vai começar…' : n ? '▶ Começar (' + n + (n === 1 ? ' jogador' : ' jogadores') + ')' : 'À espera de jogadores…';
+    bs.textContent = !G.host ? L('O anfitrião vai começar…', 'The host will start…') : n ? L('▶ Começar (', '▶ Start (') + n + (n === 1 ? L(' jogador', ' player') : L(' jogadores', ' players')) + ')' : L('À espera de jogadores…', 'Waiting for players…');
   }
 }
 UI.start = () => { SFX.unlock(); keepAwake(); UI.hostAct('start'); };
-UI.newGame = () => { if (confirm('Começar um jogo novo? Os jogadores vão ter de entrar outra vez.')) { window.onbeforeunload = null; location.href = location.pathname + (URLP.has('local') ? '?local=1' : ''); } };
+UI.newGame = () => { if (confirm(L('Começar um jogo novo? Os jogadores vão ter de entrar outra vez.', 'Start a new game? Players will have to join again.'))) { window.onbeforeunload = null; location.href = location.pathname + (URLP.has('local') ? '?local=1' : ''); } };
 UI.toggleSound = () => { G.sound = !G.sound; $('tv-snd').textContent = G.sound ? '🔊' : '🔇'; $('tv-snd').classList.toggle('off', !G.sound); SFX.unlock(); };
 UI.toggleMusic = () => {
   SFX.unlock();
@@ -3403,15 +4671,15 @@ function renderPh(S, P) {
   const me = S.players[G.me];
   if (!me) {
     if (S.phase !== 'LOBBY') return;
-    showView('v-home'); toast('Já não estás nesta sala.'); clearSess(); return;
+    showView('v-home'); toast(L('Já não estás nesta sala.', 'You are no longer in this room.')); clearSess(); return;
   }
   // barra de cima
-  $('ph-l').innerHTML = S.phase === 'LOBBY' ? 'Sala<b class="pix">' + esc(S.code) + '</b>' : S.fin ? 'Grande<b>Final 🔥</b>' : (S.style && STYLE_DEF[S.style] ? 'Ronda ' + S.round + '/' + S.nRounds + '<b>' + STYLE_DEF[S.style].ic + ' ' + esc(STYLE_DEF[S.style].nome) + '</b>' : '');
+  $('ph-l').innerHTML = S.phase === 'LOBBY' ? L('Sala', 'Room') + '<b class="pix">' + esc(S.code) + '</b>' : S.fin ? L('Grande<b>Final 🔥</b>', 'Grand<b>Final 🔥</b>') : (S.style && STYLE_DEF[S.style] ? L('Ronda ', 'Round ') + S.round + '/' + S.nRounds + '<b>' + STYLE_DEF[S.style].ic + ' ' + esc(styleName(S.style)) + '</b>' : '');
   const timed = !['LOBBY', 'END'].includes(S.phase);
   $('ph-t').textContent = timed ? S.t : '';
   $('ph-t').classList.toggle('low', (S.phase === 'Q' || S.phase === 'FQ') && S.t <= 3);
   const finNow = S.fin && ['FINTRO', 'FQ', 'FREV'].includes(S.phase);
-  $('ph-r').innerHTML = finNow ? `<span class="pix">${me.time}s</span><small>tempo</small>` : `<span class="pix">${me.score}</span><small>pontos</small>`;
+  $('ph-r').innerHTML = finNow ? `<span class="pix">${me.time}s</span><small>${L('tempo', 'time')}</small>` : `<span class="pix">${me.score}</span><small>${L('pontos', 'points')}</small>`;
 
   // o meu boneco
   const actEl = $('ph-act');
@@ -3456,22 +4724,22 @@ function bubbleText(S, me) {
   const n = esc(me.name);
   const l = me.last;
   switch (S.phase) {
-    case 'LOBBY': return `<b>${n}</b>Toca em mim! 😄`;
-    case 'INTRO': return '<b>Nova ronda!</b>Lê as regras ali em cima.';
-    case 'VOTE': return me.voted ? '<b>Votado!</b>Espera pelos outros…' : '<b>Vota no tema</b>Qual te dá mais jeito?';
-    case 'THEME': return '<b>Tema: ' + esc(S.cat) + '</b>Prepara o cérebro!';
-    case 'ATTACK': return me.atk ? '<b>Hehehe… 😈</b>Agora é esperar.' : '<b>Sabotagem!</b>Escolhe uma vítima…';
-    case 'BET': return me.bet != null ? '<b>Aposta feita!</b>Que nervos…' : '<b>Quanto arriscas?</b>';
-    case 'READY': return '<b>Atenção…</b>Dedo pronto!';
-    case 'Q': return me.ans ? '<b>Resposta enviada!</b>Será que acertei?' : '<b>Hmm…</b>Escolhe depressa!';
+    case 'LOBBY': return `<b>${n}</b>` + L('Toca em mim! 😄', 'Tap me! 😄');
+    case 'INTRO': return L('<b>Nova ronda!</b>Lê as regras ali em cima.', '<b>New round!</b>Read the rules above.');
+    case 'VOTE': return me.voted ? L('<b>Votado!</b>Espera pelos outros…', '<b>Voted!</b>Waiting for the others…') : L('<b>Vota no tema</b>Qual te dá mais jeito?', '<b>Vote for a topic</b>Which one suits you?');
+    case 'THEME': return '<b>' + L('Tema: ', 'Topic: ') + esc(S.cat) + '</b>' + L('Prepara o cérebro!', 'Warm up your brain!');
+    case 'ATTACK': return me.atk ? L('<b>Hehehe… 😈</b>Agora é esperar.', '<b>Hehehe… 😈</b>Now we wait.') : L('<b>Sabotagem!</b>Escolhe uma vítima…', '<b>Sabotage!</b>Pick a victim…');
+    case 'BET': return me.bet != null ? L('<b>Aposta feita!</b>Que nervos…', '<b>Bet placed!</b>So nervous…') : L('<b>Quanto arriscas?</b>', '<b>How much will you risk?</b>');
+    case 'READY': return L('<b>Atenção…</b>Dedo pronto!', '<b>Heads up…</b>Finger ready!');
+    case 'Q': return me.ans ? L('<b>Resposta enviada!</b>Será que acertei?', '<b>Answer sent!</b>Did I get it right?') : L('<b>Hmm…</b>Escolhe depressa!', '<b>Hmm…</b>Pick quickly!');
     case 'REVEAL':
-      if (!l || l.ok == null) return '<b>Ups!</b>Não respondi a tempo…';
-      return l.ok ? `<b>Boa!! ${l.pts ? '+' + l.pts : ''}</b>${l.first ? 'Fui o primeiro! 🎯' : 'Sou um génio!'}` : `<b>Ai…</b>${l.pts < 0 ? 'Perdi ' + (-l.pts) + ' pontos.' : 'Errei esta.'}`;
-    case 'RANK': return '<b>Classificação</b>Como estou?';
-    case 'FINTRO': return `<b>Tenho ${me.time} segundos!</b>Vou sobreviver!`;
-    case 'FQ': return !me.alive ? '<b>Fui eliminado 💀</b>Agora só vejo…' : me.time <= 10 ? '<b>AAAH!</b>Estou quase sem tempo!' : me.ans ? '<b>Feito!</b>Que venha a próxima.' : '<b>Rápido!</b>O tempo está a fugir!';
-    case 'FREV': return !me.alive ? '<b>Eliminado…</b>Foi bonito enquanto durou.' : !l ? '' : l.ok ? '<b>Certo!</b>Continuo vivo!' : l.ok === false ? '<b>-10 segundos!</b>Ai ai ai…' : '<b>-5 segundos!</b>Fui lento…';
-    case 'END': return S.winner === me.id ? '<b>GANHEI!! 🏆</b>Sou o maior!' : '<b>Fim de jogo</b>Para a próxima é que é!';
+      if (!l || l.ok == null) return L('<b>Ups!</b>Não respondi a tempo…', '<b>Oops!</b>I was too slow…');
+      return l.ok ? `<b>${L('Boa!!', 'Yes!!')} ${l.pts ? '+' + l.pts : ''}</b>${l.first ? L('Fui o primeiro! 🎯', 'I was first! 🎯') : L('Sou um génio!', "I'm a genius!")}` : `<b>${L('Ai…', 'Ouch…')}</b>${l.pts < 0 ? L('Perdi ' + (-l.pts) + ' pontos.', 'I lost ' + (-l.pts) + ' points.') : L('Errei esta.', 'Got that one wrong.')}`;
+    case 'RANK': return L('<b>Classificação</b>Como estou?', '<b>Standings</b>How am I doing?');
+    case 'FINTRO': return L(`<b>Tenho ${me.time} segundos!</b>Vou sobreviver!`, `<b>I have ${me.time} seconds!</b>I will survive!`);
+    case 'FQ': return !me.alive ? L('<b>Fui eliminado 💀</b>Agora só vejo…', "<b>I'm out 💀</b>Just watching now…") : me.time <= 10 ? L('<b>AAAH!</b>Estou quase sem tempo!', "<b>AAAH!</b>I'm almost out of time!") : me.ans ? L('<b>Feito!</b>Que venha a próxima.', '<b>Done!</b>Bring on the next one.') : L('<b>Rápido!</b>O tempo está a fugir!', '<b>Quick!</b>Time is running out!');
+    case 'FREV': return !me.alive ? L('<b>Eliminado…</b>Foi bonito enquanto durou.', '<b>Eliminated…</b>It was fun while it lasted.') : !l ? '' : l.ok ? L('<b>Certo!</b>Continuo vivo!', "<b>Correct!</b>Still alive!") : l.ok === false ? L('<b>-10 segundos!</b>Ai ai ai…', '<b>-10 seconds!</b>Ouch ouch…') : L('<b>-5 segundos!</b>Fui lento…', '<b>-5 seconds!</b>Too slow…');
+    case 'END': return S.winner === me.id ? L('<b>GANHEI!! 🏆</b>Sou o maior!', "<b>I WON!! 🏆</b>I'm the best!") : L('<b>Fim de jogo</b>Para a próxima é que é!', '<b>Game over</b>Next time for sure!');
   }
   return '';
 }
@@ -3501,28 +4769,29 @@ function answerGrid(el, S, me, enabled) {
 
 const PHV = {
   LOBBY: {
-    key: (S, me) => [S.order.length, S.order.map(id => S.players[id].on ? 1 : 0).join(''), S.aud, S.len].join(','),
+    key: (S, me) => [S.order.length, S.order.map(id => S.players[id].on ? 1 : 0).join(''), S.aud, S.len, S.lang].join(','),
     build(el, S, me) {
       const others = S.order.map(id => S.players[id]);
       let h = '';
       if (G.host) {
         const url = joinUrl(S.code);
         h += `<div class="glass card lobby-ph" style="max-width:none;padding:14px">
-          <div class="lbl" style="margin-top:0">Código da sala</div><div class="code-big">${esc(S.code)}</div>
+          <div class="lbl" style="margin-top:0">${L('Código da sala', 'Room code')}</div><div class="code-big">${esc(S.code)}</div>
           <div class="qr sm" id="ph-qr"></div>
-          <div class="share-row"><button class="btn btn-ghost btn-sm" style="flex:1" onclick="UI.share()">📤 Partilhar link</button></div>
-          <div class="lbl">Público</div><div class="seg" id="seg-aud"></div>
-          <div class="lbl">Duração</div><div class="seg" id="seg-len"></div>
-          <div class="lbl">Jogadores (${others.length}/6)</div><div class="plist">${others.map(p => `<div class="pi">${avHTML(p, 46, 60)}<div>${esc(p.name)}</div>${p.id !== G.me ? `<button class="kick" onclick="UI.hostAct('kick',{pid:'${p.id}'})">×</button>` : ''}</div>`).join('')}</div>
+          <div class="share-row"><button class="btn btn-ghost btn-sm" style="flex:1" onclick="UI.share()">📤 ${L('Partilhar link', 'Share link')}</button></div>
+          <div class="lbl">${L('Idioma', 'Language')}</div><div class="seg" id="seg-lang"></div>
+          <div class="lbl">${L('Público', 'Audience')}</div><div class="seg" id="seg-aud"></div>
+          <div class="lbl">${L('Duração', 'Length')}</div><div class="seg" id="seg-len"></div>
+          <div class="lbl">${L('Jogadores', 'Players')} (${others.length}/6)</div><div class="plist">${others.map(p => `<div class="pi">${avHTML(p, 46, 60)}<div>${esc(p.name)}</div>${p.id !== G.me ? `<button class="kick" onclick="UI.hostAct('kick',{pid:'${p.id}'})">×</button>` : ''}</div>`).join('')}</div>
           <button class="btn btn-gold mt" id="btn-start" onclick="UI.start()"></button></div>`;
         el.innerHTML = h;
         makeQR($('ph-qr'), url);
         G.keys['seg'] = null; $('seg-aud').dataset.k = '';
         updOpts(S);
       } else {
-        h += msgBig('🎉', 'Estás dentro!', S.mode === 'mesa' ? 'Espera que o anfitrião comece o jogo.' : 'Olha para o ecrã principal e espera que o jogo comece.');
-        h += `<div class="glass" style="padding:12px;margin-top:6px"><div class="lbl" style="margin-top:0">Jogadores (${others.length}/6)</div><div class="plist">${others.map(p => `<div class="pi">${avHTML(p, 46, 60)}<div>${esc(p.name)}</div></div>`).join('')}</div>
-          <p class="muted small center mt">Público: <b>${AUD_LBL[S.aud][0]}</b> · Duração: <b>${LEN_LBL[S.len][0]}</b></p></div>`;
+        h += msgBig('🎉', L('Estás dentro!', "You're in!"), S.mode === 'mesa' ? L('Espera que o anfitrião comece o jogo.', 'Wait for the host to start the game.') : L('Olha para o ecrã principal e espera que o jogo comece.', 'Look at the main screen and wait for the game to start.'));
+        h += `<div class="glass" style="padding:12px;margin-top:6px"><div class="lbl" style="margin-top:0">${L('Jogadores', 'Players')} (${others.length}/6)</div><div class="plist">${others.map(p => `<div class="pi">${avHTML(p, 46, 60)}<div>${esc(p.name)}</div></div>`).join('')}</div>
+          <p class="muted small center mt">${L('Público', 'Audience')}: <b>${AUD_LBL()[S.aud][0]}</b> · ${L('Duração', 'Length')}: <b>${LEN_LBL()[S.len][0]}</b></p></div>`;
         el.innerHTML = h;
       }
       hydrateAv(el);
@@ -3530,35 +4799,36 @@ const PHV = {
   },
   INTRO: {
     key: S => S.round,
-    build(el, S) { const d = STYLE_DEF[S.style]; el.innerHTML = msgBig(d.ic, 'Ronda ' + S.round + ': ' + esc(d.nome), esc(d.desc), `<p class="muted mt">${S.nq} ${S.style === 'vf' ? 'afirmações' : 'perguntas'}</p>`); }
+    build(el, S) { const d = STYLE_DEF[S.style]; el.innerHTML = msgBig(d.ic, L('Ronda ', 'Round ') + S.round + ': ' + esc(styleName(S.style)), esc(styleDesc(S.style)), `<p class="muted mt">${S.nq} ${S.style === 'vf' ? L('afirmações', 'statements') : L('perguntas', 'questions')}</p>`); }
   },
   VOTE: {
     key: (S, me) => S.round + '|' + me.voted + '|' + (G.myVote && G.myVote.r === S.round ? G.myVote.i : ''),
     build(el, S, me) {
       const mine = G.myVote && G.myVote.r === S.round ? G.myVote.i : null;
-      el.innerHTML = `<h2 class="center" style="font-weight:900;font-size:22px">${me.voted ? 'Voto registado! ✅' : 'Vota no próximo tema'}</h2>` +
+      el.innerHTML = `<h2 class="center" style="font-weight:900;font-size:22px">${me.voted ? L('Voto registado! ✅', 'Vote counted! ✅') : L('Vota no próximo tema', 'Vote for the next topic')}</h2>` +
         S.vote.opts.map((o, i) => `<button class="choice ${mine === i ? 'on' : ''}" data-i="${i}" ${me.voted ? 'disabled' : ''}><span class="ic">${['🅰️', '🅱️', '🆎'][i] || '•'}</span><span>${esc(o)}</span></button>`).join('');
       if (!me.voted) el.querySelectorAll('.choice').forEach(b => b.onclick = () => { G.myVote = { r: S.round, i: +b.dataset.i }; send({ t: 'V', i: +b.dataset.i }); vib(25); G.keys['ph-ctrl'] = null; renderPh(G.S); });
     }
   },
-  THEME: { key: S => S.round, build(el, S) { el.innerHTML = msgBig('🎯', esc(S.cat), 'Este é o tema da ronda!'); } },
+  THEME: { key: S => S.round, build(el, S) { el.innerHTML = msgBig('🎯', esc(S.cat), L('Este é o tema da ronda!', "This round's topic!")); } },
   ATTACK: {
     key: (S, me) => S.round + '|' + me.atk + '|' + JSON.stringify(G.atkUI && G.atkUI.r === S.round ? G.atkUI : {}),
     build(el, S, me) {
       if (!G.atkUI || G.atkUI.r !== S.round) G.atkUI = { r: S.round, w: null };
       const ui = G.atkUI;
       const targets = S.order.map(id => S.players[id]).filter(p => p.id !== G.me);
-      if (me.atk) { el.innerHTML = ui.sent === 'none' ? msgBig('😇', 'Hoje estás pacífico', 'Não atacaste ninguém.') : msgBig('😈', 'Ataque preparado!', ui.sent === 'roubo' ? 'Os pontos já são teus!' : 'Vai cair numa pergunta surpresa…'); return; }
+      if (me.atk) { el.innerHTML = ui.sent === 'none' ? msgBig('😇', L('Hoje estás pacífico', 'Feeling peaceful today'), L('Não atacaste ninguém.', "You didn't attack anyone.")) : msgBig('😈', L('Ataque preparado!', 'Attack ready!'), ui.sent === 'roubo' ? L('Os pontos já são teus!', 'The points are yours!') : L('Vai cair numa pergunta surpresa…', 'It will land on a surprise question…')); return; }
+      const WP = WEAPONS();
       if (!ui.w) {
-        el.innerHTML = `<h2 class="center" style="font-weight:900;font-size:22px">😈 Escolhe a arma</h2>` +
-          Object.entries(WEAPONS).map(([id, w]) => `<button class="choice" data-w="${id}"><span class="ic">${w.ic}</span><span>${w.nome}<small>${w.desc}</small></span></button>`).join('') +
-          `<button class="btn btn-ghost btn-sm" style="align-self:center" id="atk-skip">Não atacar ninguém</button>`;
+        el.innerHTML = `<h2 class="center" style="font-weight:900;font-size:22px">😈 ${L('Escolhe a arma', 'Pick a weapon')}</h2>` +
+          Object.entries(WP).map(([id, w]) => `<button class="choice" data-w="${id}"><span class="ic">${w.ic}</span><span>${w.nome}<small>${w.desc}</small></span></button>`).join('') +
+          `<button class="btn btn-ghost btn-sm" style="align-self:center" id="atk-skip">${L('Não atacar ninguém', "Don't attack anyone")}</button>`;
         el.querySelectorAll('.choice').forEach(b => b.onclick = () => { ui.w = b.dataset.w; G.keys['ph-ctrl'] = null; renderPh(G.S); });
       } else {
-        const w = WEAPONS[ui.w];
-        el.innerHTML = `<h2 class="center" style="font-weight:900;font-size:20px">${w.ic} ${w.nome}: em quem?</h2>` +
-          targets.map(p => `<button class="choice" data-p="${p.id}" ${p.on ? '' : 'disabled'}>${avHTML(p, 40, 52)}<span>${esc(p.name)}<small>${p.score} pontos${p.on ? '' : ' · desligado'}</small></span></button>`).join('') +
-          `<div class="row" style="justify-content:center"><button class="btn btn-ghost btn-sm" id="atk-back">← Outra arma</button><button class="btn btn-ghost btn-sm" id="atk-skip">Não atacar</button></div>`;
+        const w = WP[ui.w];
+        el.innerHTML = `<h2 class="center" style="font-weight:900;font-size:20px">${w.ic} ${w.nome}: ${L('em quem?', 'on whom?')}</h2>` +
+          targets.map(p => `<button class="choice" data-p="${p.id}" ${p.on ? '' : 'disabled'}>${avHTML(p, 40, 52)}<span>${esc(p.name)}<small>${p.score} ${L('pontos', 'points')}${p.on ? '' : L(' · desligado', ' · offline')}</small></span></button>`).join('') +
+          `<div class="row" style="justify-content:center"><button class="btn btn-ghost btn-sm" id="atk-back">← ${L('Outra arma', 'Other weapon')}</button><button class="btn btn-ghost btn-sm" id="atk-skip">${L('Não atacar', "Don't attack")}</button></div>`;
         hydrateAv(el);
         el.querySelectorAll('.choice').forEach(b => b.onclick = () => { ui.sent = ui.w; send({ t: 'A', w: ui.w, to: b.dataset.p }); vib(40); });
         $('atk-back').onclick = () => { ui.w = null; G.keys['ph-ctrl'] = null; renderPh(G.S); };
@@ -3569,16 +4839,16 @@ const PHV = {
   BET: {
     key: (S, me) => qKeyOf(S) + '|' + me.bet,
     build(el, S, me) {
-      if (me.bet != null) { el.innerHTML = msgBig('💰', 'Apostaste ' + me.bet, 'Se acertares ganhas ' + me.bet + '. Se errares, perdes ' + Math.min(me.bet, me.score) + '.'); return; }
-      el.innerHTML = `<h2 class="center" style="font-weight:900;font-size:22px">Quanto apostas?</h2><p class="center muted small">Tema: <b>${esc(S.cat)}</b> · tens ${me.score} pontos</p><div class="betgrid">${BET_OPTS.map(v => `<button class="btn ${v >= 1000 ? 'btn-red' : v >= 500 ? 'btn-gold' : v >= 250 ? 'btn-purple' : 'btn-blue'}" data-v="${v}">${v}</button>`).join('')}</div><p class="center muted small">Se não apostares, conta como 100.</p>`;
+      if (me.bet != null) { el.innerHTML = msgBig('💰', L('Apostaste ', 'You bet ') + me.bet, L('Se acertares ganhas ' + me.bet + '. Se errares, perdes ' + Math.min(me.bet, me.score) + '.', 'Right: you win ' + me.bet + '. Wrong: you lose ' + Math.min(me.bet, me.score) + '.')); return; }
+      el.innerHTML = `<h2 class="center" style="font-weight:900;font-size:22px">${L('Quanto apostas?', 'How much will you bet?')}</h2><p class="center muted small">${L('Tema', 'Topic')}: <b>${esc(S.cat)}</b> · ${L('tens', 'you have')} ${me.score} ${L('pontos', 'points')}</p><div class="betgrid">${BET_OPTS.map(v => `<button class="btn ${v >= 1000 ? 'btn-red' : v >= 500 ? 'btn-gold' : v >= 250 ? 'btn-purple' : 'btn-blue'}" data-v="${v}">${v}</button>`).join('')}</div><p class="center muted small">${L('Se não apostares, conta como 100.', "If you don't bet, it counts as 100.")}</p>`;
       el.querySelectorAll('[data-v]').forEach(b => b.onclick = () => { send({ t: 'B', v: +b.dataset.v }); vib(25); });
     }
   },
-  READY: { key: S => qKeyOf(S), build(el, S) { el.innerHTML = msgBig(STYLE_DEF[S.style].ic, 'Pergunta ' + S.q.n + ' de ' + S.q.of, S.mode === 'tv' ? 'Olha para o ecrã principal!' : 'Prepara-te!'); } },
+  READY: { key: S => qKeyOf(S), build(el, S) { el.innerHTML = msgBig(STYLE_DEF[S.style].ic, L('Pergunta ', 'Question ') + S.q.n + L(' de ', ' of ') + S.q.of, S.mode === 'tv' ? L('Olha para o ecrã principal!', 'Look at the main screen!') : L('Prepara-te!', 'Get ready!')); } },
   Q: {
     key: (S, me) => qKeyOf(S) + '|' + (me.ans || (G.myAns && G.myAns.k === S.q.k) ? 'a' : '') + '|' + (S.q.masked ? S.q.ans.join('~') : ''),
     build(el, S, me) {
-      if (!me.on) { el.innerHTML = msgBig('📵', 'Desligado', ''); return; }
+      if (!me.on) { el.innerHTML = msgBig('📵', L('Desligado', 'Offline'), ''); return; }
       answerGrid(el, S, me, true);
     }
   },
@@ -3587,30 +4857,30 @@ const PHV = {
     build(el, S, me) {
       const l = me.last, q = S.q;
       const right = q.ans[q.correct];
-      if (!l || l.ok == null) el.innerHTML = msgBig('⏰', 'Não respondeste!', 'A resposta certa era: <b>' + esc(right) + '</b>', S.style === 'aposta' && l && l.pts ? `<div class="pts" style="color:#f87171">${l.pts}</div>` : '');
-      else if (l.ok) el.innerHTML = msgBig(l.first ? '🎯' : '✅', 'Certo!', esc(right), `<div class="pts" style="color:#4ade80">+${l.pts}</div>`);
-      else el.innerHTML = msgBig('❌', 'Errado…', 'A resposta certa era: <b>' + esc(right) + '</b>', l.pts ? `<div class="pts" style="color:#f87171">${l.pts}</div>` : '');
+      if (!l || l.ok == null) el.innerHTML = msgBig('⏰', L('Não respondeste!', "You didn't answer!"), L('A resposta certa era: ', 'The right answer was: ') + '<b>' + esc(right) + '</b>', S.style === 'aposta' && l && l.pts ? `<div class="pts" style="color:#f87171">${l.pts}</div>` : '');
+      else if (l.ok) el.innerHTML = msgBig(l.first ? '🎯' : '✅', L('Certo!', 'Correct!'), esc(right), `<div class="pts" style="color:#4ade80">+${l.pts}</div>`);
+      else el.innerHTML = msgBig('❌', L('Errado…', 'Wrong…'), L('A resposta certa era: ', 'The right answer was: ') + '<b>' + esc(right) + '</b>', l.pts ? `<div class="pts" style="color:#f87171">${l.pts}</div>` : '');
     }
   },
   RANK: {
     key: S => S.round,
     build(el, S, me) {
       const r = ranked(S), pos = r.findIndex(p => p.id === me.id) + 1;
-      el.innerHTML = msgBig(pos === 1 ? '🥇' : pos === 2 ? '🥈' : pos === 3 ? '🥉' : '📊', 'Estás em ' + ordinal(pos) + ' lugar', 'Nesta ronda: ' + (me.roundPts >= 0 ? '+' : '') + me.roundPts + ' pontos') +
-        `<div class="rank" style="margin-top:6px">${r.map((p, i) => `<div class="rrow ${p.id === me.id ? 'first' : ''}" style="font-size:15px;padding:6px 10px"><span class="pos">${i + 1}.º</span>${avHTML(p, 30, 40)}<span class="nm">${esc(p.name)}</span><span class="pts">${p.score}</span></div>`).join('')}</div>`;
+      el.innerHTML = msgBig(pos === 1 ? '🥇' : pos === 2 ? '🥈' : pos === 3 ? '🥉' : '📊', L('Estás em ' + ordinal(pos) + ' lugar', "You're in " + ordinal(pos) + ' place'), L('Nesta ronda: ', 'This round: ') + (me.roundPts >= 0 ? '+' : '') + me.roundPts + L(' pontos', ' points')) +
+        `<div class="rank" style="margin-top:6px">${r.map((p, i) => `<div class="rrow ${p.id === me.id ? 'first' : ''}" style="font-size:15px;padding:6px 10px"><span class="pos">${ordinal(i + 1)}</span>${avHTML(p, 30, 40)}<span class="nm">${esc(p.name)}</span><span class="pts">${p.score}</span></div>`).join('')}</div>`;
       hydrateAv(el);
     }
   },
   FINTRO: {
     key: () => 'f',
     build(el, S, me) {
-      el.innerHTML = msgBig('🔥', 'Grande Final!', 'Os teus pontos viraram tempo. Responde certo para não perderes segundos. Não responder: −5 s. Errar: −10 s.', `<div class="bigtime mt">${me.time}s</div>`);
+      el.innerHTML = msgBig('🔥', L('Grande Final!', 'Grand Final!'), L('Os teus pontos viraram tempo. Responde certo para não perderes segundos. Não responder: −5 s. Errar: −10 s.', 'Your points became time. Answer right to keep your seconds. No answer: −5 s. Wrong: −10 s.'), `<div class="bigtime mt">${me.time}s</div>`);
     }
   },
   FQ: {
     key: (S, me) => qKeyOf(S) + '|' + me.alive + '|' + (me.ans || (G.myAns && G.myAns.k === S.q.k) ? 'a' : ''),
     build(el, S, me) {
-      if (!me.alive) { el.innerHTML = msgBig('💀', 'Eliminado', 'Assiste ao resto da final!'); return; }
+      if (!me.alive) { el.innerHTML = msgBig('💀', L('Eliminado', 'Eliminated'), L('Assiste ao resto da final!', 'Watch the rest of the final!')); return; }
       el.innerHTML = `<div class="bigtime" id="ph-big"></div><div style="flex:1;min-height:0" id="ph-ans"></div>`;
       answerGrid($('ph-ans'), S, me, true);
     },
@@ -3620,11 +4890,12 @@ const PHV = {
     key: S => qKeyOf(S),
     build(el, S, me) {
       const l = me.last, right = S.q.ans[S.q.correct];
-      if (!me.alive && (!l || l.dt)) el.innerHTML = msgBig('💀', 'Ficaste sem tempo!', 'A resposta certa era: <b>' + esc(right) + '</b>');
-      else if (!me.alive) el.innerHTML = msgBig('💀', 'Eliminado', 'Assiste ao resto da final!');
-      else if (!l || l.ok == null) el.innerHTML = msgBig('⏰', '−5 segundos', 'Era: <b>' + esc(right) + '</b>', `<div class="bigtime">${me.time}s</div>`);
-      else if (l.ok) el.innerHTML = msgBig('✅', 'Certo!', esc(right), `<div class="bigtime">${me.time}s</div>`);
-      else el.innerHTML = msgBig('❌', '−10 segundos', 'Era: <b>' + esc(right) + '</b>', `<div class="bigtime low">${me.time}s</div>`);
+      const era = L('Era: ', 'It was: ');
+      if (!me.alive && (!l || l.dt)) el.innerHTML = msgBig('💀', L('Ficaste sem tempo!', 'You ran out of time!'), L('A resposta certa era: ', 'The right answer was: ') + '<b>' + esc(right) + '</b>');
+      else if (!me.alive) el.innerHTML = msgBig('💀', L('Eliminado', 'Eliminated'), L('Assiste ao resto da final!', 'Watch the rest of the final!'));
+      else if (!l || l.ok == null) el.innerHTML = msgBig('⏰', L('−5 segundos', '−5 seconds'), era + '<b>' + esc(right) + '</b>', `<div class="bigtime">${me.time}s</div>`);
+      else if (l.ok) el.innerHTML = msgBig('✅', L('Certo!', 'Correct!'), esc(right), `<div class="bigtime">${me.time}s</div>`);
+      else el.innerHTML = msgBig('❌', L('−10 segundos', '−10 seconds'), era + '<b>' + esc(right) + '</b>', `<div class="bigtime low">${me.time}s</div>`);
     }
   },
   END: {
@@ -3632,9 +4903,9 @@ const PHV = {
     build(el, S, me) {
       const pos = (S.rank || []).indexOf(me.id) + 1;
       const w = S.players[S.winner];
-      el.innerHTML = (S.winner === me.id ? msgBig('🏆', S.fin && S.fin.solo ? 'Sobreviveste!' : 'GANHASTE!', S.fin && S.fin.solo ? 'Aguentaste ' + S.fin.n + ' perguntas.' : 'És o grande sobrevivente!') : msgBig(pos === 2 ? '🥈' : pos === 3 ? '🥉' : '🎮', 'Ficaste em ' + ordinal(pos), 'Venceu ' + esc(w ? w.name : '') + '!')) +
-        `<div class="rank" style="margin-top:6px">${(S.rank || []).map(id => S.players[id]).filter(Boolean).map((p, i) => `<div class="rrow ${i === 0 ? 'first' : ''}" style="font-size:15px;padding:6px 10px"><span class="pos">${i + 1}.º</span>${avHTML(p, 30, 40)}<span class="nm">${esc(p.name)}</span><span class="pts">${p.score}</span></div>`).join('')}</div>` +
-        (G.host ? '<div class="row mt"><button class="btn btn-gold" onclick="UI.hostAct(\'again\')">🔁 Outra vez</button><button class="btn btn-ghost" onclick="UI.newGame()">Novo</button></div>' : '');
+      el.innerHTML = (S.winner === me.id ? msgBig('🏆', S.fin && S.fin.solo ? L('Sobreviveste!', 'You survived!') : L('GANHASTE!', 'YOU WON!'), S.fin && S.fin.solo ? L('Aguentaste ' + S.fin.n + ' perguntas.', 'You lasted ' + S.fin.n + ' questions.') : L('És o grande sobrevivente!', "You're the last survivor!")) : msgBig(pos === 2 ? '🥈' : pos === 3 ? '🥉' : '🎮', L('Ficaste em ' + ordinal(pos), 'You finished ' + ordinal(pos)), L('Venceu ', 'Winner: ') + esc(w ? w.name : '') + '!')) +
+        `<div class="rank" style="margin-top:6px">${(S.rank || []).map(id => S.players[id]).filter(Boolean).map((p, i) => `<div class="rrow ${i === 0 ? 'first' : ''}" style="font-size:15px;padding:6px 10px"><span class="pos">${ordinal(i + 1)}</span>${avHTML(p, 30, 40)}<span class="nm">${esc(p.name)}</span><span class="pts">${p.score}</span></div>`).join('')}</div>` +
+        (G.host ? '<div class="row mt"><button class="btn btn-gold" onclick="UI.hostAct(\'again\')">🔁 ' + L('Outra vez', 'Again') + '</button><button class="btn btn-ghost" onclick="UI.newGame()">' + L('Novo', 'New') + '</button></div>' : '');
       hydrateAv(el);
     }
   }
@@ -3642,12 +4913,12 @@ const PHV = {
 
 UI.share = async () => {
   const url = joinUrl(G.code);
-  const text = 'Entra no meu jogo Saber & Sobreviver! Código: ' + G.code;
+  const text = L('Entra no meu jogo Saber & Sobreviver! Código: ', 'Join my Know & Survive game! Code: ') + G.code;
   try {
-    if (navigator.share) { await navigator.share({ title: 'Saber & Sobreviver', text, url }); return; }
+    if (navigator.share) { await navigator.share({ title: L('Saber & Sobreviver', 'Know & Survive'), text, url }); return; }
     await navigator.clipboard.writeText(url);
-    toast('Link copiado! Envia aos outros jogadores.', true);
-  } catch (e) { toast('Código da sala: ' + G.code, true); }
+    toast(L('Link copiado! Envia aos outros jogadores.', 'Link copied! Send it to the other players.'), true);
+  } catch (e) { toast(L('Código da sala: ', 'Room code: ') + G.code, true); }
 };
 
 /* =========================================================
@@ -3683,7 +4954,7 @@ const OVL = {
     g.fillStyle = 'rgba(180,190,255,.10)';
     for (let i = 0; i < 18; i++) { g.beginPath(); g.ellipse(Math.random() * W, Math.random() * H, 3 + Math.random() * 10, 2 + Math.random() * 5, Math.random() * 3, 0, 7); g.fill(); }
     let taps = 0; const need = 10;
-    $('ink-msg').textContent = (from ? from + ' acertou-te! ' : '') + 'Toca ' + need + ' vezes para limpar!';
+    $('ink-msg').textContent = (from ? from + L(' acertou-te! ', ' got you! ') : '') + L('Toca ' + need + ' vezes para limpar!', 'Tap ' + need + ' times to clean it!');
     this.cur = 'ink';
     cv.onpointerdown = e => {
       e.preventDefault();
@@ -3693,7 +4964,7 @@ const OVL = {
       for (let i = 0; i < 9; i++) { g.beginPath(); g.arc(x + (Math.random() - .5) * r * 1.6, y + (Math.random() - .5) * r * 1.6, r * (.35 + Math.random() * .6), 0, 7); g.fill(); }
       vib(15);
       const left = need - taps;
-      $('ink-msg').textContent = left > 0 ? 'Mais ' + left + (left === 1 ? ' toque!' : ' toques!') : 'Limpo!';
+      $('ink-msg').textContent = left > 0 ? L('Mais ' + left + (left === 1 ? ' toque!' : ' toques!'), left + (left === 1 ? ' more tap!' : ' more taps!')) : L('Limpo!', 'Clean!');
       if (left <= 0) this.done();
     };
   },
@@ -3710,7 +4981,7 @@ const OVL = {
     g.fillStyle = '#D7263D'; g.beginPath(); g.arc(W * .5, H * .42, 22, 0, 7); g.fill();
     g.strokeStyle = '#2F7D32'; g.lineWidth = 4; g.beginPath(); g.moveTo(W * .5, H * .42 - 20); g.quadraticCurveTo(W * .5 + 10, H * .42 - 50, W * .5 + 26, H * .42 - 56); g.stroke();
     const GX = 8, GY = 12, cells = new Set();
-    $('pie-msg').textContent = (from ? from + ' acertou-te! ' : '') + 'Passa o dedo para limpar!';
+    $('pie-msg').textContent = (from ? from + L(' acertou-te! ', ' got you! ') : '') + L('Passa o dedo para limpar!', 'Swipe to wipe it off!');
     this.cur = 'pie';
     let down = false;
     const wipe = e => {
@@ -3724,7 +4995,7 @@ const OVL = {
         if (cx >= 0 && cy >= 0 && cx < GX && cy < GY) cells.add(cx + ',' + cy);
       }
       const pct = cells.size / (GX * GY);
-      $('pie-msg').textContent = pct < .75 ? 'Continua a limpar… ' + Math.round(pct / .75 * 100) + '%' : 'Limpo!';
+      $('pie-msg').textContent = pct < .75 ? L('Continua a limpar… ', 'Keep wiping… ') + Math.round(pct / .75 * 100) + '%' : L('Limpo!', 'Clean!');
       if (pct >= .75) { down = false; this.done(); }
     };
     cv.onpointerdown = e => { down = true; wipe(e); };
