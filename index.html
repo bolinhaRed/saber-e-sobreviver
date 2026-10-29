@@ -359,6 +359,7 @@ body.is-tv #feed { top: 96px; left: auto; right: 2vw; transform: none; align-ite
         <button class="btn btn-green" onclick="UI.goJoin()" data-en="📱 Join a game">📱 Entrar num jogo</button>
         <button class="btn btn-ghost hidden" id="btn-resume" onclick="UI.resume()" data-en="↩️ Back to my last game">↩️ Voltar ao jogo anterior</button>
       </div>
+      <div style="text-align:center;opacity:.35;font-size:11px;margin-top:14px">v2.1</div>
       <p class="muted small center mt" id="home-note"></p>
     </div>
   </section>
@@ -387,7 +388,7 @@ body.is-tv #feed { top: 96px; left: auto; right: 2vw; transform: none; align-ite
       <h2 class="mid-title" style="font-size:26px" data-en="Join the room">Entrar na sala</h2>
       <p class="muted center small mt" data-en="Type the 4-letter code shown on the host's screen.">Escreve o código de 4 letras que aparece no ecrã do anfitrião.</p>
       <div class="stack mt">
-        <input id="join-code" class="inp code" maxlength="4" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" placeholder="ABCD">
+        <input id="join-code" class="inp code" maxlength="4" enterkeyhint="go" onkeydown="if(event.key==='Enter'){event.preventDefault();UI.connect();}" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" placeholder="ABCD">
         <button class="btn btn-green" id="btn-connect" onclick="UI.connect()" data-en="Connect">Ligar</button>
         <button class="btn btn-ghost btn-sm" style="align-self:center" onclick="UI.show('v-home')" data-en="← Back">← Voltar</button>
       </div>
@@ -3149,7 +3150,18 @@ const URLP = new URLSearchParams(location.search);
 const NET_LOCAL = URLP.has('local') || typeof Peer === 'undefined';
 // opcional: servidor PeerJS próprio (?peerhost=...&peerport=...&peerpath=...&peersecure=1)
 const PEER_OPTS = (() => {
-  const o = { debug: 1 };
+  // STUN + vários TURN: em dados móveis (4G/5G) a ligação direta entre telemóveis costuma falhar e precisa de reencaminhamento
+  const o = {
+    debug: 1,
+    config: {
+      iceServers: [
+        { urls: ['stun:stun.l.google.com:19302', 'stun:stun1.l.google.com:19302'] },
+        { urls: ['turn:eu-0.turn.peerjs.com:3478', 'turn:us-0.turn.peerjs.com:3478'], username: 'peerjs', credential: 'peerjsp' },
+        { urls: ['turn:openrelay.metered.ca:80', 'turn:openrelay.metered.ca:443', 'turn:openrelay.metered.ca:443?transport=tcp'], username: 'openrelayproject', credential: 'openrelayproject' }
+      ],
+      sdpSemantics: 'unified-plan'
+    }
+  };
   const h = URLP.get('peerhost');
   if (h) { o.host = h; o.port = +(URLP.get('peerport') || 443); o.path = URLP.get('peerpath') || '/'; o.secure = URLP.get('peersecure') !== '0'; }
   if (URLP.has('noice')) o.config = { iceServers: [] };
@@ -3164,6 +3176,9 @@ class Link {
 }
 
 // ---------- ANFITRIÃO ----------
+let NET_HOST_PEER = null;
+// chamado quando a página volta a ficar visível: volta a registar a sala no servidor de imediato
+function netWake() { const p = NET_HOST_PEER; try { if (p && !p.destroyed && p.disconnected) p.reconnect(); } catch (e) { } }
 function netHost(code, cb) {
   // cb: { ready(), conn(link), error(type, msg) }
   if (NET_LOCAL) {
@@ -3173,16 +3188,16 @@ function netHost(code, cb) {
       const m = e.data;
       if (!m || m.to !== code) return;
       if (m.k === 'hello') {
-        const L = new Link(); L.id = m.from; L.open = true;
-        L.send = d => bc.postMessage({ to: m.from, from: code, k: 'data', d });
-        L.close = () => bc.postMessage({ to: m.from, from: code, k: 'bye' });
-        conns[m.from] = L;
+        const lk = new Link(); lk.id = m.from; lk.open = true;
+        lk.send = d => bc.postMessage({ to: m.from, from: code, k: 'data', d });
+        lk.close = () => bc.postMessage({ to: m.from, from: code, k: 'bye' });
+        conns[m.from] = lk;
         bc.postMessage({ to: m.from, from: code, k: 'ok' });
-        cb.conn(L);
+        cb.conn(lk);
       } else if (m.k === 'data' && conns[m.from]) {
         conns[m.from].emit('data', m.d);
       } else if (m.k === 'bye' && conns[m.from]) {
-        const L = conns[m.from]; L.open = false; delete conns[m.from]; L.emit('close');
+        const lk = conns[m.from]; lk.open = false; delete conns[m.from]; lk.emit('close');
       }
     };
     setTimeout(() => cb.ready(), 50);
@@ -3196,21 +3211,22 @@ function netHost(code, cb) {
     else if (!ready) cb.error(err.type, L('Não foi possível criar a sala (', 'Could not create the room (') + err.type + L('). Verifica a internet.', '). Check your internet.'));
     else console.warn('peer error', err.type);
   });
-  peer.on('disconnected', () => { setTimeout(() => { try { if (!peer.destroyed) peer.reconnect(); } catch (e) { } }, 1500); });
+  NET_HOST_PEER = peer;
+  peer.on('disconnected', () => { setTimeout(() => { try { if (!peer.destroyed && peer.disconnected) peer.reconnect(); } catch (e) { } }, 1500); });
   peer.on('connection', c => {
-    const L = new Link(); L.id = c.peer;
-    L.send = d => { if (c.open) { try { c.send(d); } catch (e) { } } };
-    L.close = () => { try { c.close(); } catch (e) { } };
-    c.on('open', () => { L.open = true; cb.conn(L); });
-    c.on('data', d => L.emit('data', d));
-    c.on('close', () => { if (L.open) { L.open = false; L.emit('close'); } });
+    const lk = new Link(); lk.id = c.peer;
+    lk.send = d => { if (c.open) { try { c.send(d); } catch (e) { } } };
+    lk.close = () => { try { c.close(); } catch (e) { } };
+    c.on('open', () => { lk.open = true; cb.conn(lk); });
+    c.on('data', d => lk.emit('data', d));
+    c.on('close', () => { if (lk.open) { lk.open = false; lk.emit('close'); } });
     c.on('error', () => { });
     // alguns browsers não disparam "close" quando o telemóvel bloqueia
     const iv = setInterval(() => {
-      if (L.open && c.peerConnection && ['failed', 'closed', 'disconnected'].includes(c.peerConnection.iceConnectionState)) {
-        if (c.peerConnection.iceConnectionState !== 'disconnected') { L.open = false; L.emit('close'); clearInterval(iv); }
+      if (lk.open && c.peerConnection && ['failed', 'closed', 'disconnected'].includes(c.peerConnection.iceConnectionState)) {
+        if (c.peerConnection.iceConnectionState !== 'disconnected') { lk.open = false; lk.emit('close'); clearInterval(iv); }
       }
-      if (!L.open) clearInterval(iv);
+      if (!lk.open) clearInterval(iv);
     }, 3000);
   });
   return peer;
@@ -3223,46 +3239,53 @@ function netJoin(code, cb) {
     const bc = new BroadcastChannel('ss-local');
     const me = 'c' + Math.random().toString(36).slice(2, 9);
     let ok = false;
-    const L = new Link();
-    L.send = d => bc.postMessage({ to: code, from: me, k: 'data', d });
-    L.close = () => { bc.postMessage({ to: code, from: me, k: 'bye' }); bc.close(); };
+    const lk = new Link();
+    lk.send = d => bc.postMessage({ to: code, from: me, k: 'data', d });
+    lk.close = () => { bc.postMessage({ to: code, from: me, k: 'bye' }); bc.close(); };
     bc.onmessage = e => {
       const m = e.data;
       if (!m || m.to !== me) return;
-      if (m.k === 'ok') { ok = true; L.open = true; cb.open(L); }
+      if (m.k === 'ok') { ok = true; lk.open = true; cb.open(lk); }
       else if (m.k === 'data') cb.data(m.d);
-      else if (m.k === 'bye') { L.open = false; cb.close(); }
+      else if (m.k === 'bye') { lk.open = false; cb.close(); }
     };
     bc.postMessage({ to: code, from: me, k: 'hello' });
     setTimeout(() => { if (!ok) { bc.close(); cb.fail(L('Sala não encontrada. Confirma o código.', 'Room not found. Check the code.')); } }, 2500);
-    return L;
+    return lk;
   }
-  const L = new Link();
+  const lk = new Link();
   const peer = new Peer(PEER_OPTS);
-  let ok = false, failed = false;
+  let ok = false, failed = false, tries = 0;
+  const t0 = Date.now();
   const fail = msg => { if (ok || failed) return; failed = true; try { peer.destroy(); } catch (e) { } cb.fail(msg); };
-  peer.on('open', () => {
+  const attempt = () => {
+    if (ok || failed) return;
+    tries++;
     const c = peer.connect(NET_PREFIX + code, { reliable: true, serialization: 'json' });
-    L.send = d => { if (c.open) { try { c.send(d); } catch (e) { } } };
-    L.close = () => { try { c.close(); peer.destroy(); } catch (e) { } };
-    c.on('open', () => { ok = true; L.open = true; cb.open(L); });
+    lk.send = d => { if (c.open) { try { c.send(d); } catch (e) { } } };
+    lk.close = () => { try { c.close(); peer.destroy(); } catch (e) { } };
+    c.on('open', () => { if (ok || failed) { try { c.close(); } catch (e) { } return; } ok = true; lk.open = true; cb.open(lk); });
     c.on('data', d => cb.data(d));
-    c.on('close', () => { if (L.open) { L.open = false; cb.close(); } });
+    c.on('close', () => { if (lk.open) { lk.open = false; cb.close(); } });
     c.on('error', () => { });
     const iv = setInterval(() => {
-      if (L.open && c.peerConnection && ['failed', 'closed'].includes(c.peerConnection.iceConnectionState)) {
-        L.open = false; clearInterval(iv); cb.close();
+      if (lk.open && c.peerConnection && ['failed', 'closed'].includes(c.peerConnection.iceConnectionState)) {
+        lk.open = false; clearInterval(iv); cb.close();
       }
-      if (!L.open && ok) clearInterval(iv);
+      if ((!lk.open && ok) || failed) clearInterval(iv);
     }, 3000);
-  });
+  };
+  peer.on('open', attempt);
   peer.on('error', err => {
-    if (err.type === 'peer-unavailable') fail(L('Sala não encontrada. Confirma o código.', 'Room not found. Check the code.'));
+    if (err.type === 'peer-unavailable') {
+      // a sala pode estar só momentaneamente fora (ex.: o telemóvel anfitrião mudou de app): tenta de novo
+      if (Date.now() - t0 < 11000) setTimeout(attempt, 2000);
+      else fail(L('Sala não encontrada. Confirma o código e que o aparelho que criou a sala tem o jogo aberto no ecrã.', 'Room not found. Check the code and that the device that created the room has the game open on screen.'));
+    }
     else if (!ok) fail(L('Erro de ligação (', 'Connection error (') + err.type + L('). Verifica a internet.', '). Check your internet.'));
-    else if (['network', 'disconnected', 'server-error', 'socket-error', 'socket-closed'].includes(err.type)) { /* a ligação direta pode continuar */ }
   });
-  setTimeout(() => fail(L('A ligação demorou demasiado. Tenta outra vez.', 'The connection took too long. Try again.')), 15000);
-  return L;
+  setTimeout(() => fail(L('A ligação demorou demasiado. Confirma que o aparelho que criou a sala tem o jogo aberto no ecrã e tenta outra vez.', 'The connection took too long. Make sure the device that created the room has the game open on screen, then try again.')), 20000);
+  return lk;
 }
 
 
@@ -3926,7 +3949,7 @@ let toastTm;
 function toast(msg, info) {
   const t = $('toast');
   t.textContent = msg; t.className = info ? 'info' : '';
-  clearTimeout(toastTm); toastTm = setTimeout(() => t.classList.add('hidden'), 3800);
+  clearTimeout(toastTm); toastTm = setTimeout(() => t.classList.add('hidden'), Math.max(3800, msg.length * 75));
 }
 function patch(el, key, build) {
   if (G.keys[el.id] === key) return false;
@@ -4061,6 +4084,7 @@ async function keepAwake() { try { if ('wakeLock' in navigator && !wakeLock) { w
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible') {
     if (G.role) keepAwake();
+    if (G.host) netWake();
     if (G.role === 'ph' && !G.host && G.code && G.token && (!G.link || !G.link.open)) reconnectNow();
   }
 });
