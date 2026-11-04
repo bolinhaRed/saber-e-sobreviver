@@ -359,7 +359,7 @@ body.is-tv #feed { top: 96px; left: auto; right: 2vw; transform: none; align-ite
         <button class="btn btn-green" onclick="UI.goJoin()" data-en="📱 Join a game">📱 Entrar num jogo</button>
         <button class="btn btn-ghost hidden" id="btn-resume" onclick="UI.resume()" data-en="↩️ Back to my last game">↩️ Voltar ao jogo anterior</button>
       </div>
-      <div style="text-align:center;opacity:.35;font-size:11px;margin-top:14px">v2.1</div>
+      <div style="text-align:center;opacity:.35;font-size:11px;margin-top:14px">v2.2</div>
       <p class="muted small center mt" id="home-note"></p>
     </div>
   </section>
@@ -3143,11 +3143,17 @@ function mountActor(el, P, anim, acc) {
 
 
 /* =========================================================
-   REDE: PeerJS (WebRTC) ou modo local (várias abas, para testes)
+   REDE
+   Dois caminhos ao mesmo tempo, ganha o primeiro que funcionar:
+   1) PeerJS (WebRTC): ligação direta entre aparelhos, mais rápida.
+   2) Relé MQTT por WebSocket (servidores públicos): funciona em qualquer rede,
+      mesmo quando o WebRTC falha (iPhones, dados móveis, Wi-Fi com restrições).
+   Modo local (?local=1): várias abas no mesmo browser, para testes.
    ========================================================= */
 const NET_PREFIX = 'saber-sobreviver-v2-';
 const URLP = new URLSearchParams(location.search);
-const NET_LOCAL = URLP.has('local') || typeof Peer === 'undefined';
+const NET_LOCAL = URLP.has('local');
+const HAS_PEER = () => typeof Peer !== 'undefined' && !URLP.has('onlyrelay');
 // opcional: servidor PeerJS próprio (?peerhost=...&peerport=...&peerpath=...&peersecure=1)
 const PEER_OPTS = (() => {
   // STUN + vários TURN: em dados móveis (4G/5G) a ligação direta entre telemóveis costuma falhar e precisa de reencaminhamento
@@ -3167,18 +3173,86 @@ const PEER_OPTS = (() => {
   if (URLP.has('noice')) o.config = { iceServers: [] };
   return o;
 })();
-const PEER_PARAMS = ['peerhost', 'peerport', 'peerpath', 'peersecure', 'noice'].filter(k => URLP.has(k)).map(k => '&' + k + '=' + encodeURIComponent(URLP.get(k))).join('');
+// servidores do relé (?relay=url1,url2 para usar outros; ?norelay para desligar)
+const RELAY_URLS = URLP.has('norelay') ? [] : (URLP.get('relay') ? URLP.get('relay').split(',') : [
+  'wss://broker.emqx.io:8084/mqtt',
+  'wss://broker.hivemq.com:8884/mqtt',
+  'wss://test.mosquitto.org:8081/mqtt'
+]);
+const RELAY_TOPIC = 'saber-sobreviver/v2/';
+const PEER_PARAMS = ['peerhost', 'peerport', 'peerpath', 'peersecure', 'noice', 'relay', 'norelay', 'onlyrelay'].filter(k => URLP.has(k)).map(k => '&' + k + '=' + encodeURIComponent(URLP.get(k))).join('');
 
 class Link {
   constructor() { this.h = {}; this.open = false; }
   on(ev, fn) { this.h[ev] = fn; return this; }
   emit(ev, ...a) { if (this.h[ev]) this.h[ev](...a); }
 }
+const rndId = () => Math.random().toString(36).slice(2, 10);
 
-// ---------- ANFITRIÃO ----------
-let NET_HOST_PEER = null;
-// chamado quando a página volta a ficar visível: volta a registar a sala no servidor de imediato
-function netWake() { const p = NET_HOST_PEER; try { if (p && !p.destroyed && p.disconnected) p.reconnect(); } catch (e) { } }
+/* ---------- cliente MQTT 3.1.1 mínimo (só QoS 0) ---------- */
+class MiniMqtt {
+  constructor(url, onMsg, onDown) {
+    this.url = url; this.onMsg = onMsg; this.onDown = onDown;
+    this.ok = false; this.dead = false; this.buf = new Uint8Array(0); this.pid = 1; this.subs = [];
+  }
+  connect(timeout) {
+    return new Promise(res => {
+      let done = false;
+      const fin = v => { if (!done) { done = true; clearTimeout(tm); res(v); } };
+      const tm = setTimeout(() => { fin(false); this.close(); }, timeout || 6000);
+      let ws;
+      try { ws = new WebSocket(this.url, 'mqtt'); } catch (e) { fin(false); return; }
+      this.ws = ws; ws.binaryType = 'arraybuffer';
+      ws.onopen = () => {
+        const cid = 'ss' + rndId() + rndId();
+        this._send(0x10, [this._str('MQTT'), [4, 0x02, 0, 30], this._str(cid)]);
+      };
+      ws.onmessage = e => this._feed(new Uint8Array(e.data), fin);
+      ws.onerror = () => fin(false);
+      ws.onclose = () => { fin(false); const was = this.ok; this.ok = false; clearInterval(this.ping); if (was && !this.dead) this.onDown && this.onDown(); };
+    });
+  }
+  _str(s) { const b = new TextEncoder().encode(s); return [b.length >> 8, b.length & 255, ...b]; }
+  _send(h, parts) {
+    const body = [].concat(...parts.map(p => Array.from(p)));
+    let n = body.length; const len = [];
+    do { let d = n % 128; n = Math.floor(n / 128); if (n > 0) d |= 128; len.push(d); } while (n > 0);
+    try { if (this.ws && this.ws.readyState === 1) this.ws.send(new Uint8Array([h, ...len, ...body])); } catch (e) { }
+  }
+  _feed(chunk, fin) {
+    const b = new Uint8Array(this.buf.length + chunk.length); b.set(this.buf); b.set(chunk, this.buf.length); this.buf = b;
+    for (;;) {
+      const B = this.buf; if (B.length < 2) return;
+      let mul = 1, len = 0, i = 1, d;
+      do { if (i >= B.length) return; d = B[i++]; len += (d & 127) * mul; mul *= 128; } while (d & 128);
+      if (B.length < i + len) return;
+      const type = B[0] >> 4, body = B.subarray(i, i + len);
+      this.buf = B.slice(i + len);
+      if (type === 2) { // CONNACK
+        if (body[1] === 0) { this.ok = true; this.ping = setInterval(() => this._send(0xC0, []), 20000); fin(true); } else fin(false);
+      } else if (type === 3) { // PUBLISH
+        const tl = (body[0] << 8) | body[1];
+        const topic = new TextDecoder().decode(body.subarray(2, 2 + tl));
+        let p = 2 + tl; if ((B[0] >> 1) & 3) p += 2;
+        let msg = null; try { msg = JSON.parse(new TextDecoder().decode(body.subarray(p))); } catch (e) { }
+        if (msg) this.onMsg(topic, msg);
+      }
+    }
+  }
+  sub(topic) { const id = this.pid++ & 0xffff || 1; this._send(0x82, [[id >> 8, id & 255], this._str(topic), [0]]); }
+  pub(topic, obj) { this._send(0x30, [this._str(topic), new TextEncoder().encode(JSON.stringify(obj))]); }
+  close() { this.dead = true; clearInterval(this.ping); try { this.ws && this.ws.close(); } catch (e) { } }
+}
+
+/* =========================================================
+   ANFITRIÃO
+   ========================================================= */
+let NET_HOST_PEER = null, NET_HOST_RELAY = null;
+// chamado quando a página volta a ficar visível: volta a registar a sala de imediato
+function netWake() {
+  const p = NET_HOST_PEER; try { if (p && !p.destroyed && p.disconnected) p.reconnect(); } catch (e) { }
+  if (NET_HOST_RELAY) NET_HOST_RELAY.wake();
+}
 function netHost(code, cb) {
   // cb: { ready(), conn(link), error(type, msg) }
   if (NET_LOCAL) {
@@ -3203,36 +3277,104 @@ function netHost(code, cb) {
     setTimeout(() => cb.ready(), 50);
     return { destroy() { bc.close(); } };
   }
-  const peer = new Peer(NET_PREFIX + code, PEER_OPTS);
-  let ready = false;
-  peer.on('open', () => { ready = true; cb.ready(); });
-  peer.on('error', err => {
-    if (err.type === 'unavailable-id') cb.error('taken');
-    else if (!ready) cb.error(err.type, L('Não foi possível criar a sala (', 'Could not create the room (') + err.type + L('). Verifica a internet.', '). Check your internet.'));
-    else console.warn('peer error', err.type);
+  let ready = false, rtcDown = !HAS_PEER(), relayDown = !RELAY_URLS.length, failMsg = '';
+  const isReady = () => { if (!ready) { ready = true; cb.ready(); } };
+  const maybeFail = () => {
+    if (!ready && rtcDown && relayDown) cb.error('net', failMsg || L('Não foi possível criar a sala. Verifica a internet.', 'Could not create the room. Check your internet.'));
+  };
+  // --- WebRTC ---
+  let peer = null;
+  if (!rtcDown) {
+    peer = new Peer(NET_PREFIX + code, PEER_OPTS);
+    NET_HOST_PEER = peer;
+    peer.on('open', isReady);
+    peer.on('error', err => {
+      if (err.type === 'unavailable-id' && !ready) { cancelled = true; relay.stop(); cb.error('taken'); return; }
+      if (!peer.open && !ready) { rtcDown = true; failMsg = L('Não foi possível criar a sala (', 'Could not create the room (') + err.type + L('). Verifica a internet.', '). Check your internet.'); maybeFail(); }
+      else console.warn('peer error', err.type);
+    });
+    peer.on('disconnected', () => { setTimeout(() => { try { if (!peer.destroyed && peer.disconnected) peer.reconnect(); } catch (e) { } }, 1500); });
+    peer.on('connection', c => {
+      const lk = new Link(); lk.id = c.peer; lk.via = 'rtc';
+      lk.send = d => { if (c.open) { try { c.send(d); } catch (e) { } } };
+      lk.close = () => { try { c.close(); } catch (e) { } };
+      c.on('open', () => { lk.open = true; cb.conn(lk); });
+      c.on('data', d => lk.emit('data', d));
+      c.on('close', () => { if (lk.open) { lk.open = false; lk.emit('close'); } });
+      c.on('error', () => { });
+      // alguns browsers não disparam "close" quando o telemóvel bloqueia
+      const iv = setInterval(() => {
+        if (lk.open && c.peerConnection && ['failed', 'closed'].includes(c.peerConnection.iceConnectionState)) { lk.open = false; lk.emit('close'); }
+        if (!lk.open) clearInterval(iv);
+      }, 3000);
+    });
+  }
+  // --- relé ---
+  let cancelled = false;
+  const relay = relayHost(code, {
+    // se o PeerJS ainda não respondeu, espera um pouco: assim um código repetido é detetado antes de abrir a sala
+    ready: () => { if (cancelled) return; if (rtcDown || (peer && peer.open)) isReady(); else setTimeout(() => { if (!cancelled) isReady(); }, 3000); },
+    down: () => { relayDown = true; maybeFail(); },
+    conn: lk => cb.conn(lk)
   });
-  NET_HOST_PEER = peer;
-  peer.on('disconnected', () => { setTimeout(() => { try { if (!peer.destroyed && peer.disconnected) peer.reconnect(); } catch (e) { } }, 1500); });
-  peer.on('connection', c => {
-    const lk = new Link(); lk.id = c.peer;
-    lk.send = d => { if (c.open) { try { c.send(d); } catch (e) { } } };
-    lk.close = () => { try { c.close(); } catch (e) { } };
-    c.on('open', () => { lk.open = true; cb.conn(lk); });
-    c.on('data', d => lk.emit('data', d));
-    c.on('close', () => { if (lk.open) { lk.open = false; lk.emit('close'); } });
-    c.on('error', () => { });
-    // alguns browsers não disparam "close" quando o telemóvel bloqueia
-    const iv = setInterval(() => {
-      if (lk.open && c.peerConnection && ['failed', 'closed', 'disconnected'].includes(c.peerConnection.iceConnectionState)) {
-        if (c.peerConnection.iceConnectionState !== 'disconnected') { lk.open = false; lk.emit('close'); clearInterval(iv); }
-      }
-      if (!lk.open) clearInterval(iv);
-    }, 3000);
-  });
-  return peer;
+  NET_HOST_RELAY = relay;
+  return { destroy() { cancelled = true; try { peer && peer.destroy(); } catch (e) { } relay.stop(); } };
 }
 
-// ---------- CLIENTE ----------
+function relayHost(code, cb) {
+  const topicIn = RELAY_TOPIC + code + '/h';
+  const conns = {}; // id -> { lk, m (broker), seen }
+  const brokers = [];
+  let stopped = false, anyUp = false, pending = RELAY_URLS.length;
+  if (!pending) return { stop() { }, wake() { } };
+  const onMsg = m => (topic, msg) => {
+    if (!msg || !msg.from || typeof msg.from !== 'string') return;
+    const id = msg.from, out = RELAY_TOPIC + code + '/c/' + id;
+    let c = conns[id];
+    if (msg.k === 'hello') {
+      if (c && c.lk.open) { c.m = m; m.pub(out, { k: 'ok' }); return; }
+      const lk = new Link(); lk.id = id; lk.open = true; lk.via = 'relay';
+      c = conns[id] = { lk, m, seen: Date.now() };
+      lk.send = d => { if (!lk.open) return; const mm = c.m.ok ? c.m : (brokers.find(b => b.url === c.m.url && b.ok) || c.m); mm.pub(out, { k: 'data', d }); };
+      lk.close = () => { if (lk.open) { c.m.pub(out, { k: 'bye' }); lk.open = false; delete conns[id]; } };
+      m.pub(out, { k: 'ok' });
+      cb.conn(lk);
+      return;
+    }
+    if (!c) { if (msg.k !== 'bye') m.pub(out, { k: 'bye' }); return; } // ligação antiga: o cliente volta a dizer olá
+    c.seen = Date.now(); c.m = m;
+    if (msg.k === 'data') c.lk.emit('data', msg.d);
+    else if (msg.k === 'ping') m.pub(out, { k: 'pong' });
+    else if (msg.k === 'bye') { c.lk.open = false; delete conns[id]; c.lk.emit('close'); }
+  };
+  const start = (url, first) => {
+    const m = new MiniMqtt(url, null, () => { if (!stopped) setTimeout(() => start(url, false), 1500); });
+    m.onMsg = onMsg(m);
+    const i = brokers.findIndex(b => b.url === url); if (i >= 0) brokers[i] = m; else brokers.push(m);
+    m.connect(7000).then(ok => {
+      if (stopped) { m.close(); return; }
+      if (ok) { m.sub(topicIn); if (!anyUp) { anyUp = true; cb.ready(); } }
+      else if (first) { if (--pending === 0 && !anyUp) cb.down(); setTimeout(() => !stopped && start(url, false), 5000); }
+      else setTimeout(() => !stopped && start(url, false), 4000);
+    });
+  };
+  RELAY_URLS.forEach(u => start(u, true));
+  // quem deixou de dar sinal (telemóvel bloqueado, saiu da página) é dado como desligado
+  const iv = setInterval(() => {
+    for (const id in conns) {
+      const c = conns[id];
+      if (Date.now() - c.seen > 15000) { c.lk.open = false; delete conns[id]; c.lk.emit('close'); }
+    }
+  }, 3000);
+  return {
+    stop() { stopped = true; clearInterval(iv); brokers.forEach(b => b.close()); },
+    wake() { brokers.forEach(b => { if (b.ok) b._send(0xC0, []); }); }
+  };
+}
+
+/* =========================================================
+   CLIENTE
+   ========================================================= */
 function netJoin(code, cb) {
   // cb: { open(link), data(d), close(), fail(msg) }
   if (NET_LOCAL) {
@@ -3254,38 +3396,122 @@ function netJoin(code, cb) {
     return lk;
   }
   const lk = new Link();
-  const peer = new Peer(PEER_OPTS);
-  let ok = false, failed = false, tries = 0;
+  let won = null, failed = false, notFound = false;
+  const subs = [];
+  const giveUp = msg => {
+    if (won || failed) return; failed = true;
+    subs.forEach(s => s.cancel());
+    cb.fail(msg);
+  };
+  const checkAllFailed = () => {
+    if (!won && !failed && subs.length === (useRtc ? 1 : 0) + (RELAY_URLS.length ? 1 : 0) && subs.every(s => s.dead)) {
+      giveUp(notFound
+        ? L('Sala não encontrada. Confirma o código e que o aparelho que criou a sala tem o jogo aberto no ecrã.', 'Room not found. Check the code and that the device that created the room has the game open on screen.')
+        : L('Não foi possível ligar. Verifica a internet e confirma que o aparelho que criou a sala tem o jogo aberto no ecrã.', 'Could not connect. Check your internet and make sure the device that created the room has the game open on screen.'));
+    }
+  };
+  const h = sub => ({
+    open: api => {
+      if (won || failed) { api.close(); return; }
+      won = sub; lk.via = sub.kind;
+      subs.forEach(s => s !== sub && s.cancel());
+      lk.send = api.send; lk.close = api.close; lk.open = true;
+      cb.open(lk);
+    },
+    data: d => { if (won === sub) cb.data(d); },
+    close: () => { if (won === sub && lk.open) { lk.open = false; cb.close(); } },
+    fail: nf => { sub.dead = true; if (nf) notFound = true; checkAllFailed(); }
+  });
+  const useRtc = HAS_PEER();
+  if (useRtc) { const s = { kind: 'rtc' }; subs.push(s); Object.assign(s, rtcJoin(code, h(s))); }
+  if (RELAY_URLS.length) {
+    // o relé arranca logo se não houver WebRTC; senão dá-lhe uns segundos de avanço
+    setTimeout(() => {
+      if (won || failed) return;
+      const s = { kind: 'relay' }; subs.push(s); Object.assign(s, relayJoin(code, h(s)));
+    }, useRtc ? 2500 : 0);
+  }
+  if (!subs.length && !RELAY_URLS.length) setTimeout(() => giveUp(L('Não foi possível ligar.', 'Could not connect.')), 0);
+  setTimeout(() => giveUp(L('A ligação demorou demasiado. Confirma que o aparelho que criou a sala tem o jogo aberto no ecrã e tenta outra vez.', 'The connection took too long. Make sure the device that created the room has the game open on screen, then try again.')), 25000);
+  return lk;
+}
+
+function rtcJoin(code, h) {
+  let peer;
+  try { peer = new Peer(PEER_OPTS); } catch (e) { setTimeout(() => h.fail(false), 0); return { cancel() { } }; }
+  let ok = false, dead = false;
   const t0 = Date.now();
-  const fail = msg => { if (ok || failed) return; failed = true; try { peer.destroy(); } catch (e) { } cb.fail(msg); };
+  const die = nf => { if (ok || dead) return; dead = true; try { peer.destroy(); } catch (e) { } h.fail(nf); };
   const attempt = () => {
-    if (ok || failed) return;
-    tries++;
+    if (ok || dead) return;
     const c = peer.connect(NET_PREFIX + code, { reliable: true, serialization: 'json' });
-    lk.send = d => { if (c.open) { try { c.send(d); } catch (e) { } } };
-    lk.close = () => { try { c.close(); peer.destroy(); } catch (e) { } };
-    c.on('open', () => { if (ok || failed) { try { c.close(); } catch (e) { } return; } ok = true; lk.open = true; cb.open(lk); });
-    c.on('data', d => cb.data(d));
-    c.on('close', () => { if (lk.open) { lk.open = false; cb.close(); } });
+    c.on('open', () => {
+      if (ok || dead) { try { c.close(); } catch (e) { } return; }
+      ok = true;
+      h.open({ send: d => { if (c.open) { try { c.send(d); } catch (e) { } } }, close: () => { try { c.close(); peer.destroy(); } catch (e) { } } });
+    });
+    c.on('data', d => h.data(d));
+    c.on('close', () => { if (ok) h.close(); });
     c.on('error', () => { });
     const iv = setInterval(() => {
-      if (lk.open && c.peerConnection && ['failed', 'closed'].includes(c.peerConnection.iceConnectionState)) {
-        lk.open = false; clearInterval(iv); cb.close();
-      }
-      if ((!lk.open && ok) || failed) clearInterval(iv);
+      if (ok && c.peerConnection && ['failed', 'closed'].includes(c.peerConnection.iceConnectionState)) { clearInterval(iv); h.close(); }
+      if (dead) clearInterval(iv);
     }, 3000);
   };
   peer.on('open', attempt);
   peer.on('error', err => {
-    if (err.type === 'peer-unavailable') {
-      // a sala pode estar só momentaneamente fora (ex.: o telemóvel anfitrião mudou de app): tenta de novo
-      if (Date.now() - t0 < 11000) setTimeout(attempt, 2000);
-      else fail(L('Sala não encontrada. Confirma o código e que o aparelho que criou a sala tem o jogo aberto no ecrã.', 'Room not found. Check the code and that the device that created the room has the game open on screen.'));
-    }
-    else if (!ok) fail(L('Erro de ligação (', 'Connection error (') + err.type + L('). Verifica a internet.', '). Check your internet.'));
+    if (ok) return;
+    // a sala pode estar só momentaneamente fora (ex.: o telemóvel anfitrião mudou de app): tenta de novo
+    if (err.type === 'peer-unavailable') { if (Date.now() - t0 < 12000) setTimeout(attempt, 2000); else die(true); }
+    else die(false);
   });
-  setTimeout(() => fail(L('A ligação demorou demasiado. Confirma que o aparelho que criou a sala tem o jogo aberto no ecrã e tenta outra vez.', 'The connection took too long. Make sure the device that created the room has the game open on screen, then try again.')), 20000);
-  return lk;
+  setTimeout(() => die(false), 16000);
+  return { cancel() { if (!ok) { dead = true; try { peer.destroy(); } catch (e) { } } } };
+}
+
+function relayJoin(code, h) {
+  const me = rndId() + rndId();
+  const toHost = RELAY_TOPIC + code + '/h', mine = RELAY_TOPIC + code + '/c/' + me;
+  let ok = false, dead = false, m = null, idx = 0, lastPong = 0, iv = null, helloTm = null, anyUp = false;
+  const t0 = Date.now();
+  const finish = nf => { if (dead) return; dead = true; clearInterval(iv); clearTimeout(helloTm); if (m) m.close(); if (!ok) h.fail(nf); };
+  const lost = () => { if (!ok || dead) return; dead = true; clearInterval(iv); if (m) m.close(); h.close(); };
+  const onMsg = (topic, msg) => {
+    if (topic !== mine || dead) return;
+    lastPong = Date.now();
+    if (msg.k === 'ok' && !ok) {
+      ok = true; clearTimeout(helloTm);
+      iv = setInterval(() => {
+        if (Date.now() - lastPong > 16000) lost();
+        else m.pub(toHost, { from: me, k: 'ping' });
+      }, 5000);
+      h.open({ send: d => { if (!dead) m.pub(toHost, { from: me, k: 'data', d }); }, close: () => { if (!dead) { m.pub(toHost, { from: me, k: 'bye' }); setTimeout(() => finish(), 300); } } });
+    } else if (msg.k === 'data') h.data(msg.d);
+    else if (msg.k === 'bye') lost();
+  };
+  const tryNext = () => {
+    if (dead || ok) return;
+    if (idx >= RELAY_URLS.length) {
+      // nenhum servidor respondeu com a sala: volta ao primeiro enquanto houver tempo
+      if (Date.now() - t0 < 14000) { idx = 0; setTimeout(tryNext, 1500); return; }
+      finish(anyUp); return;
+    }
+    const url = RELAY_URLS[idx++];
+    if (m) m.close();
+    m = new MiniMqtt(url, onMsg, () => lost());
+    const mm = m;
+    mm.connect(5000).then(up => {
+      if (dead || ok || mm !== m) return;
+      if (!up) { tryNext(); return; }
+      anyUp = true;
+      mm.sub(mine);
+      // pequeno atraso para a subscrição ficar ativa antes de dizer olá
+      setTimeout(() => { if (!dead && !ok && mm === m) { mm.pub(toHost, { from: me, k: 'hello' }); } }, 300);
+      helloTm = setTimeout(() => { if (!ok && mm === m) { mm.pub(toHost, { from: me, k: 'hello' }); helloTm = setTimeout(() => { if (!ok && mm === m) tryNext(); }, 2500); } }, 2500);
+    });
+  };
+  tryNext();
+  return { cancel() { if (!ok) finish(); } };
 }
 
 
@@ -3378,7 +3604,7 @@ function engHeartbeat() {
     const t = ENG.seen[p.id];
     if (t && now - t > 12000) {
       p.on = false;
-      if (S.phase !== 'LOBBY') feed('off', p.id);
+      if (S.phase !== 'LOBBY') feed('off', p.id); else engLobbyDrop(p.id);
       engPush(); engCheckAll();
     }
   }
@@ -3431,7 +3657,7 @@ function engOnConn(L) {
       const p = ENG.S.players[pid];
       if (p) {
         p.on = false;
-        if (ENG.S.phase !== 'LOBBY') feed('off', pid);
+        if (ENG.S.phase !== 'LOBBY') feed('off', pid); else engLobbyDrop(pid);
         engPush(); engCheckAll();
       }
     }
@@ -3544,6 +3770,12 @@ function engAction(a, d) {
   else if (a === 'skip') engHurry(0);
   else if (a === 'kick') engKick(d.pid);
   else if (a === 'again' && S.phase === 'END') engLobby();
+}
+
+// na sala de espera, quem se desliga e não volta liberta o lugar (senão "fantasmas" enchiam a sala);
+// se voltar depois, entra de novo com o mesmo nome e boneco
+function engLobbyDrop(pid) {
+  setTimeout(() => { const S = ENG.S, p = S && S.players[pid]; if (S && S.phase === 'LOBBY' && p && !p.on) engKick(pid, true); }, 10000);
 }
 
 function engKick(pid, self) {
