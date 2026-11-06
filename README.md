@@ -3,7 +3,7 @@
 🇵🇹 Português · 🇬🇧 [English below](#-english)
 
 **Um quiz multijogador para jogar em família ou com amigos, no estilo *Buzz!*.**
-Até 6 jogadores, cada um com o seu telemóvel como comando. Não é preciso instalar nada: basta abrir um link no browser.
+Até 8 jogadores, cada um com o seu telemóvel como comando. Não é preciso instalar nada: basta abrir um link no browser.
 
 ## ▶️ [JOGAR AGORA](https://bolinhared.github.io/saber-e-sobreviver/)
 
@@ -128,7 +128,7 @@ Tem música de fundo e efeitos sonoros no ecrã principal. Os botões 🎵 e �
 
 ## 🇬🇧 English
 
-**A multiplayer party quiz in the style of *Buzz!*, for family and friends.** Up to 6 players, each using their phone as a controller. Nothing to install: just open a link in the browser.
+**A multiplayer party quiz in the style of *Buzz!*, for family and friends.** Up to 8 players, each using their phone as a controller. Nothing to install: just open a link in the browser.
 
 ### ▶️ [PLAY NOW](https://bolinhared.github.io/saber-e-sobreviver/?lang=en)
 

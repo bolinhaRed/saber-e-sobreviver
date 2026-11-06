@@ -336,6 +336,22 @@ body.is-tv #feed { top: 96px; left: auto; right: 2vw; transform: none; align-ite
   .ph-stage .qemo { font-size: 36px; }
 }
 
+/* 7–8 jogadores: tudo um pouco mais compacto */
+.rank:has(.rrow:nth-child(7)) { gap: .6vh; }
+.rank:has(.rrow:nth-child(7)) .rrow { padding: .6vh 1.4vw; font-size: clamp(14px, 1.6vw, 26px); }
+.strip:has(.pcard:nth-child(7)) { gap: .6vw; }
+.strip:has(.pcard:nth-child(7)) .pcard .act { width: clamp(56px, min(6.5vw, 13vh), 110px); }
+.plist:has(.pi:nth-child(7)) { grid-template-columns: repeat(4, 1fr); }
+.rank:has(.rrow:nth-child(7)) .rrow canvas { width: clamp(26px, 2.6vw, 44px); }
+.podium .rank:has(.rrow:nth-child(7)) { gap: .4vh; margin-top: 0; }
+.podium .rank:has(.rrow:nth-child(7)) .rrow { padding: .35vh 1.2vw; font-size: clamp(12px, 1.3vw, 21px); }
+.podium .rank:has(.rrow:nth-child(7)) .rrow canvas { width: clamp(22px, 2.1vw, 36px); }
+.rank:has(.rrow:nth-child(7)) { margin-top: 1vh; gap: .45vh; }
+.rank:has(.rrow:nth-child(7)) .rrow { padding: .25vh 1.4vw; font-size: clamp(13px, 1.4vw, 23px); }
+.rank:has(.rrow:nth-child(7)) .rrow canvas { width: clamp(20px, 1.7vw, 34px); }
+.fade:has(.rank .rrow:nth-child(7)) > .mid-title, .fade:has(.rank .rrow:nth-child(7)) > .big-title { font-size: clamp(22px, 3vw, 46px); }
+.fade:has(.rank .rrow:nth-child(7)) > .desc { font-size: clamp(12px, 1.2vw, 19px); margin: .5vh auto; }
+
 </style>
 </head>
 <body>
@@ -359,7 +375,7 @@ body.is-tv #feed { top: 96px; left: auto; right: 2vw; transform: none; align-ite
         <button class="btn btn-green" onclick="UI.goJoin()" data-en="📱 Join a game">📱 Entrar num jogo</button>
         <button class="btn btn-ghost hidden" id="btn-resume" onclick="UI.resume()" data-en="↩️ Back to my last game">↩️ Voltar ao jogo anterior</button>
       </div>
-      <div style="text-align:center;opacity:.35;font-size:11px;margin-top:14px">v2.2</div>
+      <div style="text-align:center;opacity:.35;font-size:11px;margin-top:14px">v2.3</div>
       <p class="muted small center mt" id="home-note"></p>
     </div>
   </section>
@@ -3539,7 +3555,8 @@ const STYLE_EN = {
 };
 const styleName = id => (typeof LANG !== 'undefined' && LANG === 'en' && STYLE_EN[id] ? STYLE_EN[id][0] : STYLE_DEF[id].nome);
 const styleDesc = id => (typeof LANG !== 'undefined' && LANG === 'en' && STYLE_EN[id] ? STYLE_EN[id][1] : STYLE_DEF[id].desc);
-const RANK_PTS = [1000, 800, 650, 500, 400, 300];
+const MAX_PLAYERS = 8;
+const RANK_PTS = [1000, 850, 700, 600, 500, 400, 350, 300];
 const BET_OPTS = [100, 250, 500, 1000];
 const FINAL_MIN = 45, FINAL_MAX = 70;
 // ?speed=4 acelera o jogo (só para testes)
@@ -3678,7 +3695,7 @@ function engJoin(L, d) {
     return;
   }
   if (S.phase !== 'LOBBY') { L.send({ t: 'E', code: 'started' }); return; }
-  if (S.order.length >= 6) { L.send({ t: 'E', code: 'full' }); return; }
+  if (S.order.length >= MAX_PLAYERS) { L.send({ t: 'E', code: 'full' }); return; }
   pid = 'p' + (ENG.nextPid++);
   const token = d.token || rid(12);
   ENG.tokens[token] = pid;
@@ -4148,7 +4165,7 @@ const PHASE_TITLE = () => ({
 });
 const ANIMAL_EN = { gato: 'Cat', pinguim: 'Penguin', coelho: 'Rabbit', raposa: 'Fox', urso: 'Bear', macaco: 'Monkey', sapo: 'Frog', passaro: 'Bird' };
 const ACC_EN = { nada: 'None', oculos: 'Sunglasses', palha: 'Straw hat', laco: 'Bow', pirata: 'Pirate hat', coroa: 'Crown', capacete: 'Hard hat', monoculo: 'Monocle', cachecol: 'Scarf' };
-const ERR_TXT = () => ({ started: L('O jogo já começou. Espera pelo próximo!', 'The game has already started. Wait for the next one!'), full: L('A sala está cheia (máximo 6 jogadores).', 'The room is full (6 players max).'), kick: L('Foste removido da sala.', 'You were removed from the room.') });
+const ERR_TXT = () => ({ started: L('O jogo já começou. Espera pelo próximo!', 'The game has already started. Wait for the next one!'), full: L('A sala está cheia (máximo 8 jogadores).', 'The room is full (8 players max).'), kick: L('Foste removido da sala.', 'You were removed from the room.') });
 function feedText(it, S) {
   const nm = id => (id && S.players[id] ? S.players[id].name : '?');
   const a = nm(it.a), b = nm(it.b), n = it.n;
@@ -4803,7 +4820,7 @@ const TVV = {
         <div class="glass panel">
           <div class="lbl">${L('Entra com o telemóvel', 'Join with your phone')}</div>
           <div class="join-row"><div class="qr" id="tv-qr"></div><div><div class="code-big">${esc(S.code)}</div><div class="url">${esc(url)}</div></div></div>
-          <p class="desc" style="font-size:clamp(14px,1.4vw,22px);margin-top:2vh">${L('Abre o link no telemóvel (ou lê o código QR), carrega em <b>Entrar num jogo</b> e escreve o código. Até 6 jogadores.', 'Open the link on your phone (or scan the QR code), tap <b>Join a game</b> and type the code. Up to 6 players.')}</p>
+          <p class="desc" style="font-size:clamp(14px,1.4vw,22px);margin-top:2vh">${L('Abre o link no telemóvel (ou lê o código QR), carrega em <b>Entrar num jogo</b> e escreve o código. Até 8 jogadores.', 'Open the link on your phone (or scan the QR code), tap <b>Join a game</b> and type the code. Up to 8 players.')}</p>
         </div>
         <div class="glass panel">
           <div class="lbl">${L('Idioma', 'Language')}</div><div class="seg" id="seg-lang"></div>
@@ -5038,7 +5055,7 @@ const PHV = {
           <div class="lbl">${L('Idioma', 'Language')}</div><div class="seg" id="seg-lang"></div>
           <div class="lbl">${L('Público', 'Audience')}</div><div class="seg" id="seg-aud"></div>
           <div class="lbl">${L('Duração', 'Length')}</div><div class="seg" id="seg-len"></div>
-          <div class="lbl">${L('Jogadores', 'Players')} (${others.length}/6)</div><div class="plist">${others.map(p => `<div class="pi">${avHTML(p, 46, 60)}<div>${esc(p.name)}</div>${p.id !== G.me ? `<button class="kick" onclick="UI.hostAct('kick',{pid:'${p.id}'})">×</button>` : ''}</div>`).join('')}</div>
+          <div class="lbl">${L('Jogadores', 'Players')} (${others.length}/${MAX_PLAYERS})</div><div class="plist">${others.map(p => `<div class="pi">${avHTML(p, 46, 60)}<div>${esc(p.name)}</div>${p.id !== G.me ? `<button class="kick" onclick="UI.hostAct('kick',{pid:'${p.id}'})">×</button>` : ''}</div>`).join('')}</div>
           <button class="btn btn-gold mt" id="btn-start" onclick="UI.start()"></button></div>`;
         el.innerHTML = h;
         makeQR($('ph-qr'), url);
@@ -5046,7 +5063,7 @@ const PHV = {
         updOpts(S);
       } else {
         h += msgBig('🎉', L('Estás dentro!', "You're in!"), S.mode === 'mesa' ? L('Espera que o anfitrião comece o jogo.', 'Wait for the host to start the game.') : L('Olha para o ecrã principal e espera que o jogo comece.', 'Look at the main screen and wait for the game to start.'));
-        h += `<div class="glass" style="padding:12px;margin-top:6px"><div class="lbl" style="margin-top:0">${L('Jogadores', 'Players')} (${others.length}/6)</div><div class="plist">${others.map(p => `<div class="pi">${avHTML(p, 46, 60)}<div>${esc(p.name)}</div></div>`).join('')}</div>
+        h += `<div class="glass" style="padding:12px;margin-top:6px"><div class="lbl" style="margin-top:0">${L('Jogadores', 'Players')} (${others.length}/${MAX_PLAYERS})</div><div class="plist">${others.map(p => `<div class="pi">${avHTML(p, 46, 60)}<div>${esc(p.name)}</div></div>`).join('')}</div>
           <p class="muted small center mt">${L('Público', 'Audience')}: <b>${AUD_LBL()[S.aud][0]}</b> · ${L('Duração', 'Length')}: <b>${LEN_LBL()[S.len][0]}</b></p></div>`;
         el.innerHTML = h;
       }
