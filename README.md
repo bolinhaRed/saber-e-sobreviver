@@ -86,7 +86,8 @@ A tinta e a tarte caem numa pergunta surpresa da ronda!
 
 Os pontos transformam-se em **tempo**: o líder começa com 70 segundos e o último com 45. Assim, toda a gente ainda pode ganhar.
 
-O relógio desce para todos ao mesmo tempo e as perguntas aparecem sem parar:
+As perguntas aparecem sem parar e **o teu relógio só corre até responderes**: quem é rápido gasta menos tempo.
+- O primeiro a acertar ganha +2 segundos.
 - Não responder tira 5 segundos.
 - Errar tira 10 segundos.
 - Quem chega a zero é eliminado.
@@ -137,6 +138,6 @@ Tem música de fundo e efeitos sonoros no ecrã principal. Os botões 🎵 e �
 - **Pixel-art tamagotchi avatars:** 8 animals and 9 accessories. They jump, spin, cry and panic during the game.
 - **5 rounds plus a Grand Final.** Round styles: Quick Fire, Sharpshooter, Hidden Letters, Emoji Riddle, Clues, All or Nothing, and True or False.
 - **Sabotage before each round:** Ink bomb (tap to clean), Pie in the face (swipe to wipe), or Point thief (steal 250 points).
-- **Grand Final (Survival):** your points become time, between 45 and 70 seconds, so even the last player can still win. No answer costs 5 s and a wrong answer costs 10 s. The last one standing wins!
+- **Grand Final (Survival):** your points become time, between 45 and 70 seconds, so even the last player can still win. Your clock only runs until you answer, so speed matters, and the fastest correct answer earns +2 s. No answer costs 5 s and a wrong answer costs 10 s. The last one standing wins!
 - **Over 1000 questions in English,** with worldwide topics: History, Geography, Science, Sport, Arts & Literature, World Culture, Nature, Film & Music, Food & Drink. There is also a **Kids (up to 12)** set and a **Family** mix. Questions don't repeat from one game to the next.
 - **Languages:** switch between Português and English on the home screen or in the lobby.
